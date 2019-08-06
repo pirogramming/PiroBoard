@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        div.post {
+            float: left;
+            width: 150px;
+            height: 150px;
+            padding: 10px 0px 0px 20px;
+            background-color: #f9d716;
+            border: 1px solid black;
+            box-shadow: 2px 2px 2px;
+        }
+
+        div.color {
+            background-color: salmon;
+        }
+    </style>
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script>
+
+
+</head>
+<body>
+
+<div class="post">
+    <p>hello</p>
+</div>
+
+<div class="post">
+    <p>Lorem ipsum dolor <br/> sit amet, consecteturlit. Aenean</p>
+</div>
+
+<div class="post">
+    <p>Drag me</p>
+</div>
+
+<div class="post">
+    <p>What a Wonderful</p>
+    <img src="http://sevensprings.dothome.co.kr/img/6.jpg" width="130" height="80"/>
+</div>
+
+
+
+<script>
+    $(".post").draggable({      // 드래그
+        cursor: "move",      // 드래그 시 커서모양
+        stack: ".post",      // .post 클래스끼리의 스택 기능
+        opacity: 0.8         // 드래그 시 투명도
+    });
+
+    $(".post").bind("dragstart", function (event, ui) {
+        $(this).addClass("color");  //bgi 체인지
+    });
+    $(".post").bind("dragstop", function (event, ui) {
+        $(this).removeClass("color");   //bgi 체인지
+    });
+</script>
+
+</body>
+</html>
