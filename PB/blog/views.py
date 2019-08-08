@@ -12,6 +12,9 @@ def home(request):
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About'})
 
+def myPage(request):
+    return render(request, 'blog/user_main.html')
+
 
 def login(request):
     return render(request, 'users/login.html')
