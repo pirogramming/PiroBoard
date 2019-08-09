@@ -107,6 +107,11 @@
             border: #dfdddd solid 0.5px;
             box-sizing: border-box;
         }
+
+        .cat-button{
+            padding-top: 70px;
+            height: 200px;
+        }
     </style>
 
 
@@ -234,7 +239,7 @@
 
             <div class="board">
                 <img class="cat-button"
-                     src="'default.jpg'"/>
+                     src="../../../media/tripcat.png"/>
             </div>
 
         </div>
@@ -254,16 +259,16 @@
         return "draggable_" + i
     })
     var d2 = $(".sec2").attr("id", function (i) {
-        return "draggable_" + i
+        return "draggable_" + i+10
     })
     var d3 = $(".sec3").attr("id", function (i) {
-        return "draggable_" + i
+        return "draggable_" + i+20
     })
     var d4 = $(".sec4").attr("id", function (i) {
-        return "draggable_" + i
+        return "draggable_" + i+30
     })
     var d5 = $(".sec5").attr("id", function (i) {
-        return "draggable_" + i
+        return "draggable_" + i+40
     })
 
     $.each(positions, function (id, pos) {
@@ -312,5 +317,25 @@
     });
 </script>
 
+<script>
+var positions = JSON.parse(localStorage.positions || "{}");
+$(function () {
+    var d = $("[id=draggable]").attr("id", function (i) {
+        return "draggable_" + i
+    })
+    $.each(positions, function (id, pos) {
+        $("#" + id).css(pos)
+    })
+
+    d.draggable({
+        containment: "#containment-wrapper",
+        scroll: false,
+        stop: function (event, ui) {
+            positions[this.id] = ui.position
+            localStorage.positions = JSON.stringify(positions)
+        }
+    });
+});
+</script>
 </body>
 </html>
