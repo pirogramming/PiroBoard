@@ -28,6 +28,7 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('oauth/', include('social_django.urls', namespace='social')),
 
+
 ]
 
 if settings.DEBUG:

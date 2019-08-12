@@ -90,7 +90,7 @@
             padding: 0 2rem;
         }
 
-        .button2{
+        .button2 {
             color: gray;
         }
 
@@ -138,7 +138,9 @@
 
             </div>
             <div>
+                {% csrf_token %}
                 <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+                <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
             </div>
         </div>
     </div>
