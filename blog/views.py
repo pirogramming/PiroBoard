@@ -36,3 +36,7 @@ def about(request):
 
 def login(request):
     return render(request, 'users/login.html')
+
+
+def invite(request):
+    return render(request, 'blog/notification/friends_invite_sent/notice.html')
