@@ -2,6 +2,23 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
 from blog.forms import GroupForm
+
+@login_required
+def home(request):
+    profile = request.user.profile
+    
+    ctx = {}
+    user_groups = profile.group.objects.all()
+    
+    if user_groups.length:
+        ctx['user_groups'] = user_groups
+        ctx['hasGroup'] = True
+    
+    else:
+        ctx['hasGroup'] = False
+        
+    return render(request, "blog/home.html", ctx)
+
 # from .models import Group, Post
 #
 #
