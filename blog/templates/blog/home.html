@@ -1,0 +1,21 @@
+{% extends "blog/base.html" %}
+{% block content %}
+     <div id="title"><h1>{{ user }}의 그룹</h1></div>
+    <hr>
+    {% for group in groups %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="{% url 'profile' %}">{{ group.group_creator }}</a>
+                    <small class="text-muted">{{ group.created_date|date:"F d, Y" }}</small>
+                </div>
+                {% if group.group_img %}
+                    <img src="{{ group.group_img }}" style="max-width: 100%"/>
+                {% endif %}
+                <h2><a class="article-title" href="{% url 'group_detail' pk=group.pk %}">{{ group.group_name }}</a></h2>
+                <p class="article-content">{{ group.group_info }}</p>
+                <button class="button2 btn login_btn" >초대할 대상 찾기</button>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
