@@ -1,6 +1,18 @@
 {% extends "blog/base.html" %}
 {% block content %}
-     <div id="title"><h1>{{ user }}의 그룹</h1></div>
+    <div id="title"><h1>{{ user }}의 그룹</h1></div>
+    <div>
+        {% if hasGroup %}
+            <h2>있음</h2>
+            <div>
+                {% for group in user_groups %}
+                    <h3>{{group.group_name}}</h3>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h2>없음</h2>
+        {% endif %}
+    </div>
     <hr>
     {% for group in groups %}
         <article class="media content-section">
@@ -14,7 +26,7 @@
                 {% endif %}
                 <h2><a class="article-title" href="{% url 'group_detail' pk=group.pk %}">{{ group.group_name }}</a></h2>
                 <p class="article-content">{{ group.group_info }}</p>
-                <button class="button2 btn login_btn" >초대할 대상 찾기</button>
+                <button class="button2 btn login_btn">초대할 대상 찾기</button>
             </div>
         </article>
     {% endfor %}

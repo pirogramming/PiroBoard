@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
@@ -8,12 +9,12 @@ def home(request):
     profile = request.user.profile
     
     ctx = {}
-    user_groups = profile.group.objects.all()
+    user_groups = profile.group.all()
     
-    if user_groups.length:
+    if len(user_groups):
         ctx['user_groups'] = user_groups
         ctx['hasGroup'] = True
-    
+
     else:
         ctx['hasGroup'] = False
         
@@ -35,25 +36,26 @@ def home(request):
 #     return render(request, 'blog/group_detail.html', {'group': group})
 #
 #
-# def about(request):
-#     # return render(request, 'blog/about.html', {'title': 'About'})
-#     if request.method == "POST":
-#         form = GroupForm(request.POST)
-#         if form.is_valid():
-#             group = form.save(commit=False)
-#             group.group_creator = request.user
-#
-#             group.created_date = timezone.now()
-#             group.save()
-#             return redirect('blog-home')
-#     else:
-#         form = GroupForm()
-#     return render(request, 'blog/about.html', {'form': form})
-#
-#
-# def login(request):
-#     return render(request, 'users/login.html')
-#
+
+def about(request):
+    # return render(request, 'blog/about.html', {'title': 'About'})
+    if request.method == "POST":
+        form = GroupForm(request.POST)
+        if form.is_valid():
+            group = form.save(commit=False)
+            group.group_creator = request.user
+
+            group.created_date = timezone.now()
+            group.save()
+            return redirect('blog-home')
+    else:
+        form = GroupForm()
+    return render(request, 'blog/about.html', {'form': form})
+
+
+def login(request):
+    return render(request, 'users/login.html')
+
 #
 # def invite(request):
 #     return render(request, 'blog/notification/friends_invite_sent/notice.html')
