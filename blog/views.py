@@ -7,21 +7,19 @@ from blog.forms import GroupForm
 
 @login_required
 def home(request):
-    # profile = request.user.profile
+    #profile = request.user.profile
     profile = Profile.objects.create(user=request.user)
     ctx = {}
     user_groups = profile.group.all()
 
-    if len(user_groups):
+    if len(user_groups) > 0:
         ctx['user_groups'] = user_groups
         ctx['hasGroup'] = True
 
     else:
         ctx['hasGroup'] = False
 
-    return render(request, "blog/home.html", {
-        'pk': id
-    }, ctx)
+    return render(request, "blog/home.html", ctx)
 
 
 # from .models import Group, Post
@@ -39,7 +37,20 @@ def home(request):
 #     group = get_object_or_404(Group, pk=pk)
 #     return render(request, 'blog/group_detail.html', {'group': group})
 #
-#
+#@login_required
+def profile_revise(request):
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            us = form.save()
+            return redirect("accounts:profile")
+    else:
+        profileform = UserEditForm(instance=request.user)
+        forms = {'profileform': profileform}
+        return render(request, 'accounts/profile_revise.html', forms)
+
+
+
 
 def about(request):
     # return render(request, 'blog/about.html', {'title': 'About'})
