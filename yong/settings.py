@@ -24,10 +24,12 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
+USER_APPS = [
+    "blog",
+    "users"
+]
 
 INSTALLED_APPS = [
-    'blog.apps.BlogConfig',
-    'users.apps.UsersConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -36,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #'django.contrib.sites',
-]
+] + USER_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
