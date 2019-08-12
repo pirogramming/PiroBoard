@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    image = models.ImageField(default='기본프로필.png', upload_to='profile_pics')
 
     group = models.ManyToManyField('Group', through='GroupMember', related_name="people")
 
@@ -16,7 +16,7 @@ class Group(models.Model):
     group_name = models.CharField(max_length=100)
     group_img = models.ImageField(blank=True, null=True)
     group_info = models.TextField()
-    master_id = models.ForeignKey(Profile, related_name="slave_group", on_delete=models.CASCADE)
+    # master_id = models.ForeignKey(Profile, related_name="slave_group", on_delete=models.CASCADE)
 
 
 class GroupMember(models.Model):

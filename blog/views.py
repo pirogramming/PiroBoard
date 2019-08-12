@@ -1,24 +1,28 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-
+from users.models import Profile
 from blog.forms import GroupForm
+
 
 @login_required
 def home(request):
-    profile = request.user.profile
-    
+    # profile = request.user.profile
+    profile = Profile.objects.create(user=request.user)
     ctx = {}
     user_groups = profile.group.all()
-    
+
     if len(user_groups):
         ctx['user_groups'] = user_groups
         ctx['hasGroup'] = True
 
     else:
         ctx['hasGroup'] = False
-        
-    return render(request, "blog/home.html", ctx)
+
+    return render(request, "blog/home.html", {
+        'pk': id
+    }, ctx)
+
 
 # from .models import Group, Post
 #

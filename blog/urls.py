@@ -6,3 +6,5 @@ urlpatterns = [
     # path('group/<int:pk>/', views.group_detail, name='group_detail'),
     path('about/', views.about, name='blog-about'),
 ]
+
+
