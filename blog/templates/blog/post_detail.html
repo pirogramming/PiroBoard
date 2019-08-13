@@ -1,0 +1,43 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    <h2>detail page</h2><hr>
+    제목 : {{post.title}} <br>
+    내용 : {{post.content}}<br>
+{% if post.photo %}
+<img src="{{post.photo.url}}" alt=""><hr>
+
+{% endif %}
+
+    작성자 : {{post.author}}
+<hr>
+<a href="{% url 'post_delete' post.pk %}">삭제</a>
+<a href="{% url 'post_edit' post.pk %}">수정</a>
+<hr>
+<h3>댓글</h3>
+
+<br>
+    <h1>New comment</h1>
+{% if user.is_authenticated %}
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        작성자 : {{ request.user }}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Send</button>
+    </form>
+    <br>
+{% endif %}
+
+{% for comment in post.comments.all %}
+    <div class="comment">
+        <div class="date">
+            {{ comment.created_date }}
+        </div>
+        <strong>작성자 : {{ comment.author }}</strong>
+        <p> {{ comment.message|linebreaks }}</p>
+        <hr>
+    </div>
+{% empty %}
+    <p>No comments here yet :(</p>
+{% endfor %}
+
+{% endblock content %}
