@@ -9,11 +9,7 @@ from .forms import GroupForm, CommentForm, PostForm
 
 @login_required
 def home(request):
-    if hasattr(request.user, 'profile'):
-        profile = request.user.profile
-    else:
-        profile = Profile.objects.create(user=request.user)
-
+    profile = Profile.objects.get(user=request.user)
     ctx = {}
     user_groups = profile.group.all()
 

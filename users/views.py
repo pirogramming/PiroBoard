@@ -22,11 +22,6 @@ def register(request):
 def profile(request):
     return render(request, 'users/profile.html')
 
-@login_required
-def profile(request):
-    return render(request, 'users/set_up_profile.html')
-
-
 def find_user(request, group_id): #그룹 내에서 초대할 유저를 검색함 
     """
         GET
