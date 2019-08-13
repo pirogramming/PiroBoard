@@ -1,14 +1,19 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from users.models import Profile
-from blog.forms import GroupForm
+
+from .models import Post
+from users.models import Profile, Group
+from .forms import GroupForm, CommentForm, PostForm
 
 
 @login_required
 def home(request):
-    #profile = request.user.profile
-    profile = Profile.objects.create(user=request.user)
+    if hasattr(request.user, 'profile'):
+        profile = request.user.profile
+    else:
+        profile = Profile.objects.create(user=request.user)
+
     ctx = {}
     user_groups = profile.group.all()
 
@@ -33,11 +38,17 @@ def home(request):
 #     return render(request, 'blog/home.html', context)
 #
 #
-# def group_detail(request, pk):
-#     group = get_object_or_404(Group, pk=pk)
-#     return render(request, 'blog/group_detail.html', {'group': group})
-#
-#@login_required
+def group_detail(request, pk):
+    group = get_object_or_404(Group, pk=pk)
+    posts = Post.objects.all()
+    hi = {
+        'group': group,
+        'posts': posts,
+    }
+    return render(request, 'blog/group_detail.html', hi)
+
+
+# @login_required
 def profile_revise(request):
     if request.method == 'POST':
         form = UserEditForm(request.POST, request.FILES, instance=request.user)
@@ -48,8 +59,6 @@ def profile_revise(request):
         profileform = UserEditForm(instance=request.user)
         forms = {'profileform': profileform}
         return render(request, 'accounts/profile_revise.html', forms)
-
-
 
 
 def about(request):
@@ -71,6 +80,55 @@ def about(request):
 def login(request):
     return render(request, 'users/login.html')
 
+
+# sulmo
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.author = request.user
+            comment.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'blog/post_detail.html', {'post': post, 'form': form})
+
+
+def post_new(request):
+    if request.method == 'POST':
+        post = Post()
+        post.title = request.POST['title']
+        post.author = request.user
+        post.content = request.POST['content']
+        post.photo = request.FILES['photo']
+        post.save()
+        return redirect('blog-home')
+    else:
+        form = PostForm()
+    return render(request, 'blog/post_new.html', {'form': form})
+
+
+def post_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('blog-home')
+
+
+def post_edit(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save()
+            return redirect('blog-home')
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/post_new.html', {
+        'form': form,
+    })
 #
 # def invite(request):
 #     return render(request, 'blog/notification/friends_invite_sent/notice.html')
