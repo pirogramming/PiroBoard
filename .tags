@@ -1,0 +1,181 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ALLOWED_HOSTS	yong/settings.py	/^ALLOWED_HOSTS = []$/;"	v	line:24
+AUTH_PASSWORD_VALIDATORS	yong/settings.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	v	line:86
+BASE_DIR	yong/settings.py	/^BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))$/;"	v	line:13
+BlogConfig	blog/apps.py	/^class BlogConfig(AppConfig):$/;"	c	line:4
+CRISPY_TEMPLATE_PACK	yong/settings.py	/^CRISPY_TEMPLATE_PACK = 'bootstrap4'$/;"	v	line:122
+DATABASES	yong/settings.py	/^DATABASES = {$/;"	v	line:76
+DEBUG	yong/settings.py	/^DEBUG = True$/;"	v	line:22
+Group	users/models.py	/^class Group(models.Model):$/;"	c	line:15
+GroupForm	blog/forms.py	/^class GroupForm(forms.ModelForm):$/;"	c	line:6
+GroupMember	users/models.py	/^class GroupMember(models.Model):$/;"	c	line:22
+INSTALLED_APPS	yong/settings.py	/^INSTALLED_APPS = [$/;"	v	line:32
+LANGUAGE_CODE	yong/settings.py	/^LANGUAGE_CODE = 'ko'$/;"	v	line:104
+LOGIN_REDIRECT_URL	yong/settings.py	/^LOGIN_REDIRECT_URL = 'blog-home'$/;"	v	line:124
+LOGIN_URL	yong/settings.py	/^LOGIN_URL = 'login'$/;"	v	line:125
+MEDIA_ROOT	yong/settings.py	/^MEDIA_ROOT = os.path.join(BASE_DIR, 'media')$/;"	v	line:119
+MEDIA_URL	yong/settings.py	/^MEDIA_URL = '\/media\/'$/;"	v	line:120
+MIDDLEWARE	yong/settings.py	/^MIDDLEWARE = [$/;"	v	line:43
+Meta	blog/forms.py	/^    class Meta:$/;"	c	line:7	class:GroupForm
+Meta	users/forms.py	/^    class Meta:$/;"	c	line:9	class:UserRegisterForm
+Migration	blog/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	c	line:9
+Migration	blog/migrations/0002_group.py	/^class Migration(migrations.Migration):$/;"	c	line:9
+Migration	blog/migrations/0003_auto_20190809_1642.py	/^class Migration(migrations.Migration):$/;"	c	line:6
+Migration	blog/migrations/0004_auto_20190809_1647.py	/^class Migration(migrations.Migration):$/;"	c	line:6
+Migration	blog/migrations/0005_auto_20190809_1657.py	/^class Migration(migrations.Migration):$/;"	c	line:6
+Migration	blog/migrations/0006_auto_20190809_1704.py	/^class Migration(migrations.Migration):$/;"	c	line:6
+Migration	blog/migrations/0007_membership.py	/^class Migration(migrations.Migration):$/;"	c	line:9
+Migration	blog/migrations/0008_auto_20190812_0633.py	/^class Migration(migrations.Migration):$/;"	c	line:10
+Migration	blog/migrations/0009_auto_20190812_1447.py	/^class Migration(migrations.Migration):$/;"	c	line:6
+Migration	users/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	c	line:8
+Migration	users/migrations/0002_auto_20190812_1447.py	/^class Migration(migrations.Migration):$/;"	c	line:7
+Migration	users/migrations/0003_auto_20190812_1501.py	/^class Migration(migrations.Migration):$/;"	c	line:7
+Profile	users/models.py	/^class Profile(models.Model):$/;"	c	line:5
+ROOT_URLCONF	yong/settings.py	/^ROOT_URLCONF = 'yong.urls'$/;"	v	line:53
+SECRET_KEY	yong/settings.py	/^SECRET_KEY = 'exhlfdat&vfum(-34*c2uroi(($ww(yo$9pv98=e6p^gl(-eoj'$/;"	v	line:19
+STATIC_URL	yong/settings.py	/^STATIC_URL = '\/static\/'$/;"	v	line:117
+STATUS_CHOICES	users/models.py	/^    STATUS_CHOICES = ($/;"	v	line:26	class:GroupMember
+TEMPLATES	yong/settings.py	/^TEMPLATES = [$/;"	v	line:55
+TIME_ZONE	yong/settings.py	/^TIME_ZONE = 'UTC'$/;"	v	line:106
+USER_APPS	yong/settings.py	/^USER_APPS = [$/;"	v	line:27
+USE_I18N	yong/settings.py	/^USE_I18N = True$/;"	v	line:108
+USE_L10N	yong/settings.py	/^USE_L10N = True$/;"	v	line:110
+USE_TZ	yong/settings.py	/^USE_TZ = True$/;"	v	line:112
+UserRegisterForm	users/forms.py	/^class UserRegisterForm(UserCreationForm):$/;"	c	line:6
+UsersConfig	users/apps.py	/^class UsersConfig(AppConfig):$/;"	c	line:4
+WSGI_APPLICATION	yong/settings.py	/^WSGI_APPLICATION = 'yong.wsgi.application'$/;"	v	line:71
+__str__	users/models.py	/^    def __str__(self):$/;"	m	line:11	class:Profile	file:
+accept_member	users/views.py	/^def accept_member(request):   #초대를 수락하는 페이지$/;"	f	line:36
+application	yong/wsgi.py	/^application = get_wsgi_application()$/;"	v	line:16
+create_profile	users/signals.py	/^def create_profile(sender, instance, created, **kwargs):$/;"	f	line:8
+dependencies	blog/migrations/0001_initial.py	/^    dependencies = [$/;"	v	line:13	class:Migration
+dependencies	blog/migrations/0002_group.py	/^    dependencies = [$/;"	v	line:11	class:Migration
+dependencies	blog/migrations/0003_auto_20190809_1642.py	/^    dependencies = [$/;"	v	line:8	class:Migration
+dependencies	blog/migrations/0004_auto_20190809_1647.py	/^    dependencies = [$/;"	v	line:8	class:Migration
+dependencies	blog/migrations/0005_auto_20190809_1657.py	/^    dependencies = [$/;"	v	line:8	class:Migration
+dependencies	blog/migrations/0006_auto_20190809_1704.py	/^    dependencies = [$/;"	v	line:8	class:Migration
+dependencies	blog/migrations/0007_membership.py	/^    dependencies = [$/;"	v	line:11	class:Migration
+dependencies	blog/migrations/0008_auto_20190812_0633.py	/^    dependencies = [$/;"	v	line:12	class:Migration
+dependencies	blog/migrations/0009_auto_20190812_1447.py	/^    dependencies = [$/;"	v	line:8	class:Migration
+dependencies	users/migrations/0001_initial.py	/^    dependencies = [$/;"	v	line:12	class:Migration
+dependencies	users/migrations/0002_auto_20190812_1447.py	/^    dependencies = [$/;"	v	line:9	class:Migration
+dependencies	users/migrations/0003_auto_20190812_1501.py	/^    dependencies = [$/;"	v	line:9	class:Migration
+email	users/forms.py	/^    email = forms.EmailField()$/;"	v	line:7	class:UserRegisterForm
+field	blog/migrations/0003_auto_20190809_1642.py	/^            field=models.TextField(),$/;"	v	line:16	class:Migration
+field	blog/migrations/0006_auto_20190809_1704.py	/^            field=models.ImageField(blank=True, upload_to=''),$/;"	v	line:16	class:Migration
+field	blog/migrations/0008_auto_20190812_0633.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Membership.from_group+', to='blog.Group'),$/;"	v	line:32	class:Migration
+field	blog/migrations/0008_auto_20190812_0633.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Membership.to_user+', to=settings.AUTH_USER_MODEL),$/;"	v	line:37	class:Migration
+field	users/migrations/0002_auto_20190812_1447.py	/^            field=models.ManyToManyField(related_name='people', through='users.GroupMember', to='users.Group'),$/;"	v	line:36	class:Migration
+field	users/migrations/0003_auto_20190812_1501.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='slave_group', to='users.Profile'),$/;"	v	line:17	class:Migration
+fields	blog/forms.py	/^        fields = ('group_name', 'group_info', 'group_img')/;"	v	line:9	class:GroupForm.Meta
+fields	blog/migrations/0001_initial.py	/^            fields=[$/;"	v	line:20	class:Migration
+fields	blog/migrations/0002_group.py	/^            fields=[$/;"	v	line:19	class:Migration
+fields	blog/migrations/0007_membership.py	/^            fields=[$/;"	v	line:19	class:Migration
+fields	blog/migrations/0008_auto_20190812_0633.py	/^            fields=[$/;"	v	line:20	class:Migration
+fields	blog/migrations/0008_auto_20190812_0633.py	/^            fields=[$/;"	v	line:41	class:Migration
+fields	blog/migrations/0008_auto_20190812_0633.py	/^            fields=[$/;"	v	line:53	class:Migration
+fields	blog/migrations/0008_auto_20190812_0633.py	/^            fields=[$/;"	v	line:64	class:Migration
+fields	users/forms.py	/^        fields = ['username', 'email', 'password1', 'password2']/;"	v	line:11	class:UserRegisterForm.Meta
+fields	users/migrations/0001_initial.py	/^            fields=[$/;"	v	line:19	class:Migration
+fields	users/migrations/0002_auto_20190812_1447.py	/^            fields=[$/;"	v	line:16	class:Migration
+fields	users/migrations/0002_auto_20190812_1447.py	/^            fields=[$/;"	v	line:26	class:Migration
+group	users/models.py	/^    group = models.ForeignKey('Group', related_name='membership', on_delete=models.CASCADE)$/;"	v	line:24	class:GroupMember
+group	users/models.py	/^    group = models.ManyToManyField('Group', through='GroupMember', related_name="people")$/;"	v	line:9	class:Profile
+group_img	users/models.py	/^    group_img = models.ImageField(blank=True, null=True)$/;"	v	line:17	class:Group
+group_info	users/models.py	/^    group_info = models.TextField()$/;"	v	line:18	class:Group
+group_name	users/models.py	/^    group_name = models.CharField(max_length=100)$/;"	v	line:16	class:Group
+image	users/models.py	/^    image = models.ImageField(default='default.jpg', upload_to='profile_pics')$/;"	v	line:7	class:Profile
+initial	blog/migrations/0001_initial.py	/^    initial = True$/;"	v	line:11	class:Migration
+initial	users/migrations/0001_initial.py	/^    initial = True$/;"	v	line:10	class:Migration
+invite_member	users/views.py	/^def invite_member(request):   #유저를 초대하는 페이지$/;"	f	line:25
+main	manage.py	/^def main():$/;"	f	line:7
+master_id	users/models.py	/^    master_id = models.ForeignKey(Profile, related_name="slave_group", on_delete=models.CASCADE)$/;"	v	line:19	class:Group
+model	blog/forms.py	/^        model = Group$/;"	v	line:8	class:GroupForm.Meta
+model	users/forms.py	/^        model = User$/;"	v	line:10	class:UserRegisterForm.Meta
+model_name	blog/migrations/0003_auto_20190809_1642.py	/^            model_name='group',$/;"	v	line:14	class:Migration
+model_name	blog/migrations/0004_auto_20190809_1647.py	/^            model_name='group',$/;"	v	line:14	class:Migration
+model_name	blog/migrations/0005_auto_20190809_1657.py	/^            model_name='group',$/;"	v	line:14	class:Migration
+model_name	blog/migrations/0006_auto_20190809_1704.py	/^            model_name='group',$/;"	v	line:14	class:Migration
+model_name	blog/migrations/0008_auto_20190812_0633.py	/^            model_name='membership',$/;"	v	line:30	class:Migration
+model_name	blog/migrations/0008_auto_20190812_0633.py	/^            model_name='membership',$/;"	v	line:35	class:Migration
+model_name	blog/migrations/0009_auto_20190812_1447.py	/^            model_name='friendshipinvitation',$/;"	v	line:14	class:Migration
+model_name	blog/migrations/0009_auto_20190812_1447.py	/^            model_name='friendshipinvitation',$/;"	v	line:18	class:Migration
+model_name	blog/migrations/0009_auto_20190812_1447.py	/^            model_name='friendshipinvitationhistory',$/;"	v	line:22	class:Migration
+model_name	blog/migrations/0009_auto_20190812_1447.py	/^            model_name='friendshipinvitationhistory',$/;"	v	line:26	class:Migration
+model_name	blog/migrations/0009_auto_20190812_1447.py	/^            model_name='group',$/;"	v	line:30	class:Migration
+model_name	blog/migrations/0009_auto_20190812_1447.py	/^            model_name='joininvitation',$/;"	v	line:34	class:Migration
+model_name	blog/migrations/0009_auto_20190812_1447.py	/^            model_name='joininvitation',$/;"	v	line:38	class:Migration
+model_name	blog/migrations/0009_auto_20190812_1447.py	/^            model_name='membership',$/;"	v	line:46	class:Migration
+model_name	blog/migrations/0009_auto_20190812_1447.py	/^            model_name='membership',$/;"	v	line:50	class:Migration
+model_name	blog/migrations/0009_auto_20190812_1447.py	/^            model_name='post',$/;"	v	line:54	class:Migration
+model_name	users/migrations/0002_auto_20190812_1447.py	/^            model_name='profile',$/;"	v	line:34	class:Migration
+model_name	users/migrations/0003_auto_20190812_1501.py	/^            model_name='group',$/;"	v	line:15	class:Migration
+name	blog/apps.py	/^    name = 'blog'/;"	v	line:5	class:BlogConfig
+name	blog/migrations/0001_initial.py	/^            name='Post',$/;"	v	line:19	class:Migration
+name	blog/migrations/0002_group.py	/^            name='Group',$/;"	v	line:18	class:Migration
+name	blog/migrations/0003_auto_20190809_1642.py	/^            name='group_intro',$/;"	v	line:15	class:Migration
+name	blog/migrations/0006_auto_20190809_1704.py	/^            name='group_img',$/;"	v	line:15	class:Migration
+name	blog/migrations/0007_membership.py	/^            name='Membership',$/;"	v	line:18	class:Migration
+name	blog/migrations/0008_auto_20190812_0633.py	/^            name='Contact',$/;"	v	line:19	class:Migration
+name	blog/migrations/0008_auto_20190812_0633.py	/^            name='FriendshipInvitation',$/;"	v	line:63	class:Migration
+name	blog/migrations/0008_auto_20190812_0633.py	/^            name='FriendshipInvitationHistory',$/;"	v	line:52	class:Migration
+name	blog/migrations/0008_auto_20190812_0633.py	/^            name='JoinInvitation',$/;"	v	line:40	class:Migration
+name	blog/migrations/0008_auto_20190812_0633.py	/^            name='from_group',$/;"	v	line:31	class:Migration
+name	blog/migrations/0008_auto_20190812_0633.py	/^            name='to_user',$/;"	v	line:36	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='Contact',$/;"	v	line:58	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='FriendshipInvitation',$/;"	v	line:61	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='FriendshipInvitationHistory',$/;"	v	line:64	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='Group',$/;"	v	line:67	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='JoinInvitation',$/;"	v	line:70	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='Membership',$/;"	v	line:73	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='Post',$/;"	v	line:76	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='author',$/;"	v	line:55	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='contact',$/;"	v	line:35	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='from_group',$/;"	v	line:15	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='from_group',$/;"	v	line:39	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='from_group',$/;"	v	line:47	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='from_user',$/;"	v	line:23	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='group_creator',$/;"	v	line:31	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='membership',$/;"	v	line:42	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='to_user',$/;"	v	line:19	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='to_user',$/;"	v	line:27	class:Migration
+name	blog/migrations/0009_auto_20190812_1447.py	/^            name='to_user',$/;"	v	line:51	class:Migration
+name	users/apps.py	/^    name = 'users'$/;"	v	line:5	class:UsersConfig
+name	users/migrations/0001_initial.py	/^            name='Profile',$/;"	v	line:18	class:Migration
+name	users/migrations/0002_auto_20190812_1447.py	/^            name='Group',$/;"	v	line:15	class:Migration
+name	users/migrations/0002_auto_20190812_1447.py	/^            name='GroupMember',$/;"	v	line:25	class:Migration
+name	users/migrations/0002_auto_20190812_1447.py	/^            name='group',$/;"	v	line:35	class:Migration
+name	users/migrations/0003_auto_20190812_1501.py	/^            name='master_id',$/;"	v	line:16	class:Migration
+new_name	blog/migrations/0004_auto_20190809_1647.py	/^            new_name='group_info',$/;"	v	line:16	class:Migration
+new_name	blog/migrations/0005_auto_20190809_1657.py	/^            new_name='group_creator',$/;"	v	line:16	class:Migration
+old_name	blog/migrations/0004_auto_20190809_1647.py	/^            old_name='group_intro',$/;"	v	line:15	class:Migration
+old_name	blog/migrations/0005_auto_20190809_1657.py	/^            old_name='group_creater',$/;"	v	line:15	class:Migration
+operations	blog/migrations/0001_initial.py	/^    operations = [$/;"	v	line:17	class:Migration
+operations	blog/migrations/0002_group.py	/^    operations = [$/;"	v	line:16	class:Migration
+operations	blog/migrations/0003_auto_20190809_1642.py	/^    operations = [$/;"	v	line:12	class:Migration
+operations	blog/migrations/0004_auto_20190809_1647.py	/^    operations = [$/;"	v	line:12	class:Migration
+operations	blog/migrations/0005_auto_20190809_1657.py	/^    operations = [$/;"	v	line:12	class:Migration
+operations	blog/migrations/0006_auto_20190809_1704.py	/^    operations = [$/;"	v	line:12	class:Migration
+operations	blog/migrations/0007_membership.py	/^    operations = [$/;"	v	line:16	class:Migration
+operations	blog/migrations/0008_auto_20190812_0633.py	/^    operations = [$/;"	v	line:17	class:Migration
+operations	blog/migrations/0009_auto_20190812_1447.py	/^    operations = [$/;"	v	line:12	class:Migration
+operations	users/migrations/0001_initial.py	/^    operations = [$/;"	v	line:16	class:Migration
+operations	users/migrations/0002_auto_20190812_1447.py	/^    operations = [$/;"	v	line:13	class:Migration
+operations	users/migrations/0003_auto_20190812_1501.py	/^    operations = [$/;"	v	line:13	class:Migration
+options	blog/migrations/0007_membership.py	/^            options={$/;"	v	line:25	class:Migration
+person	users/models.py	/^    person = models.ForeignKey('Profile', related_name='membership', on_delete=models.CASCADE)$/;"	v	line:23	class:GroupMember
+profile	users/views.py	/^def profile(request):$/;"	f	line:21
+ready	users/apps.py	/^    def ready(self):$/;"	m	line:7	class:UsersConfig
+register	users/views.py	/^def register(request):$/;"	f	line:7
+save_profile	users/signals.py	/^def save_profile(sender, instance, **kwargs):$/;"	f	line:14
+status	users/models.py	/^    status = models.CharField(max_length=1, choices=STATUS_CHOICES)$/;"	v	line:32	class:GroupMember
+unique_together	blog/migrations/0009_auto_20190812_1447.py	/^            unique_together=None,$/;"	v	line:43	class:Migration
+urlpatterns	blog/urls.py	/^urlpatterns = [$/;"	v	line:4
+urlpatterns	yong/urls.py	/^urlpatterns = [$/;"	v	line:22
+user	users/models.py	/^    user = models.OneToOneField(User, on_delete=models.CASCADE)$/;"	v	line:6	class:Profile
+wait_member	users/views.py	/^def wait_member(request):    #초대를 요청한 후 기다리는 페이지$/;"	f	line:40

@@ -1,0 +1,34 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    <div id="title"><h1>{{ user }}의 그룹</h1></div>
+    <hr>
+
+    <hr>
+    <div>
+        {% if hasGroup %}
+            <h2>당신은 현재 {{ user_groups.count }}개의 그룹에 속해 있습니다.</h2>
+            <div>
+                {% for group in user_groups %}
+                    <article class="media content-section">
+                        <div class="media-body">
+                            <div class="article-metadata">
+                                <a class="mr-2" href="{% url 'profile' %}">{{ group.group_name }}</a>
+                                {#                                <small class="text-muted">{{ group.created_date|date:"F d, Y" }}</small>#}
+                            </div>
+
+                            {#                            <h2><a class="article-title"#}
+                            {#                                   href="{% url 'group_detail' pk=group.pk %}">{{ group.group_name }}</a></h2>#}
+                            <p class="article-content">{{ group.group_info }}</p>
+                                <a href="{% url 'group_detail' group.pk %}">그룹 자세히</a> {#sulmo#}
+                            <button class="button2 btn login_btn">초대할 대상 찾기</button>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h2>없음</h2>
+        {% endif %}
+    </div>
+
+
+{% endblock content %}
