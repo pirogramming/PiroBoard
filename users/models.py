@@ -19,6 +19,21 @@ class Group(models.Model):
     group_info = models.TextField()
     group_users = models.ManyToManyField(Profile, through='GroupMember', related_name="people")
 
+    GROUP_OPEN_STATUS_CHOICES=(
+        ('n', '비공개'),
+        ('s', '검색만가능'),
+        ('o', '공개'),
+    )
+
+    group_open_status=models.CharField(
+        max_length=1,
+        choices=GROUP_OPEN_STATUS_CHOICES,
+        default='o',
+    )
+
+
+    def __str__(self):
+        return self.group_name
 
     # master_id = models.ForeignKey(Profile, related_name="slave_group", on_delete=models.CASCADE)
 
@@ -27,6 +42,7 @@ class GroupMember(models.Model):
     person = models.ForeignKey(Profile, related_name='membership', on_delete=models.CASCADE)
     group = models.ForeignKey(Group, related_name='membership', on_delete=models.CASCADE)
 
+
     STATUS_CHOICES = (
         ('p', 'PENDING'),
         ('a', 'ACCEPTED'),
@@ -34,6 +50,9 @@ class GroupMember(models.Model):
     )
 
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+
+
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
