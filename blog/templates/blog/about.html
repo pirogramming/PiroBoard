@@ -6,7 +6,8 @@
     <form method="POST" class="">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
-    {% blocktrans with invitation.to_user as invitation_user %}<a href="{{ user_url }}">{{ invitation_user }}</a> has accepted your friend request.{% endblocktrans %}
+        {% blocktrans with invitation.to_user as invitation_user %}<a href="{{ user_url }}">{{ invitation_user }}</a>
+            has accepted your friend request.{% endblocktrans %}
     </form>
 
 {% endblock content %}

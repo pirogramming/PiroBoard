@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+
 from .forms import UserRegisterForm
-from .models import Profile, Group
+from .models import Profile, Group, GroupMember
 from django.contrib.auth.models import User
 
 
@@ -38,7 +40,6 @@ def find_user(request, group_id):  # 그룹 내에서 초대할 유저를 검색
             "profiles": profiles,
             "group_id": group_id
         }
-
         return render(request, "users/find_users_results.html", ctx)
     else:
         return render(request, "users/find_users.html", )
@@ -52,7 +53,6 @@ def invite_member(request):  # 유저를 초대하는 페이지
         user_id: Int! (초대 해야 하는 사람)
         group_id: Int! (현재 그룹)
     """
-
     return render(request, 'users/invite.html')
 
 
@@ -67,10 +67,36 @@ def wait_member(request):  # 초대를 요청한 후 기다리는 페이지
 # 유저가 참여하고 싶은 그룹을 찾는 페이지
 # 비공개 그룹은 뜨지 않도록 변경필요!
 def group_find(request):
-    groups = Group.objects.all()
+    if request.method == "POST":
+        form = request.POST
+        group_id = form.get('group_id')
+        group = Group.objects.get(id=group_id)
+        group.save()
 
-    ctx={
-        'groups':groups,
-    }
+        GroupMember.objects.create(person=request.user.profile, group=group, status='a')
+
+        return redirect('blog-home')
+
+    else:
+        groups = Group.objects.all()
+
+        ctx = {
+            'groups': groups,
+        }
 
     return render(request, 'users/find_groups.html', ctx)
+
+# def group_apply(request):
+#     if request.method == "POST":
+#         form = request.POST
+#         if form.is_valid():
+#             group_id = form.group_id
+#             group = Group.objects.get(id=group_id)
+#             group.save()
+#
+#             GroupMember.objects.create(person=request.user.profile, group=group, status='a')
+#
+#             return redirect('blog-home')
+#     else:
+#         pass
+#     return render(request, 'users/find_groups.html')
