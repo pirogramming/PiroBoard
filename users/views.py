@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
 from .models import Profile, Group
 from django.contrib.auth.models import User
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 
 def register(request):
     if request.method == 'POST':
@@ -62,3 +64,27 @@ def accept_member(request):   #초대를 수락하는 페이지
 
 def wait_member(request):    #초대를 요청한 후 기다리는 페이지
     return render(request, 'users/wait.html')
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'users/change_password.html', {
+        'form': form
+    })
+
+
+def revise_profile(request):
+    return render(request, 'users/revise_profile.html')
+
+
+
