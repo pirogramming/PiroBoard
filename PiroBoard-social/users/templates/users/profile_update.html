@@ -3,6 +3,7 @@
 
 {% block content %}
     <h2>프로필 수정</h2>
+    <p>피로보드 대표 프로필과 별명을 수정할 수 있습니다.</p>
 
     {% if not user.is_authenticated %}
         <a href="{% url 'login' %}?next={{ request.path }}">로그인이 필요합니다.</a>
@@ -15,13 +16,13 @@
             현재 이미지: <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
         {% endif %}
 
-         {{ form.as_p }}
-         <input type="submit" value="수정완료">
+        {{ form.as_p }}
+        <input type="submit" value="수정완료">
 
         </div>
     </form>
 
     <div>
-        <a href={% url "users:profile" %}><button>수정 완료</button></a>
+        <a href={% url "users:profile" %}></a>
     </div>
 {% endblock content %}

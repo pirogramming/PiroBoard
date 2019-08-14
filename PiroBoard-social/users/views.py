@@ -24,17 +24,14 @@ def profile(request):
 
 @login_required
 def profile_update(request):
-    if request.POST == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=request.user)
-        print("벨리드 전")
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
-            print("벨리드 후")
-            modified_profile = form.save()
+            form.save()
             messages.success(request, '프로필을 성공적으로 수정하였습니다.')
-            #return redirect("users:profile")
-            return redirect(modified_profile)
+            return redirect("users:profile")
     else:
-        form = ProfileForm(instance=request.user)
+        form = ProfileForm(instance=request.user.profile)
     return render(request, 'users/profile_update.html', {'form': form})
 
 

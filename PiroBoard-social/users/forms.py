@@ -17,15 +17,20 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = [
-            'user',
-            'image',
-        ]
+        fields = ('image',)
+
+        verbose_name = 'photo'
+        verbose_name_plural = 'photos'
+
+    #image = forms.ImageField(label=(u'Image!'))
+
+    #def save(self, *args, **kw):
+    #    super(ProfileForm, self).save(*args, **kw)
 
 
-    def clean_username(self):
-        pass
-        name = self.cleaned_data.get('user.username', '')
+    #def clean_username(self):
+     #   pass
+      #  name = self.cleaned_data.get('user.username', '')
         #if name:
         #    if get_user_model().objects.filter(self.user.username=name).exists():
         #        raise forms.ValidationError('중복된 사용자 이름입니다.')

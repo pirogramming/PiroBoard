@@ -26,7 +26,7 @@ class GroupMember(models.Model):
     STATUS_CHOICES = (
         ('p', 'PENDING'),
         ('a', 'ACCEPTED'),
-        ('r', 'REFUSE')
+        ('r', 'REFUSE'),
     )
 
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
