@@ -30,9 +30,6 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('revise_profile/', user_views.revise_profile, name='revise_profile'),
     path('', include('django.contrib.auth.urls')),
-
-    path('users/', include('users.urls')),
-
 ]
 
 if settings.DEBUG:
