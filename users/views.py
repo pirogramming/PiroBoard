@@ -10,7 +10,6 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 
 
-
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -64,10 +63,8 @@ def accept_member(request):  # 초대를 수락하는 페이지
     return render(request, 'users/accept.html')
 
 
-
 def wait_member(request):  # 초대를 요청한 후 기다리는 페이지
     return render(request, 'users/wait.html')
-
 
 
 def change_password(request):
@@ -95,9 +92,6 @@ def password_reset_form(request):
     return render(request, 'registration/password_reset_form.html')
 
 
-
-
-
 # 유저가 참여하고 싶은 그룹을 찾는 페이지
 # 비공개 그룹은 뜨지 않도록 변경필요!
 def group_find(request):
@@ -123,6 +117,7 @@ def group_find(request):
 
     return render(request, 'users/find_groups.html', ctx)
 
+
 # def group_apply(request):
 #     if request.method == "POST":
 #         form = request.POST
@@ -139,18 +134,17 @@ def group_find(request):
 #     return render(request, 'users/find_groups.html')
 
 
-
 def requests_manage(request):
     profile = Profile.objects.get(user=request.user)
-    user_requests = [x.group for x in GroupMember.objects.filter(person = profile, status='u')]
-    group_requests = [x.group for x in GroupMember.objects.filter(person = profile, status='g')]
+    user_requests = [x.group for x in GroupMember.objects.filter(person=profile, status='u')]
+    group_requests = [x.group for x in GroupMember.objects.filter(person=profile, status='g')]
 
     ctx = {}
 
     if len(user_requests) > 0:
         ctx['user_requests'] = user_requests
         ctx['userRequest'] = True
-        ctx['user_requests_count']=len(user_requests)
+        ctx['user_requests_count'] = len(user_requests)
 
     else:
         ctx['userRequest'] = False
@@ -158,24 +152,22 @@ def requests_manage(request):
     if len(group_requests) > 0:
         ctx['group_requests'] = group_requests
         ctx['groupRequest'] = True
-        ctx['group_requests_count']=len(group_requests)
+        ctx['group_requests_count'] = len(group_requests)
 
     else:
         ctx['groupRequest'] = False
 
     return render(request, 'users/manage_groups.html', ctx)
 
+
 @login_required
 def profile_update(request):
-    if request.POST == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=request.user)
-        print("벨리드 전")
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
-            print("벨리드 후")
-            modified_profile = form.save()
+            form.save()
             messages.success(request, '프로필을 성공적으로 수정하였습니다.')
-            #return redirect("users:profile")
-            return redirect(modified_profile)
+            return redirect("users:profile")
     else:
-        form = ProfileForm(instance=request.user)
+        form = ProfileForm(instance=request.user.profile)
     return render(request, 'users/profile_update.html', {'form': form})
