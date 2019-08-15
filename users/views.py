@@ -166,7 +166,8 @@ def requests_manage(request):
     return render(request, 'users/manage_groups.html', ctx)
 
 
-#새로고침 없게 수정하기
+#새로 렌더링 하지 없게 수정하기
+#가입하시겠냐고 알림창 띄우기
 def request_accept(request):
     if request.method == "POST":
         form = request.POST
@@ -174,7 +175,11 @@ def request_accept(request):
         group = Group.objects.get(id=group_id)
         group.save()
 
-        print(group)
+        profile = Profile.objects.get(user=request.user)
+        membership=GroupMember.objects.get(group=group, person=profile)
+
+        membership.status='a'
+        membership.save()
 
         return redirect('users:group_manage')
     return redirect('blog-home')
