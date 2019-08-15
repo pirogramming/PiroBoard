@@ -168,6 +168,15 @@ def requests_manage(request):
 
 #새로고침 없게 수정하기
 def request_accept(request):
+    if request.method == "POST":
+        form = request.POST
+        group_id = form.get('group_id')
+        group = Group.objects.get(id=group_id)
+        group.save()
+
+        print(group)
+
+        return redirect('users:group_manage')
     return redirect('blog-home')
 
 
