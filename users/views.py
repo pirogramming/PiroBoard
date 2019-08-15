@@ -187,4 +187,15 @@ def request_accept(request):
 
 #새로고침 없게 수정하기
 def request_cancel(request):
-    return render(request, 'users/manage_groups.html')
+    if request.method == "POST":
+        form = request.POST
+        group_id = form.get('group_id')
+        group = Group.objects.get(id=group_id)
+        group.save()
+
+        profile = Profile.objects.get(user=request.user)
+        membership=GroupMember.objects.get(group=group, person=profile)
+        membership.delete()
+
+        return redirect('users:group_manage')
+    return redirect('users:group_manage')
