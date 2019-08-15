@@ -14,7 +14,8 @@ class Post(models.Model):
     photo = ProcessedImageField(blank=True,
                                 processors=[Thumbnail(300, 300)],
                                 format='JPEG',
-                                options={'quality': 60})
+                                options={'quality': 60},
+                                null=True,)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 

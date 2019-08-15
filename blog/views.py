@@ -111,7 +111,7 @@ def post_new(request, pk):
         post.author = request.user
         post.group_id = pk
         post.content = request.POST['content']
-        post.photo = request.FILES['photo']
+        post.photo = request.FILES.get('photo', False)
         post.save()
         return redirect('blog-home')
     else:

@@ -12,7 +12,6 @@ class Profile(models.Model):
     region = models.CharField(blank=True, max_length=50, null=True)
     nickname = models.CharField(blank=True, null=True, max_length=30)
     #interests = models.ManyToManyField('Interest', max_length=20, blank=True, null=True, related_name='users')
-
     group = models.ManyToManyField('Group', through='GroupMember', related_name="people")
 
     def __str__(self):

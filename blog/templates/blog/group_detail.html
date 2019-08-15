@@ -9,14 +9,7 @@
             <a href="{% url 'post_new' pk %}">글쓰기</a>
         {% endif %}
         <br>
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_table }}
 
-            <!--    <input type="text" name="title">-->
-            <!--    <textarea name="content" id="" cols="30" rows="10"></textarea>-->
-            <input type="submit" value="팍">
-        </form>
         <br>
         {% for post in posts %}
             제목 : {{ post.title }}<br>
