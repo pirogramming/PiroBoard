@@ -96,6 +96,9 @@ class GroupMember(models.Model):
         default='m',
     )
 
+    def __str__(self):
+        return f'{self.person} {self.group} {self.status}'
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

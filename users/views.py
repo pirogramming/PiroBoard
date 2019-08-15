@@ -60,8 +60,8 @@ def invite_member(request):  # 유저를 초대하는 페이지
     return render(request, 'users/invite.html')
 
 
-def accept_member(request):  # 초대를 수락하는 페이지
-    return render(request, 'users/accept.html')
+# def accept_member(request):  # 초대를 수락하는 페이지
+#     return render(request, 'users/accept.html')
 
 
 
@@ -165,3 +165,12 @@ def requests_manage(request):
 
     return render(request, 'users/manage_groups.html', ctx)
 
+
+#새로고침 없게 수정하기
+def request_accept(request):
+    return redirect('blog-home')
+
+
+#새로고침 없게 수정하기
+def request_cancel(request):
+    return render(request, 'users/manage_groups.html')
