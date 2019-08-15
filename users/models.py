@@ -97,7 +97,7 @@ class GroupMember(models.Model):
     )
 
     def __str__(self):
-        return f'{self.person} {self.group} {self.status}'
+        return f'{self.id} {self.person} {self.group} {self.status} {self.group_role}'
 
 
 @receiver(post_save, sender=User)
