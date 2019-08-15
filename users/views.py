@@ -166,6 +166,7 @@ def requests_manage(request):
     return render(request, 'users/manage_groups.html', ctx)
 
 
+#그룹이 유저에 보낸 '초대'수락
 #새로 렌더링 하지 없게 수정하기
 #가입하시겠냐고 알림창 띄우기
 def request_accept(request):
@@ -185,6 +186,7 @@ def request_accept(request):
     return redirect('blog-home')
 
 
+#유저가 그룹에 보낸 '승인요청' 취소
 #새로고침 없게 수정하기
 def request_cancel(request):
     if request.method == "POST":
