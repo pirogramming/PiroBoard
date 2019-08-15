@@ -3,6 +3,13 @@
 
 
 {% block content %}
+
+    <form action="" method="GET">
+        <input type="text" name="q" value="{{ q }}">
+        <input type="submit" value="검색">
+    </form>
+    <hr>
+
     {% for group in groups %}
         <div class="content-section">
             <div class="media">
