@@ -87,4 +87,9 @@ def revise_profile(request):
     return render(request, 'users/revise_profile.html')
 
 
+def password_reset_form(request):
+    return render(request, 'registration/password_reset_form.html')
+
+
+
 

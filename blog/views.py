@@ -55,17 +55,17 @@ def group_detail(request, pk):
     return render(request, 'blog/group_detail.html', hi)
 
 
-# @login_required
-def profile_revise(request):
-    if request.method == 'POST':
-        form = UserEditForm(request.POST, request.FILES, instance=request.user)
-        if form.is_valid():
-            us = form.save()
-            return redirect("accounts:profile")
-    else:
-        profileform = UserEditForm(instance=request.user)
-        forms = {'profileform': profileform}
-        return render(request, 'accounts/profile_revise.html', forms)
+# # @login_required
+# def profile_revise(request):
+#     if request.method == 'POST':
+#         form = UserEditForm(request.POST, request.FILES, instance=request.user)
+#         if form.is_valid():
+#             us = form.save()
+#             return redirect("accounts:profile")
+#     else:
+#         profileform = UserEditForm(instance=request.user)
+#         forms = {'profileform': profileform}
+#         return render(request, 'accounts/profile_revise.html', forms)
 
 
 def about(request):
