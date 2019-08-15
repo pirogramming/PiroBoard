@@ -36,25 +36,36 @@ def home(request):
 #
 def group_detail(request, pk):
     group = get_object_or_404(Group, pk=pk)
-    posts = Post.objects.all()
-    hi = {
-        'group': group,
-        'posts': posts,
-    }
+    if request.method == "POST":
+        post = Post()
+        post.title = request.POST['title']
+        post.author = request.user
+        post.content = request.POST['content']
+        post.photo = request.FILES['photo']
+        post.save()
+        return redirect('group_detail', pk=group.pk)
+    else:
+        form = PostForm()
+        hi = {
+            'group': group,
+            'posts': Post.objects.filter(group=group),
+            'form': form,
+            'pk': pk,
+        }
     return render(request, 'blog/group_detail.html', hi)
 
 
-# @login_required
-def profile_revise(request):
-    if request.method == 'POST':
-        form = UserEditForm(request.POST, request.FILES, instance=request.user)
-        if form.is_valid():
-            us = form.save()
-            return redirect("accounts:profile")
-    else:
-        profileform = UserEditForm(instance=request.user)
-        forms = {'profileform': profileform}
-        return render(request, 'accounts/profile_revise.html', forms)
+# # @login_required
+# def profile_revise(request):
+#     if request.method == 'POST':
+#         form = UserEditForm(request.POST, request.FILES, instance=request.user)
+#         if form.is_valid():
+#             us = form.save()
+#             return redirect("accounts:profile")
+#     else:
+#         profileform = UserEditForm(instance=request.user)
+#         forms = {'profileform': profileform}
+#         return render(request, 'accounts/profile_revise.html', forms)
 
 
 def about(request):
@@ -93,13 +104,14 @@ def post_detail(request, pk):
     return render(request, 'blog/post_detail.html', {'post': post, 'form': form})
 
 
-def post_new(request):
+def post_new(request, pk):
     if request.method == 'POST':
         post = Post()
         post.title = request.POST['title']
         post.author = request.user
+        post.group_id = pk
         post.content = request.POST['content']
-        post.photo = request.FILES['photo']
+        post.photo = request.FILES.get('photo', False)
         post.save()
         return redirect('blog-home')
     else:

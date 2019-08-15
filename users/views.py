@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -24,7 +25,8 @@ def register(request):
 def profile(request):
     return render(request, 'users/profile.html')
 
-def find_user(request, group_id): #그룹 내에서 초대할 유저를 검색함 
+
+def find_user(request, group_id):  # 그룹 내에서 초대할 유저를 검색함
     """
         GET
             params or query
@@ -38,31 +40,29 @@ def find_user(request, group_id): #그룹 내에서 초대할 유저를 검색�
             "profiles": profiles,
             "group_id": group_id
         }
-        
+
         return render(request, "users/find_users_results.html", ctx)
     else:
-        return render(request, "users/find_users.html", ) 
-    # 
-    
-    
+        return render(request, "users/find_users.html", )
+        #
 
 
-def invite_member(request):   #유저를 초대하는 페이지
+def invite_member(request):  # 유저를 초대하는 페이지
     """
     POST
     @body: 
         user_id: Int! (초대 해야 하는 사람)
         group_id: Int! (현재 그룹)
     """
-    
+
     return render(request, 'users/invite.html')
 
 
-def accept_member(request):   #초대를 수락하는 페이지
+def accept_member(request):  # 초대를 수락하는 페이지
     return render(request, 'users/accept.html')
 
 
-def wait_member(request):    #초대를 요청한 후 기다리는 페이지
+def wait_member(request):  # 초대를 요청한 후 기다리는 페이지
     return render(request, 'users/wait.html')
 
 
