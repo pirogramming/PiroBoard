@@ -4,8 +4,11 @@ from django.contrib.auth.models import User
 from imagekit.models import ProcessedImageField
 from imagekit.processors import Thumbnail
 
+from users.models import Group
+
 
 class Post(models.Model):
+    group = models.ForeignKey(Group, related_name='G_post', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField()
     photo = ProcessedImageField(blank=True,
@@ -17,6 +20,7 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)

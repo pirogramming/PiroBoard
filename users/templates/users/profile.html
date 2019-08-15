@@ -8,6 +8,9 @@
             <div class="media-body">
                 <h2 class="account-heading">{{ user.username }}</h2>
                 <p class="text-secondary">{{ user.email }}</p>
+                <p class="text-secondary">{{ profile.region }}</p>
+
+
             </div>
         </div>
         <a href="{% url 'profile' %}">프로필 수정하기</a>
