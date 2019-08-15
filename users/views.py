@@ -81,7 +81,7 @@ def group_find(request):
     else:
 
         profile = Profile.objects.get(user=request.user)
-        groups = Group.objects.exclude(group_users=profile)
+        groups = Group.objects.exclude(group_open_status='n').exclude(group_users=profile)
 
         ctx = {
             'groups': groups,
