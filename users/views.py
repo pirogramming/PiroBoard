@@ -76,7 +76,7 @@ def group_find(request):
 
         GroupMember.objects.create(person=request.user.profile, group=group, status='u')
 
-        return redirect('blog-home')
+        return redirect('users:group_manage')
 
     else:
 
