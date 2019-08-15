@@ -14,17 +14,27 @@ class Profile(models.Model):
 
 
 class Group(models.Model):
+
     group_name = models.CharField(max_length=100)
     group_img = models.ImageField(blank=True, null=True)
     group_info = models.TextField()
     group_users = models.ManyToManyField(Profile, through='GroupMember', related_name="people")
+
+    GROUP_APPLY_STATUS_CHOICES=(
+        ('n', '가입 신청 비허용'),
+        ('y', '가입 신청 허용'),
+    )
+    group_apply_status=models.CharField(
+        max_length=1,
+        choices=GROUP_APPLY_STATUS_CHOICES,
+        default='y',
+    )
 
     GROUP_OPEN_STATUS_CHOICES=(
         ('n', '비공개'),
         ('s', '검색만가능'),
         ('o', '공개'),
     )
-
     group_open_status=models.CharField(
         max_length=1,
         choices=GROUP_OPEN_STATUS_CHOICES,
@@ -42,17 +52,23 @@ class GroupMember(models.Model):
     person = models.ForeignKey(Profile, related_name='membership', on_delete=models.CASCADE)
     group = models.ForeignKey(Group, related_name='membership', on_delete=models.CASCADE)
 
-
     STATUS_CHOICES = (
-        ('p', 'PENDING'),
+        ('g', '가입요청'),
+        ('u', '가입승인요청'),
         ('a', 'ACCEPTED'),
         ('r', 'REFUSE')
     )
-
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
 
-
-
+    GROUP_ROLE = (
+        ('h', '그룹장'),
+        ('m', '그룹 멤버')
+    )
+    group_role=models.CharField(
+        max_length=1,
+        choices=GROUP_ROLE,
+        default='m',
+    )
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

@@ -74,7 +74,7 @@ def group_find(request):
 
         group.save()
 
-        GroupMember.objects.create(person=request.user.profile, group=group, status='a')
+        GroupMember.objects.create(person=request.user.profile, group=group, status='u')
 
         return redirect('blog-home')
 
@@ -103,3 +103,30 @@ def group_find(request):
 #     else:
 #         pass
 #     return render(request, 'users/find_groups.html')
+
+
+
+def requests_manage(request):
+    profile = Profile.objects.get(user=request.user)
+    user_requests = [x.group for x in GroupMember.objects.filter(person = profile, status='u')]
+    group_requests = [x.group for x in GroupMember.objects.filter(person = profile, status='g')]
+
+    ctx = {}
+
+    if len(user_requests) > 0:
+        ctx['user_requests'] = user_requests
+        ctx['userRequest'] = True
+        ctx['user_requests_count']=len(user_requests)
+
+    else:
+        ctx['userRequest'] = False
+
+    if len(group_requests) > 0:
+        ctx['group_requests'] = group_requests
+        ctx['groupRequest'] = True
+        ctx['group_requests_count']=len(group_requests)
+
+    else:
+        ctx['groupRequest'] = False
+
+    return render(request, 'users/manage_groups.html', ctx)

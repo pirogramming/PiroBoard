@@ -10,8 +10,9 @@ from .forms import GroupForm, CommentForm, PostForm
 @login_required
 def home(request):
     profile = Profile.objects.get(user=request.user)
+    user_groups = [x.group for x in GroupMember.objects.filter(person = profile, status='a')]
+
     ctx = {}
-    user_groups = profile.group.all()
 
     if len(user_groups) > 0:
         ctx['user_groups'] = user_groups
