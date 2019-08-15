@@ -60,6 +60,8 @@ def accept_member(request):  # 초대를 수락하는 페이지
     return render(request, 'users/accept.html')
 
 
+
+
 def wait_member(request):  # 초대를 요청한 후 기다리는 페이지
     return render(request, 'users/wait.html')
 
