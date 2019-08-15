@@ -71,6 +71,7 @@ def group_find(request):
         form = request.POST
         group_id = form.get('group_id')
         group = Group.objects.get(id=group_id)
+
         group.save()
 
         GroupMember.objects.create(person=request.user.profile, group=group, status='a')
@@ -78,7 +79,9 @@ def group_find(request):
         return redirect('blog-home')
 
     else:
-        groups = Group.objects.all()
+
+        profile = Profile.objects.get(user=request.user)
+        groups = Group.objects.exclude(group_users=profile)
 
         ctx = {
             'groups': groups,
