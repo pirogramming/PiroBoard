@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, ProfileForm
 from .models import Profile, Group, GroupMember
 from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
@@ -165,3 +165,17 @@ def requests_manage(request):
 
     return render(request, 'users/manage_groups.html', ctx)
 
+@login_required
+def profile_update(request):
+    if request.POST == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=request.user)
+        print("벨리드 전")
+        if form.is_valid():
+            print("벨리드 후")
+            modified_profile = form.save()
+            messages.success(request, '프로필을 성공적으로 수정하였습니다.')
+            #return redirect("users:profile")
+            return redirect(modified_profile)
+    else:
+        form = ProfileForm(instance=request.user)
+    return render(request, 'users/profile_update.html', {'form': form})

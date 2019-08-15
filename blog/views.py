@@ -11,7 +11,6 @@ from .forms import GroupForm, CommentForm, PostForm
 def home(request):
     profile = Profile.objects.get(user=request.user)
     user_groups = [x.group for x in GroupMember.objects.filter(person = profile, status='a')]
-
     ctx = {}
 
     if len(user_groups) > 0:
