@@ -1,0 +1,68 @@
+{% extends "blog/base.html" %}
+
+
+
+{% block content %}
+    <hr/>
+    <hr/>
+    {% if groupRequest %}
+        {% for group in group_requests %}
+            <h2>{{ group_requests_count }}개의 그룹 가입 요청을 받았습니다.</h2>
+            <div class="content-section">
+                <div class="media">
+                    <img class="rounded-circle account-img" src="{{ group.group_img }}">]]]
+                    <div class="media-body">
+                        <div class="account-heading">{{ group.group_name }}</div>
+                        <p class="text-secondary">{{ group.group_info }}</p>
+                    </div>
+                    <div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="group_id" value="{{ group.id }}">
+                            <button type="submit">이 그룹에 참여하기</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    {% else %}
+        <h2>받은 가입 요청 없음</h2>
+    {% endif %}
+
+    <hr/>
+
+
+    {% if userRequest %}
+        <h2>{{ user_requests_count }}개의 가입승인을 기다리고 있습니다.</h2>
+        {% for group in user_requests %}
+            <div class="content-section">
+                <div class="media">
+                    <img class="rounded-circle account-img" src="{{ group.group_img }}">]]]
+                    <div class="media-body">
+                        <div class="account-heading">{{ group.group_name }}</div>
+                        <p class="text-secondary">{{ group.group_info }}</p>
+                    </div>
+                    <div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="group_id" value="{{ group.id }}">
+                            <button type="submit">가입신청 취소하기</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    {% else %}
+        <h2>받은 가입 요청 없음</h2>
+    {% endif %}
+
+    <hr/>
+    <hr/>
+{% endblock content %}
+
+
+
+
+

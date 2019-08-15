@@ -3,15 +3,16 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
 from .models import Post
-from users.models import Profile, Group
+from users.models import Profile, Group, GroupMember
 from .forms import GroupForm, CommentForm, PostForm
 
 
 @login_required
 def home(request):
     profile = Profile.objects.get(user=request.user)
+    user_groups = [x.group for x in GroupMember.objects.filter(person = profile, status='a')]
+
     ctx = {}
-    user_groups = profile.group.all()
 
     if len(user_groups) > 0:
         ctx['user_groups'] = user_groups
@@ -75,9 +76,11 @@ def about(request):
         if form.is_valid():
             group = form.save(commit=False)
             group.group_creator = request.user
-
             group.created_date = timezone.now()
             group.save()
+
+            GroupMember.objects.create(person=request.user.profile, group=group, status='a')
+
             return redirect('blog-home')
     else:
         form = GroupForm()

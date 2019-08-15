@@ -9,5 +9,7 @@ urlpatterns = [
 
     path('password/', views.change_password, name='change_password'),
     path('password_reset_form/', views.password_reset_form, name='password_reset_form'),
+    path('group_find/', views.group_find , name='group_find'),
+    path('requests_manage/', views.requests_manage, name='group_manage'),
 
 ]

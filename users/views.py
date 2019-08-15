@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+
 from .forms import UserRegisterForm
-from .models import Profile, Group
+from .models import Profile, Group, GroupMember
 from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+
 
 
 def register(request):
@@ -54,7 +57,6 @@ def invite_member(request):  # 유저를 초대하는 페이지
         user_id: Int! (초대 해야 하는 사람)
         group_id: Int! (현재 그룹)
     """
-
     return render(request, 'users/invite.html')
 
 
@@ -62,8 +64,10 @@ def accept_member(request):  # 초대를 수락하는 페이지
     return render(request, 'users/accept.html')
 
 
+
 def wait_member(request):  # 초대를 요청한 후 기다리는 페이지
     return render(request, 'users/wait.html')
+
 
 
 def change_password(request):
@@ -92,4 +96,72 @@ def password_reset_form(request):
 
 
 
+
+
+# 유저가 참여하고 싶은 그룹을 찾는 페이지
+# 비공개 그룹은 뜨지 않도록 변경필요!
+def group_find(request):
+    if request.method == "POST":
+        form = request.POST
+        group_id = form.get('group_id')
+        group = Group.objects.get(id=group_id)
+
+        group.save()
+
+        GroupMember.objects.create(person=request.user.profile, group=group, status='u')
+
+        return redirect('users:group_manage')
+
+    else:
+
+        profile = Profile.objects.get(user=request.user)
+        groups = Group.objects.exclude(group_open_status='n').exclude(group_users=profile)
+
+        ctx = {
+            'groups': groups,
+        }
+
+    return render(request, 'users/find_groups.html', ctx)
+
+# def group_apply(request):
+#     if request.method == "POST":
+#         form = request.POST
+#         if form.is_valid():
+#             group_id = form.group_id
+#             group = Group.objects.get(id=group_id)
+#             group.save()
+#
+#             GroupMember.objects.create(person=request.user.profile, group=group, status='a')
+#
+#             return redirect('blog-home')
+#     else:
+#         pass
+#     return render(request, 'users/find_groups.html')
+
+
+
+def requests_manage(request):
+    profile = Profile.objects.get(user=request.user)
+    user_requests = [x.group for x in GroupMember.objects.filter(person = profile, status='u')]
+    group_requests = [x.group for x in GroupMember.objects.filter(person = profile, status='g')]
+
+    ctx = {}
+
+    if len(user_requests) > 0:
+        ctx['user_requests'] = user_requests
+        ctx['userRequest'] = True
+        ctx['user_requests_count']=len(user_requests)
+
+    else:
+        ctx['userRequest'] = False
+
+    if len(group_requests) > 0:
+        ctx['group_requests'] = group_requests
+        ctx['groupRequest'] = True
+        ctx['group_requests_count']=len(group_requests)
+
+    else:
+        ctx['groupRequest'] = False
+
+    return render(request, 'users/manage_groups.html', ctx)
 
