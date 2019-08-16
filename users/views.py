@@ -74,7 +74,7 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return redirect('change_password')
+            return redirect('users:profile')
         else:
             messages.error(request, 'Please correct the error below.')
     else:
@@ -82,10 +82,6 @@ def change_password(request):
     return render(request, 'users/change_password.html', {
         'form': form
     })
-
-
-def revise_profile(request):
-    return render(request, 'users/revise_profile.html')
 
 
 def password_reset_form(request):
