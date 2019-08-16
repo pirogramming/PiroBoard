@@ -31,11 +31,30 @@ def group_member_manage(request, pk):
     return render(request, 'blog_manager/manage_group_member.html', ctx)
 
 
-def invite_member(request, pk):
+def invite_member_page(request, pk):
+
+    group = Group.objects.get(id=pk)
+    users = Profile.objects.exclude(group=group)
+
     ctx = {
         'pk': pk,
+        'profiles':users,
     }
+
     return render(request, 'blog_manager/invite_member.html', ctx)
+
+
+def invite_member(request, pk):
+
+    #기본 처리
+    if 1:
+
+        return redirect('invite_member_page', pk)
+
+    else:
+        pass
+
+    return redirect('invite_member_page', pk)
 
 
 def manage_requests(request, pk):

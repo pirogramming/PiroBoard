@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "blog/base.html" %}
 
-</body>
-</html>
+
+
+{% block content %}
+    <p>그룹에 유저를 초대하세요!</p>
+    {% for profile in profiles %}
+        <div class="content-section">
+            <div class="media">
+                <img class="rounded-circle account-img" src="{{ profile.image }}">
+                <div class="media-body">
+                    <p class="text-secondary">{{ profile.user.username }}</p>
+                    <div class="account-heading">{{ profile.nickname }}</div>
+                    <p class="text-secondary">{{ profile.region }}</p>
+                </div>
+                <div>
+                    <form method="post" action="{% url 'invite_member' pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="group_id" value="{{ group.id }}">
+                        <input type="hidden" name="user_p" value="{{ user.user.username }}">
+                        <button type="submit">이 유저를 초대하기</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}
+
+
