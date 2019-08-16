@@ -82,7 +82,6 @@ def user_request_accept(request, pk):
         profile = Profile.objects.get(user=user)
 
         membership = GroupMember.objects.get(group=group, person=profile)
-
         membership.status = 'a'
         membership.save()
 
@@ -95,13 +94,15 @@ def user_request_accept(request, pk):
 def group_request_cancel(request, pk):
     if request.method == "POST":
         form = request.POST
-        group_id = form.get('group_id')
-        group = Group.objects.get(id=group_id)
+        group = Group.objects.get(id=pk)
         group.save()
 
-        profile = Profile.objects.get(user=request.user)
+        profile_name = form.get('user_p')
+        user = User.objects.get(username=profile_name)
+        profile = Profile.objects.get(user=user)
+
         membership = GroupMember.objects.get(group=group, person=profile)
         membership.delete()
 
-        return redirect('manage_requests')
-    return redirect('manage_requests')
+        return redirect('manage_requests', pk)
+    return redirect('manage_requests', pk)
