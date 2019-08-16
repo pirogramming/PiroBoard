@@ -9,7 +9,7 @@ from users.models import Group, Profile, GroupMember
 def group_manage(request, pk):
 
     group = Group.objects.get(id=pk)
-    members = [x.group for x in GroupMember.objects.filter(group=group, status='a')]
+    members = [x.person for x in GroupMember.objects.filter(group=group, status='a')]
 
     ctx = {
         'pk': pk,
