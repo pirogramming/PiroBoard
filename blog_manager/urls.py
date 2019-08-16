@@ -7,4 +7,7 @@ urlpatterns = [
     path('manage_member/', views.group_member_manage, name='group_member_manage'),
     path('invite_member/', views.invite_member, name='invite_member'),
     path('manage_requests/', views.manage_requests, name='manage_requests'),
+
+    path('request_accept/', views.user_request_accept, name='user_request_accept'),
+    path('request_cancel/', views.group_request_cancel, name='group_request_cancel'),
 ]
