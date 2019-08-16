@@ -15,5 +15,7 @@ urlpatterns = [
     path('requests_manage/', views.requests_manage, name='group_manage'),
     path('', views.profile, name='profile'),
     path('update/', views.profile_update, name='profile_update'),
+    path('request_cancel/', views.request_cancel, name='request_cancel'),
+    path('request_accept/', views.request_accept, name='request_accept'),
 
 ]

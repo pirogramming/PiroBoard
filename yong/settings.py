@@ -26,7 +26,8 @@ ALLOWED_HOSTS = []
 # Application definition
 USER_APPS = [
     "blog",
-    "users"
+    "users",
+    "blog_manager",
 ]
 
 INSTALLED_APPS = [

@@ -1,0 +1,43 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <br/>
+
+
+    <ur>
+        <p>구현해야 할 기능</p>
+        <a href="{% url 'group_info_update' pk %}"><li>그룹 정보 수정</li></a>
+        <a href="{% url 'group_member_manage' pk %}"><li>그룹 멤버 관리</li></a>
+        <a href="{% url 'invite_member' pk %}"><li>유저 찾아서 초대하기</li></a>
+        <a href="{% url 'manage_requests' pk %}"><li>가입요청 처리</li></a>
+        <hr/>
+        <li>이 창으로 들어오는 버튼은 그룹장일때만 보이게 하기</li>
+    </ur>
+
+    <hr/>
+    <br/>
+
+    <p>그룹기본정보</p>
+    <hr>
+
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{ group.group_img }}">
+            <div class="media-body">
+                <div class="account-heading">{{ group.group_name }}</div>
+                <p class="text-secondary">{{ group.group_info }}</p>
+            </div>
+
+            <hr/>
+
+        </div>
+        <div class="media-body">
+            <p>그룹 참가자</p>
+            <hr/>
+            {% for member in members %}
+                <p>{{ member.user.username }}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

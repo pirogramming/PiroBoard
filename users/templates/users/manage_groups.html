@@ -16,7 +16,7 @@
                         <p class="text-secondary">{{ group.group_info }}</p>
                     </div>
                     <div>
-                        <form method="post">
+                        <form method="post" action="{% url 'users:request_accept' %}">
                             {% csrf_token %}
                             <input type="hidden" name="group_id" value="{{ group.id }}">
                             <button type="submit">이 그룹에 참여하기</button>
@@ -44,7 +44,7 @@
                         <p class="text-secondary">{{ group.group_info }}</p>
                     </div>
                     <div>
-                        <form method="post">
+                        <form method="post" action="{% url 'users:request_cancel' %}">
                             {% csrf_token %}
                             <input type="hidden" name="group_id" value="{{ group.id }}">
                             <button type="submit">가입신청 취소하기</button>

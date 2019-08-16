@@ -27,7 +27,6 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('profile/', include('users.urls')),
     #path('temp_auth/', include('django.contrib.auth.urls')),
-
 ]
 
 if settings.DEBUG:

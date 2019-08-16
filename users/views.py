@@ -59,8 +59,8 @@ def invite_member(request):  # 유저를 초대하는 페이지
     return render(request, 'users/invite.html')
 
 
-def accept_member(request):  # 초대를 수락하는 페이지
-    return render(request, 'users/accept.html')
+# def accept_member(request):  # 초대를 수락하는 페이지
+#     return render(request, 'users/accept.html')
 
 
 def wait_member(request):  # 초대를 요청한 후 기다리는 페이지
@@ -167,3 +167,39 @@ def profile_update(request):
     else:
         form = ProfileForm(instance=request.user.profile)
     return render(request, 'users/profile_update.html', {'form': form})
+#그룹이 유저에 보낸 '초대'수락
+#새로 렌더링 하지 없게 수정하기
+#가입하시겠냐고 알림창 띄우기
+def request_accept(request):
+    if request.method == "POST":
+        form = request.POST
+        group_id = form.get('group_id')
+        group = Group.objects.get(id=group_id)
+        group.save()
+
+        profile = Profile.objects.get(user=request.user)
+        membership=GroupMember.objects.get(group=group, person=profile)
+
+        membership.status='a'
+        membership.save()
+
+        return redirect('users:group_manage')
+    return redirect('blog-home')
+
+
+#유저가 그룹에 보낸 '승인요청' 취소
+#새로고침 없게 수정하기
+def request_cancel(request):
+    if request.method == "POST":
+        form = request.POST
+        group_id = form.get('group_id')
+        group = Group.objects.get(id=group_id)
+        group.save()
+
+        profile = Profile.objects.get(user=request.user)
+        membership=GroupMember.objects.get(group=group, person=profile)
+        membership.delete()
+
+        return redirect('users:group_manage')
+    return redirect('users:group_manage')
+
