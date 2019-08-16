@@ -111,17 +111,14 @@ def group_find(request):
         return redirect('users:group_manage')
 
     else:
-        qs = Group.objects.all()
+        profile = Profile.objects.get(user=request.user)
+        qs = Group.objects.exclude(group_open_status='n').exclude(group_users=profile)
         q = request.GET.get('q', '')
         if q:
             qs = qs.filter(group_name__icontains=q)
 
-        profile = Profile.objects.get(user=request.user)
-        groups = Group.objects.exclude(group_open_status='n').exclude(group_users=profile)
-
         ctx = {
-            'groups': groups,
-            'user_list': qs,
+            'group_list': qs,
             'q': q,
         }
 
