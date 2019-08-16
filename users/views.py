@@ -95,20 +95,21 @@ def group_find(request):
         form = request.POST
         group_id = form.get('group_id')
         group = Group.objects.get(id=group_id)
-
         group.save()
-
         GroupMember.objects.create(person=request.user.profile, group=group, status='u')
 
         return redirect('users:group_manage')
 
     else:
-
         profile = Profile.objects.get(user=request.user)
-        groups = Group.objects.exclude(group_open_status='n').exclude(group_users=profile)
+        qs = Group.objects.exclude(group_open_status='n').exclude(group_users=profile)
+        q = request.GET.get('q', '')
+        if q:
+            qs = qs.filter(group_name__icontains=q)
 
         ctx = {
-            'groups': groups,
+            'group_list': qs,
+            'q': q,
         }
 
     return render(request, 'users/find_groups.html', ctx)

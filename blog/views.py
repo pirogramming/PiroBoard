@@ -1,11 +1,19 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-
+from django.contrib.auth.models import User
 from .models import Post
 from users.models import Profile, Group, GroupMember
 from .forms import GroupForm, CommentForm, PostForm
 
+
+# def search(request):
+#     qs = User.objects.all()
+#     q = request.GET.get('q', '')
+#     if q:
+#         qs = qs.filter(username__icontains=q)
+#
+#     return render(request, 'users/find_groups.html', {'user_list': qs, 'q': q})
 
 @login_required
 def home(request):
@@ -139,6 +147,6 @@ def post_edit(request, pk):
     return render(request, 'blog/post_new.html', {
         'form': form,
     })
-#
+
 # def invite(request):
 #     return render(request, 'blog/notification/friends_invite_sent/notice.html')

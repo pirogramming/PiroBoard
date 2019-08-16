@@ -13,6 +13,7 @@ class Profile(models.Model):
     # nickname = models.CharField(blank=True, null=True, max_length=30)
     # interests = models.ManyToManyField('Interest', max_length=20, blank=True, null=True, related_name='users')
 
+
     group = models.ManyToManyField('Group', through='GroupMember', related_name="groups", blank=True, null=True)
 
     def __str__(self):
