@@ -40,7 +40,7 @@ class Group(models.Model):
     group_name = models.CharField(max_length=100)
     group_img = models.ImageField(blank=True, null=True)
     group_info = models.TextField()
-    group_head = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+    group_head = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     group_users = models.ManyToManyField(Profile, through='GroupMember', related_name="people")
 
     GROUP_APPLY_STATUS_CHOICES = (
