@@ -168,6 +168,8 @@ def profile_update(request):
     else:
         form = ProfileForm(instance=request.user.profile)
     return render(request, 'users/profile_update.html', {'form': form})
+
+
 #그룹이 유저에 보낸 '초대'수락
 #새로 렌더링 하지 없게 수정하기
 #가입하시겠냐고 알림창 띄우기
