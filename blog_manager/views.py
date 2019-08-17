@@ -50,11 +50,8 @@ def invite(request, pk):
 
     if request.method == "POST":
         form = request.POST
-        print(1)
 
         profile_name = form.get('user_p')
-        print(profile_name)
-        print(1)
         user = User.objects.get(username=profile_name)
         profile = Profile.objects.get(user=user)
 
