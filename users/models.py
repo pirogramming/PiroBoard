@@ -8,13 +8,13 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='기본프로필.png', upload_to='profile_pics')
 
-    # phone_number = models.CharField(blank=True, max_length=20, null=True)
-    # region = models.CharField(blank=True, max_length=50, null=True)
-    # nickname = models.CharField(blank=True, null=True, max_length=30)
+    phone_number = models.CharField(blank=True, max_length=20, null=True)
+    region = models.CharField(blank=True, max_length=50, null=True)
+    nickname = models.CharField(blank=True, null=True, max_length=30)
     # interests = models.ManyToManyField('Interest', max_length=20, blank=True, null=True, related_name='users')
 
-
     group = models.ManyToManyField('Group', through='GroupMember', related_name="groups", blank=True, null=True)
+
 
     def __str__(self):
         return f'{self.user.username} Profile'
@@ -41,6 +41,7 @@ class Group(models.Model):
     group_name = models.CharField(max_length=100)
     group_img = models.ImageField(blank=True, null=True)
     group_info = models.TextField()
+    group_head = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     group_users = models.ManyToManyField(Profile, through='GroupMember', related_name="people")
 
     GROUP_APPLY_STATUS_CHOICES = (

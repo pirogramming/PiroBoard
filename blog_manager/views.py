@@ -7,7 +7,6 @@ from users.models import Group, Profile, GroupMember
 
 
 def group_manage(request, pk):
-
     group = Group.objects.get(id=pk)
     members = [x.person for x in GroupMember.objects.filter(group=group, status='a')]
 
@@ -25,20 +24,77 @@ def group_info_update(request, pk):
 
 
 def group_member_manage(request, pk):
+    group = Group.objects.get(id=pk)
+    users = [x.person for x in GroupMember.objects.filter(group=group, status='a', group_role='m')]
+
+    head = Profile.objects.get(user=request.user)
+    managers = [x.person for x in GroupMember.objects.filter(group=group, status='a', group_role='h')]
+
     ctx = {
         'pk': pk,
+        'profiles': users,
+        'head':head,
+        "managers":managers,
     }
+
     return render(request, 'blog_manager/manage_group_member.html', ctx)
 
 
-def invite_member_page(request, pk):
+def baton_touch(request, pk):
+    group = Group.objects.get(id=pk)
+    group.save()
 
+    ctx = {
+        'pk': pk,
+    }
+
+    if request.method == "POST":
+        form = request.POST
+
+        profile_name = form.get('user_p')
+        user = User.objects.get(username=profile_name)
+        profile = Profile.objects.get(user=user)
+
+        oldHead = GroupMember.objects.get(group=group, person=request.user.profile)
+        oldHead.group_role = 'm'
+        oldHead.save()
+
+        newHead = GroupMember.objects.get(group=group, person=profile)
+        newHead.group_role = 'h'
+        newHead.save()
+
+    return render(request, 'blog/group_detail.html', ctx)
+
+
+def refuse(request, pk):
+    group = Group.objects.get(id=pk)
+    group.save()
+
+    ctx = {
+        'pk': pk,
+    }
+
+    if request.method == "POST":
+        form = request.POST
+
+        profile_name = form.get('user_p')
+        user = User.objects.get(username=profile_name)
+        profile = Profile.objects.get(user=user)
+
+        membership = GroupMember.objects.get(group=group, person=profile)
+        membership.status = 'r'
+        membership.save()
+
+    return render(request, 'blog_manager/group_manage.html', ctx)
+
+
+def invite_member_page(request, pk):
     group = Group.objects.get(id=pk)
     users = Profile.objects.exclude(group=group)
 
     ctx = {
         'pk': pk,
-        'profiles':users,
+        'profiles': users,
     }
 
     return render(request, 'blog_manager/invite_member.html', ctx)
@@ -50,11 +106,8 @@ def invite(request, pk):
 
     if request.method == "POST":
         form = request.POST
-        print(1)
 
         profile_name = form.get('user_p')
-        print(profile_name)
-        print(1)
         user = User.objects.get(username=profile_name)
         profile = Profile.objects.get(user=user)
 

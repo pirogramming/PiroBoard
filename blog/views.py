@@ -82,7 +82,7 @@ def about(request):
         form = GroupForm(request.POST)
         if form.is_valid():
             group = form.save(commit=False)
-            group.group_creator = request.user
+            group.group_head = request.user
             group.created_date = timezone.now()
             group.save()
 
