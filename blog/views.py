@@ -79,7 +79,7 @@ def about(request):
             group.created_date = timezone.now()
             group.save()
 
-            GroupMember.objects.create(person=request.user.profile, group=group, status='a')
+            GroupMember.objects.create(person=request.user.profile, group=group, status='a', group_role='h')
 
             return redirect('blog-home')
     else:
