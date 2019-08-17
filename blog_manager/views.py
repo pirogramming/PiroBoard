@@ -1,10 +1,25 @@
+import functools
+
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from blog_manager.forms import GroupForm
 from users.models import Group, Profile, GroupMember
 
 
+def manager_required(func):
+    @functools.wraps(func)
+    def wrapper(request, pk):
+        group = get_object_or_404(Group, pk=pk)
+        user = request.user.profile
+        group_member = GroupMember.objects.get(group=group, person=user)
+        if not group_member.is_head or not group_member.is_member:
+            return HttpResponse("헤드의 권한이 필요합니다.")
+        return func(request, pk)
+    return wrapper
+
+@manager_required
 def group_manage(request, pk):
     group = Group.objects.get(id=pk)
     members = [x.person for x in GroupMember.objects.filter(group=group, status='a')]

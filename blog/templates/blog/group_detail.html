@@ -1,8 +1,8 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
-
-
+    <a href="{% url 'group_manage' pk %}">그룹 관리</a>
+    <hr>
     {#    sulmo 임시 확이용  #}
     <div class="rows">
         {% if user.is_authenticated %}

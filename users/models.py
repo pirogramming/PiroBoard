@@ -93,6 +93,20 @@ class GroupMember(models.Model):
         default='m',
     )
 
+    @property
+    def is_head(self):
+        if self.group_role == 'h':
+            return True
+        else:
+            return False
+
+    @property
+    def is_member(self):
+        if self.status == 'a':
+            return True
+        else:
+            return False
+
     def __str__(self):
         return f'{self.id} {self.person} {self.group} {self.status} {self.group_role}'
 
