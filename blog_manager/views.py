@@ -33,17 +33,32 @@ def group_info_update(request, pk):
 
 
 def group_member_manage(request, pk):
+    group = Group.objects.get(id=pk)
+    users = [x.person for x in GroupMember.objects.filter(group=group, status='a', group_role='m')]
+
+    head = Profile.objects.get(user=request.user)
+    managers = [x.person for x in GroupMember.objects.filter(group=group, status='a', group_role='h')]
+
     ctx = {
         'pk': pk,
+        'profiles': users,
+        'head':head,
+        "managers":managers,
     }
+
     return render(request, 'blog_manager/manage_group_member.html', ctx)
 
 
 def invite_member_page(request, pk):
-
     group = Group.objects.get(id=pk)
     users = Profile.objects.exclude(group=group)
 
+    ctx = {
+        'pk': pk,
+        'profiles': users,
+    }
+
+    return render(request, 'blog_manager/invite_member.html', ctx)
 
 def invite(request, pk):
     group = Group.objects.get(id=pk)
