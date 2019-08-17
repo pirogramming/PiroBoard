@@ -14,10 +14,10 @@
                     <p class="text-secondary">{{ profile.region }}</p>
                 </div>
                 <div>
-                    <form method="post" action="{% url 'invite_member' pk %}">
+                    <form method="post" action="{% url 'invite' pk %}">
                         {% csrf_token %}
                         <input type="hidden" name="group_id" value="{{ group.id }}">
-                        <input type="hidden" name="user_p" value="{{ user.user.username }}">
+                        <input type="hidden" name="user_p" value="{{ profile.user.username }}">
                         <button type="submit">이 유저를 초대하기</button>
                     </form>
                 </div>

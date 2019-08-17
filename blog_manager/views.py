@@ -44,15 +44,21 @@ def invite_member_page(request, pk):
     return render(request, 'blog_manager/invite_member.html', ctx)
 
 
-def invite_member(request, pk):
+def invite(request, pk):
+    group = Group.objects.get(id=pk)
+    group.save()
 
-    #기본 처리
-    if 1:
+    if request.method == "POST":
+        form = request.POST
+        print(1)
 
-        return redirect('invite_member_page', pk)
+        profile_name = form.get('user_p')
+        print(profile_name)
+        print(1)
+        user = User.objects.get(username=profile_name)
+        profile = Profile.objects.get(user=user)
 
-    else:
-        pass
+        GroupMember.objects.create(person=profile, group=group, status='g')
 
     return redirect('invite_member_page', pk)
 
