@@ -27,7 +27,10 @@ def group_member_manage(request, pk):
     group = Group.objects.get(id=pk)
     users = [x.person for x in GroupMember.objects.filter(group=group, status='a', group_role='m')]
 
-    head = Profile.objects.get(user=request.user)
+    head = group.group_head
+    print(head)
+    print(type(head))
+
     managers = [x.person for x in GroupMember.objects.filter(group=group, status='a', group_role='h')]
 
     ctx = {
