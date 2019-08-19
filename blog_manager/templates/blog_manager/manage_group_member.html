@@ -37,11 +37,11 @@
                         <input type="hidden" name="user_p" value="{{ profile.user.username }}">
                         <button type="submit">이 유저에게 그룹장 넘기기</button>
                     </form>
-                    <form method="post" action="{% url 'refuse' pk %}">
+                    <form method="post" action="{% url 'byebye_manager' pk %}">
                         {% csrf_token %}
                         <input type="hidden" name="group_id" value="{{ group.id }}">
                         <input type="hidden" name="user_p" value="{{ profile.user.username }}">
-                        <button type="submit">이 유저를 차단하기</button>
+                        <button type="submit">이 유저에게서 매니저 권한 취소</button>
                     </form>
                 </div>
             </div>
@@ -61,6 +61,12 @@
                     <p class="text-secondary">{{ profile.region }}</p>
                 </div>
                 <div>
+                    <form method="post" action="{% url 'welcome_manager' pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="group_id" value="{{ group.id }}">
+                        <input type="hidden" name="user_p" value="{{ profile.user.username }}">
+                        <button type="submit">이 유저에게 매니저 권한 부여</button>
+                    </form>
                     <form method="post" action="{% url 'refuse' pk %}">
                         {% csrf_token %}
                         <input type="hidden" name="group_id" value="{{ group.id }}">

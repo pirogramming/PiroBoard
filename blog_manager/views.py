@@ -84,7 +84,7 @@ def group_member_manage(request, pk):
     return render(request, 'blog_manager/manage_group_member.html', ctx)
 
 
-@manager_required
+@group_head_required
 def baton_touch(request, pk):
     group = Group.objects.get(id=pk)
     group.save()
@@ -100,13 +100,8 @@ def baton_touch(request, pk):
         user = User.objects.get(username=profile_name)
         profile = Profile.objects.get(user=user)
 
-        oldHead = GroupMember.objects.get(group=group, person=request.user.profile)
-        oldHead.group_role = 'm'
-        oldHead.save()
-
-        newHead = GroupMember.objects.get(group=group, person=profile)
-        newHead.group_role = 'h'
-        newHead.save()
+        group.group_head=profile
+        group.save()
 
     return render(request, 'blog/group_detail.html', ctx)
 
