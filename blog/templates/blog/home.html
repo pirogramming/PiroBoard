@@ -30,7 +30,7 @@
                         <h2 class="title">{{ group.group_name }}</h2>
                         <p class="subtitle">{{ group.group_info }}</p>
                         <p><a href="#"><img src="images/pics05.jpg" alt=""></a></p>
-                        <p class="button-style1"><a href="#">그룹 들어가보기</a></p>
+                        <p class="button-style1"><a href="{% url 'group_detail' group.id %}">그룹 들어가보기</a></p>
                     </section>
                 </div>
                 </div>

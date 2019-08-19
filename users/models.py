@@ -84,7 +84,7 @@ class GroupMember(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
 
     GROUP_ROLE = (
-        ('h', '그룹장'),
+        ('h', '관리자'),
         ('m', '그룹 멤버')
     )
     group_role = models.CharField(
@@ -94,7 +94,7 @@ class GroupMember(models.Model):
     )
 
     @property
-    def is_head(self):
+    def is_manager(self):
         if self.group_role == 'h':
             return True
         else:
