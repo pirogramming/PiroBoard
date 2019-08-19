@@ -18,6 +18,15 @@ class Post(models.Model):
                                 null=True,)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    CATEGRORY_CHOICES = (
+        ('음식', '음식'),
+        ('취미', '취미'),
+        ('인물', '인물'),
+        ('etc', 'etc'),
+        ('없음', '없음'),
+    )
+    category = models.CharField(max_length=10, choices=CATEGRORY_CHOICES, default='없음',)
+
 
     def __str__(self):
         return self.title

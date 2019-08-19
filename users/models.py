@@ -2,11 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from imagekit.models import ProcessedImageField
+from imagekit.processors import Thumbnail
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='기본프로필.png', upload_to='profile_pics')
+    image = ProcessedImageField(blank=True, null=True,
+                                default='기본프로필.png', upload_to='profile_pics',
+                                processors=[Thumbnail(300, 300)],
+                                format='JPEG',
+                                options={'quality': 60}, )
 
     phone_number = models.CharField(blank=True, max_length=20, null=True)
     region = models.CharField(blank=True, max_length=50, null=True)
@@ -14,7 +20,6 @@ class Profile(models.Model):
     # interests = models.ManyToManyField('Interest', max_length=20, blank=True, null=True, related_name='users')
 
     group = models.ManyToManyField('Group', through='GroupMember', related_name="groups", blank=True, null=True)
-
 
     def __str__(self):
         return f'{self.user.username} Profile'
@@ -39,9 +44,12 @@ class Interest(models.Model):
 
 class Group(models.Model):
     group_name = models.CharField(max_length=100)
-    group_img = models.ImageField(blank=True, null=True)
+    group_img = ProcessedImageField(blank=True, null=True,
+                                    processors=[Thumbnail(300, 300)],
+                                    format='JPEG',
+                                    options={'quality': 60}, )
     group_info = models.TextField()
-    group_head = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    group_head = models.ForeignKey(User, on_delete=models.CASCADE)
     group_users = models.ManyToManyField(Profile, through='GroupMember', related_name="people")
 
     GROUP_APPLY_STATUS_CHOICES = (

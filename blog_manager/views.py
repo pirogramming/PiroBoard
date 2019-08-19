@@ -20,7 +20,6 @@ def group_head_required(func):
     return wrapper
 
 
-
 def manager_required(func):
     @functools.wraps(func)
     def wrapper(request, pk):
@@ -32,6 +31,7 @@ def manager_required(func):
             return HttpResponse("메니저의 권한이 필요합니다.")
         return func(request, pk)
     return wrapper
+
 
 @manager_required
 def group_manage(request, pk):
