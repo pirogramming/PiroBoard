@@ -112,13 +112,30 @@ def refuse(request, pk):
 
 
 def invite_member_page(request, pk):
-    group = Group.objects.get(id=pk)
+    group = Group.objects.get(pk=pk)
     users = Profile.objects.exclude(group=group)
 
+    q = request.GET.get('q', '')
+    if q:
+        username = users.user.objects.all()
+        username_filter = users.filter(username__icontains=q)
     ctx = {
         'pk': pk,
         'profiles': users,
+        'q': q,
     }
+
+#     profile = Profile.objects.get(user=request.user)
+#     qs = Group.objects.exclude(group_open_status='n').exclude(group_users=profile)
+#     q = request.GET.get('q', '')
+#     if q:
+#         qs = qs.filter(group_name__icontains=q)
+#
+#     ctx = {
+#         'group_list': qs,
+#         'q': q,
+#     }
+# return render(request, 'users/find_groups.html', ctx)
 
     return render(request, 'blog_manager/invite_member.html', ctx)
 
