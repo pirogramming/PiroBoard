@@ -208,14 +208,14 @@ def request_cancel(request):
     return redirect('users:group_manage')
 
 
-def user_manage_requests(request, pk):
-    group = Group.objects.get(id=pk)
+def user_manage_requests(request):
+    person = request.user.profile
 
-    user_requests = [x.person for x in GroupMember.objects.filter(group=group, status='u')]
-    group_requests = [x.person for x in GroupMember.objects.filter(group=group, status='g')]
+    user_requests = [x.group for x in GroupMember.objects.filter(person=person, status='u')]   # u = 가입승인요청
+    group_requests = [x.group for x in GroupMember.objects.filter(person=person, status='g')]  # g = 가입요청
 
     ctx = {
-        'pk': pk,
+
     }
 
     if len(user_requests) > 0:
@@ -235,3 +235,19 @@ def user_manage_requests(request, pk):
         ctx['groupRequest'] = False
 
     return render(request, 'users/user_manage_request.html', ctx)
+
+
+
+# 그룹이 유저에게 보낸 요청을 수락해주는 기능
+def group_request_accept(request):
+    if request.method == "POST":
+        form = request.POST
+        person = request.user
+        group = form.get('group_p')
+
+        membership = GroupMember.objects.get(group=group, person=person)
+        membership.status = 'a'
+        membership.save()
+
+        return redirect('users:user_manage_request')
+    return redirect('users:user_manage_request')

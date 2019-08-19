@@ -18,6 +18,8 @@ urlpatterns = [
     path('update/', views.profile_update, name='profile_update'),
     path('request_cancel/', views.request_cancel, name='request_cancel'),
     path('request_accept/', views.request_accept, name='request_accept'),
+    path('user_manage_request/', views.user_manage_requests, name='user_manage_request'),
+    path('group_request_accept/', views.group_request_accept, name='group_request_accept'),
 
 
 ]
