@@ -4,12 +4,26 @@
 {% block  content %}
     <div class="content-section">
         <div class="media">
-            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+            <br/>
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}"><br/><br/>
             <div class="media-body">
-                <h2 class="account-heading">{{ user.username }}</h2>
-                <p class="text-secondary">{{ user.email }}</p>
-                <p class="text-secondary">{{ profile.region }}</p>
-
+             <h2 class="account-heading">유저: {{ user.username }}</h2><br/>
+                {% if user.profile.nickname == None %}
+                {% else %}
+                    <p class="text-secondary">닉네임: {{ user.profile.nickname }}</p><br/>
+                {% endif %}
+            {% if user.profile.nickname == None %}
+                {% else %}
+                    <p class="text-secondary">이메일: {{ user.email }}</p><br/>
+                {% endif %}
+            {% if user.profile.nickname == None %}
+                {% else %}
+                    <p class="text-secondary">연락처: {{ user.profile.phone_number }}</p><br/>
+                {% endif %}
+            {% if user.profile.nickname == None %}
+                {% else %}
+                    <p class="text-secondary">지역: {{ user.profile.region }}</p><br/>
+                {% endif %}
 
             </div>
         </div>

@@ -9,7 +9,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 
-
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -21,13 +20,7 @@ def register(request):
     else:
         form = UserRegisterForm()
 
-
     return render(request, 'users/register.html', {'form': form})
-
-
-@login_required
-def profile(request):
-    return render(request, 'users/profile.html')
 
 
 def find_user(request, group_id):  # 그룹 내에서 초대할 유저를 검색함
@@ -157,6 +150,12 @@ def requests_manage(request):
         ctx['groupRequest'] = False
 
     return render(request, 'users/manage_groups.html', ctx)
+
+
+@login_required
+def profile(request):
+    profile = Profile.objects.get(user=request.user)
+    return render(request, 'users/profile.html',)
 
 
 @login_required
