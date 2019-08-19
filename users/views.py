@@ -85,7 +85,7 @@ def change_password(request):
 
 
 def password_reset_form(request):
-    return render(request, 'registration/password_reset_form.html')
+    return render(request, 'users/password_reset_form.html')
 
 
 # 유저가 참여하고 싶은 그룹을 찾는 페이지
@@ -205,4 +205,3 @@ def request_cancel(request):
 
         return redirect('users:group_manage')
     return redirect('users:group_manage')
-
