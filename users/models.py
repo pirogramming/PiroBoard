@@ -94,7 +94,7 @@ class GroupMember(models.Model):
     )
 
     @property
-    def is_head(self):
+    def is_manager(self):
         if self.group_role == 'h':
             return True
         else:

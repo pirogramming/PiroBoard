@@ -8,14 +8,28 @@ from blog_manager.forms import GroupForm
 from users.models import Group, Profile, GroupMember
 
 
-def manager_required(func):
+def group_head_required(func):
     @functools.wraps(func)
     def wrapper(request, pk):
         group = get_object_or_404(Group, pk=pk)
         user = request.user.profile
         group_member = GroupMember.objects.get(group=group, person=user)
-        if not group_member.is_head or not group_member.is_member:
+        if not group_member.is_manager or not group_member.is_member or group.group_head != request.user:
             return HttpResponse("헤드의 권한이 필요합니다.")
+        return func(request, pk)
+    return wrapper
+
+
+
+def manager_required(func):
+    @functools.wraps(func)
+    def wrapper(request, pk):
+        group = get_object_or_404(Group, pk=pk)
+        user = request.user.profile
+
+        group_member = GroupMember.objects.get(group=group, person=user)
+        if not group_member.is_manager or not group_member.is_member:
+            return HttpResponse("메니저의 권한이 필요합니다.")
         return func(request, pk)
     return wrapper
 
@@ -113,7 +127,7 @@ def refuse(request, pk):
 
     return render(request, 'blog_manager/group_manage.html', ctx)
 
-
+@group_head_required
 def invite_member_page(request, pk):
     group = Group.objects.get(pk=pk)
     users = Profile.objects.exclude(group=group)
