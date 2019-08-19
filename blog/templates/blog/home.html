@@ -2,7 +2,7 @@
 {% block content %}
 
 
-    <div class="container mt-30">
+    <div class="container">
         <div id="title"><h1>{{ user }}의 그룹</h1></div>
         <hr>
 
@@ -31,7 +31,7 @@
                             {#                    </article>#}
                             <div class="3u">
                                 <section>
-                                    <h2 class="title"><a href="{% url 'users:profile' %}">{{ group.group_name }}</a>
+                                    <h2 class="title"><a href="{% url 'group_detail' group.pk %}">{{ group.group_name }}</a>
                                     </h2>
                                     <p class="subtitle">{{ group.group_info }}</p>
                                     <p><a href="#"><img src="{{ group.group_img }}" alt=""></a></p>

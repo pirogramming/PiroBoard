@@ -15,16 +15,6 @@
     <script src="../../static/js/skel-panels.min.js"></script>
     <script src="../../static/js/init.js"></script>
 
-    <!--addition
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/loginregister.css' %}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-    -->
-
-
     <link rel="stylesheet" type="text/css" href="{% static 'blog/skel-noscript.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'blog/style-desktop.css' %}">
@@ -32,6 +22,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+
+
+    <script>
+        $(document).ready(function () {
+            $('.bxslider').bxSlider();
+        });
+        $('.bxslider').bxSlider({mode: 'fade', captions: true});
+    </script>
+
+    <script>
+        $(window).load(function () {
+            $(".loading").fadeOut();
+        });
+    </script>
 
 </head>
 <body class="homepage">
@@ -63,242 +68,6 @@
     </div>
 </div>
 <div class="container mt-15">
-
-    {#    <div class="row">#}
-    {#        <!--        <div id="banner" class="12u">-->#}
-    {#        <!--            <div class="container"><a href="#"><img src="images/pics01.jpg" alt=""></a></div>-->#}
-    {#        <!--        </div>-->#}
-    {#        <ul class="bxslider">#}
-    {#            <li><img#}
-    {#                    src="images/pics01.jpg"#}
-    {#                    title="인물">#}
-    {#            </li>#}
-    {#            <li><img#}
-    {#                    src="images/pics01.jpg"#}
-    {#                    title="음식">#}
-    {#            </li>#}
-    {#            <li><img#}
-    {#                    src="images/pics01.jpg"#}
-    {#                    title="취미">#}
-    {#            </li>#}
-    {#            <li><img#}
-    {#                    src="images/pics01.jpg"#}
-    {#                    title="etc">#}
-    {#                <!--                    <section>-->#}
-    {#                <!--                        <div class="post">-->#}
-    {#                <!--                            <h2>Integer gravida nibh quis urna</h2>-->#}
-    {#                <!--                            <p><a href="#"><img src="images/pics06.jpg" alt=""></a><br>-->#}
-    {#                <!--                                This is <strong>Tapestry</strong>, a responsive HTML5 site template freebie by <a-->#}
-    {#                <!--                                        href="http://templated.co">TEMPLATED</a>. Released for free under the <a-->#}
-    {#                <!--                                        href="http://templated.co/license">Creative Commons Attribution</a> license, so-->#}
-    {#                <!--                                use it for whatever (personal or commercial) &ndash; just give us credit! Check out more-->#}
-    {#                <!--                                of our stuff at <a href="http://templated.co">our site</a> or follow us on <a-->#}
-    {#                <!--                                        href="http://twitter.com/templatedco">Twitter</a>.</p>-->#}
-    {#                <!--                            <p class="button-style2"><a href="#">Read Full Article</a></p>-->#}
-    {#                <!--                        </div>-->#}
-    {#                <!--                    </section>-->#}
-    {#                <!--                </div>-->#}
-    {#                <!--            </div>-->#}
-    {#                <!--            <div class="3u" id="sidebar1">-->#}
-    {#                <!--                <section>-->#}
-    {#                <!--                    <h2>Ipsum Consequat</h2>-->#}
-    {#                <!--                    <ul class="style2">-->#}
-    {#                <!--                        <li class="first">-->#}
-    {#                <!--                            <p><a href="#"><img src="images/pics07.jpg" alt="">Donec leo, vivamus fermentum nibh in-->#}
-    {#                <!--                                augue praesent a lacus at urna congue rutrum. </a></p>-->#}
-    {#                <!--                        </li>-->#}
-    {#                <!--                        <li>-->#}
-    {#                <!--                            <p><a href="#"><img src="images/pics08.jpg" alt="">Donec leo, vivamus fermentum nibh in-->#}
-    {#                <!--                                augue praesent a lacus at urna congue rutrum. </a></p>-->#}
-    {#                <!--                        </li>-->#}
-    {#                <!--                        <li>-->#}
-    {#                <!--                            <p><a href="#"><img src="images/pics09.jpg" alt="">Donec leo, vivamus fermentum nibh in-->#}
-    {#                <!--                                augue praesent a lacus at urna congue rutrum. </a></p>-->#}
-    {#                <!--                        </li>-->#}
-    {#                <!--                        <li>-->#}
-    {#                <!--                            <p><a href="#"><img src="images/pics10.jpg" alt="">Donec leo, vivamus fermentum nibh in-->#}
-    {#                <!--                                augue praesent a lacus at urna congue rutrum. </a></p>-->#}
-    {#                <!--                        </li>-->#}
-    {#                <!--                    </ul>-->#}
-    {#                <!--                </section>-->#}
-    {#                <!--            </div>-->#}
-    {#                <!--            <div class="3u">-->#}
-    {#                <!--                <div id="sidebar2">-->#}
-    {#                <!--                    <section>-->#}
-    {#                <!--                        <div class="sbox1">-->#}
-    {#                <!--                            <h2>Feugiat Tempus</h2>-->#}
-    {#                <!--                            <ul class="style1">-->#}
-    {#                <!--                                <li class="first"><a href="#">Maecenas luctus lectus at sapien</a></li>-->#}
-    {#                <!--                                <li><a href="#">Etiam rhoncus volutpat erat</a></li>-->#}
-    {#                <!--                                <li><a href="#">Donec dictum metus in sapien</a></li>-->#}
-    {#                <!--                                <li><a href="#">Nulla luctus eleifend purus</a></li>-->#}
-    {#                <!--                                <li><a href="#">Maecenas luctus lectus at sapien</a></li>-->#}
-    {#                <!--                            </ul>-->#}
-    {#                <!--                        </div>-->#}
-    {#                <!--                    </section>-->#}
-    {#                <!--                    <section>-->#}
-    {#                <!--                        <div class="sbox2">-->#}
-    {#                <!--                            <h2>Nulla luctus eleifend</h2>-->#}
-    {#                <!--                            <ul class="style1">-->#}
-    {#                <!--                                <li class="first"><a href="#">Maecenas luctus lectus at sapien</a></li>-->#}
-    {#                <!--                                <li><a href="#">Donec dictum metus in sapien</a></li>-->#}
-    {#                <!--                                <li><a href="#">Integer gravida nibh quis urna</a></li>-->#}
-    {#                <!--                                <li><a href="#">Etiam posuere augue sit amet nisl</a></li>-->#}
-    {#                <!--                                <li><a href="#">Mauris vulputate dolor sit amet nibh</a></li>-->#}
-    {#                <!--                                <li><a href="#">Nulla luctus eleifend purus</a></li>-->#}
-    {#                <!--                            </ul>-->#}
-    {#                <!--                        </div>-->#}
-    {#                <!--                    </section>-->#}
-    {#                <!--                </div>-->#}
-    {#                <!--            </div>-->#}
-    {#                <!--        </div>-->#}
-    {#                <!--    </div>-->#}
-    {#                <!--</div>-->#}
-    {#                <!--<div id="featured-area">-->#}
-    {#                <!--    <div class="container">-->#}
-    {#                <!--        <div class="row divider">-->#}
-    {#                <!--            <div class="4u">-->#}
-    {#                <!--                <section>-->#}
-    {#                <!--                    <div class="box-style"><a href="#"><img src="images/pics04.jpg" alt=""></a>-->#}
-    {#                <!--                        <h3>Etiam posuere augue</h3>-->#}
-    {#                <!--                        <p>Donec nonummy magna quis risus. Quisque eleifend. </p>-->#}
-    {#                <!--                        <p class="button-style2"><a href="#">More</a></p>-->#}
-    {#                <!--                    </div>-->#}
-    {#                <!--                </section>-->#}
-    {#                <!--            </div>-->#}
-    {#                <!--            <div class="4u">-->#}
-    {#                <!--                <section>-->#}
-    {#                <!--                    <div class="box-style"><a href="#"><img src="images/pics03.jpg" alt=""></a>-->#}
-    {#                <!--                        <h3>Etiam posuere augue</h3>-->#}
-    {#                <!--                        <p>Donec nonummy magna quis risus. Quisque eleifend. </p>-->#}
-    {#                <!--                        <p class="button-style2"><a href="#">More</a></p>-->#}
-    {#                <!--                    </div>-->#}
-    {#                <!--                </section>-->#}
-    {#                <!--            <div class="4u">-->#}
-    {#                <!--                <section>-->#}
-    {#                <!--                    <div class="box-style"><a href="#"><img src="images/pics05.jpg" alt=""></a>-->#}
-    {#                <!--                        <h3>Etiam posuere augue</h3>-->#}
-    {#                <!--                        <p>Donec nonummy magna quis risus. Quisque eleifend. </p>-->#}
-    {#                <!--                        <p class="button-style2"><a href="#">More</a></p>-->#}
-    {#                <!--                    </div>-->#}
-    {#                <!--                </section>-->#}
-    {#                <!--            </div>-->#}
-    {#                <!--        </div>-->#}
-    {#                <!--    </div>-->#}
-    {#                <!--</div>-->#}
-    {#                <!--<div id="footer-wrapper">-->#}
-    {#                <!--    <div class="container">-->#}
-    {#                <!--        <div class="row" id="footer-content">-->#}
-    {#                <!--            <div class="3u" id="box1">-->#}
-    {#                <!--                <section>-->#}
-    {#                <!--                    <h2>Maecenas luctus lectus</h2>-->#}
-    {#                <!--                    <div class="balloon">-->#}
-    {#                <!--                        <blockquote>&ldquo;&nbsp;&nbsp;Donec leo, vivamus ullamcorper fermentum nibh in augue pulvinar-->#}
-    {#                <!--                            ullamcorper metus praesent a lacus at urna congue ullamcorper rutrum.&nbsp;&nbsp;&rdquo;<br>-->#}
-    {#                <!--                            <br>-->#}
-    {#                <!--                            <strong>&ndash;&nbsp;&nbsp;John Smith</strong></blockquote>-->#}
-    {#                <!--                    </div>-->#}
-    {#                <!--                    <div class="ballon-bgbtm">&nbsp;</div>-->#}
-    {#                <!--                    <p></p>-->#}
-    {#                <!--                </section>-->#}
-    {#                <!--            </div>-->#}
-    {#                <!--            <div class="3u" id="box2">-->#}
-    {#                <!--                <section>-->#}
-    {#                <!--                    <h2>Donec dictum metus</h2>-->#}
-    {#                <!--                    <ul class="style6">-->#}
-    {#                <!--                        <li class="first">-->#}
-    {#                <!--                            <h3>Mauris vulputate dolor sit amet</h3>-->#}
-    {#                <!--                            <p><a href="#">Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue-->#}
-    {#                <!--                                rutrum.</a></p>-->#}
-    {#                <!--                        </li>-->#}
-    {#                <!--                        <li>-->#}
-    {#                <!--                            <h3>Fusce ultrices fringilla metus</h3>-->#}
-    {#                <!--                            <p><a href="#">Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue-->#}
-    {#                <!--                                rutrum.</a></p>-->#}
-    {#                <!--                        </li>-->#}
-    {#                <!--                        <li>-->#}
-    {#                <!--                            <h3>Donec dictum metus in sapien</h3>-->#}
-    {#                <!--                            <p><a href="#">Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue-->#}
-    {#                <!--                                rutrum.</a></p>-->#}
-    {#                <!--                        </li>-->#}
-    {#                <!--                    </ul>-->#}
-    {#                <!--                </section>-->#}
-    {#                <!--            </div>-->#}
-    {#                <!--            <div class="3u" id="box3">-->#}
-    {#                <!--                <section>-->#}
-    {#                <!--                    <h2>Nulla luctus eleifend</h2>-->#}
-    {#                <!--                    <ul class="style1">-->#}
-    {#                <!--                        <li class="first"><a href="#">Maecenas luctus lectus at sapien</a></li>-->#}
-    {#                <!--                        <li><a href="#">Etiam rhoncus volutpat erat</a></li>-->#}
-    {#                <!--                        <li><a href="#">Donec dictum metus in sapien</a></li>-->#}
-    {#                <!--                        <li><a href="#">Nulla luctus eleifend purus</a></li>-->#}
-    {#                <!--                        <li><a href="#">Maecenas luctus lectus at sapien</a></li>-->#}
-    {#                <!--                        <li><a href="#">Etiam rhoncus volutpat erat</a></li>-->#}
-    {#                <!--                        <li><a href="#">Donec dictum metus in sapien</a></li>-->#}
-    {#                <!--                    </ul>-->#}
-    {#                <!--                </section>-->#}
-    {#                <!--            </div>-->#}
-    {#                <!--            <div class="3u" id="box4">-->#}
-    {#                <!--                <section>-->#}
-    {#                <!--                    <h2>Tristique eleifend</h2>-->#}
-    {#                <!--                    <p><strong>Aliquam erat volutpat. Pellentesque tristique ante ut risus. </strong></p>-->#}
-    {#                <!--                    <p>&nbsp;</p>-->#}
-    {#                <!--                    <p>Quisque dictum. Integer nisl risus, sagittis convallis, rutrum id, elementum congue, nibh.-->#}
-    {#                <!--                        Suspendisse dictum porta lectus. </p>-->#}
-    {#                <!--                    <p>&nbsp;</p>-->#}
-    {#                <!--                    <p>Donec placerat odio vel elit. Nullam ante orci, pellentesque eget, tempus quis, ultrices in, est.-->#}
-    {#                <!--                        Curabitur sit amet nulla. Nam in massa. Sed vel tellus. Curabitur sem urna, consequat.</p>-->#}
-    {#                <!--                </section>-->#}
-    {#                <!--            </div>-->#}
-    {#                <!--        </div>-->#}
-    {#                <!--    </div>-->#}
-    {#                <!--</div>-->#}
-    {#                <!--<div id="copyright" class="container">-->#}
-    {#                <!--    Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a-->#}
-    {#                <!--        href="http://unsplash.com/cc0">CC0</a>)-->#}
-    {#                <!--</div>-->#}
-    {#</body>#}
-    {#</html>#}
-    {#</li>#}
-    {#</ul>#}
-    {#<div class="container" id="marketing">#}
-    {#    <div class="row divider">#}
-    {#        <div class="3u">#}
-    {#            <section>#}
-    {#                <h2 class="title">1번 그룹</h2>#}
-    {#                <p class="subtitle">용성이의 월계동 친구들.</p>#}
-    {#                <p><a href="#"><img src="images/pics02.jpg" alt=""></a></p>#}
-    {#                <p class="button-style1"><a href="#">그룹 들어가보기</a></p>#}
-    {#            </section>#}
-    {#        </div>#}
-    {#        <div class="3u">#}
-    {#            <section>#}
-    {#                <h2 class="title">2번 그룹</h2>#}
-    {#                <p class="subtitle">47중대 사람들</p>#}
-    {#                <p><a href="#"><img src="images/pics03.jpg" alt=""></a></p>#}
-    {#                <p class="button-style1"><a href="#">그룹 들어가보기</a></p>#}
-    {#            </section>#}
-    {#        </div>#}
-    {#        <div class="3u">#}
-    {#            <section>#}
-    {#                <h2 class="title">3번 그룹</h2>#}
-    {#                <p class="subtitle">피로그래밍 사람들</p>#}
-    {#                <p><a href="#"><img src="images/pics04.jpg" alt=""></a></p>#}
-    {#                <p class="button-style1"><a href="#">그룹 들어가보기</a></p>#}
-    {#            </section>#}
-    {#        </div>#}
-
-    {#    </div>#}
-    {#</div>#}
-    {#</div>#}
-    <!--<div id="wrapper">-->
-    <!--    -->
-    <!--    </div>-->
-    <!--    <div class="container" id="page">-->
-    <!--        <div class="row">-->
-    <!--            <div class="6u">-->
-    <!--                <div class="mobileUI-main-content" id="content">-->
-    <!--            </div>-->
 
 
     {% block content %}
