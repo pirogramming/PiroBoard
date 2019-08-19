@@ -117,8 +117,7 @@ def invite_member_page(request, pk):
 
     q = request.GET.get('q', '')
     if q:
-        username = users.user.objects.all()
-        username_filter = users.filter(username__icontains=q)
+        users = users.filter(user__username__icontains=q)
     ctx = {
         'pk': pk,
         'profiles': users,
