@@ -122,7 +122,7 @@ def byebye_manager(request, pk):
         user = User.objects.get(username=profile_name)
         profile = Profile.objects.get(user=user)
 
-        oldManager = GroupMember.objects.get(group=group, person=request.user.profile)
+        oldManager = GroupMember.objects.get(group=group, person=profile)
         oldManager.group_role = 'm'
         oldManager.save()
 
@@ -145,7 +145,7 @@ def welcome_manager(request, pk):
         user = User.objects.get(username=profile_name)
         profile = Profile.objects.get(user=user)
 
-        oldManager = GroupMember.objects.get(group=group, person=request.user.profile)
+        oldManager = GroupMember.objects.get(group=group, person=profile)
         oldManager.group_role = 'h'
         oldManager.save()
 
