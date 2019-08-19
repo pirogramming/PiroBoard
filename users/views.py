@@ -214,3 +214,7 @@ def request_cancel(request):
 
         return redirect('users:group_manage')
     return redirect('users:group_manage')
+
+
+def password_reset_form(request):
+    return None
