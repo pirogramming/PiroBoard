@@ -134,6 +134,29 @@ def byebye_manager(request, pk):
     return render(request, 'blog_manager/group_manage.html', ctx)
 
 
+@group_head_required
+def welcome_manager(request, pk):
+    group = Group.objects.get(id=pk)
+    group.save()
+
+    ctx = {
+        'pk': pk,
+    }
+
+    if request.method == "POST":
+        form = request.POST
+
+        profile_name = form.get('user_p')
+        user = User.objects.get(username=profile_name)
+        profile = Profile.objects.get(user=user)
+
+        oldManager = GroupMember.objects.get(group=group, person=request.user.profile)
+        oldManager.group_role = 'h'
+        oldManager.save()
+
+    return render(request, 'blog_manager/group_manage.html', ctx)
+
+
 @manager_required
 def refuse(request, pk):
     group = Group.objects.get(id=pk)
