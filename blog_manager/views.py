@@ -17,8 +17,8 @@ def group_head_required(func):
         if not group_member.is_manager or not group_member.is_member or group.group_head != request.user:
             return HttpResponse("헤드의 권한이 필요합니다.")
         return func(request, pk)
-    return wrapper
 
+    return wrapper
 
 
 def manager_required(func):
@@ -31,6 +31,7 @@ def manager_required(func):
         if not group_member.is_manager or not group_member.is_member:
             return HttpResponse("메니저의 권한이 필요합니다.")
         return func(request, pk)
+
     return wrapper
 
 
@@ -76,8 +77,8 @@ def group_member_manage(request, pk):
     ctx = {
         'pk': pk,
         'profiles': users,
-        'head':head,
-        "managers":managers,
+        'head': head,
+        "managers": managers,
     }
 
     return render(request, 'blog_manager/manage_group_member.html', ctx)
@@ -108,6 +109,29 @@ def baton_touch(request, pk):
         newHead.save()
 
     return render(request, 'blog/group_detail.html', ctx)
+
+
+@group_head_required
+def byebye_manager(request, pk):
+    group = Group.objects.get(id=pk)
+    group.save()
+
+    ctx = {
+        'pk': pk,
+    }
+
+    if request.method == "POST":
+        form = request.POST
+
+        profile_name = form.get('user_p')
+        user = User.objects.get(username=profile_name)
+        profile = Profile.objects.get(user=user)
+
+        oldManager = GroupMember.objects.get(group=group, person=request.user.profile)
+        oldManager.group_role = 'm'
+        oldManager.save()
+
+    return render(request, 'blog_manager/group_manage.html', ctx)
 
 
 @manager_required
@@ -147,17 +171,17 @@ def invite_member_page(request, pk):
         'q': q,
     }
 
-#     profile = Profile.objects.get(user=request.user)
-#     qs = Group.objects.exclude(group_open_status='n').exclude(group_users=profile)
-#     q = request.GET.get('q', '')
-#     if q:
-#         qs = qs.filter(group_name__icontains=q)
-#
-#     ctx = {
-#         'group_list': qs,
-#         'q': q,
-#     }
-# return render(request, 'users/find_groups.html', ctx)
+    #     profile = Profile.objects.get(user=request.user)
+    #     qs = Group.objects.exclude(group_open_status='n').exclude(group_users=profile)
+    #     q = request.GET.get('q', '')
+    #     if q:
+    #         qs = qs.filter(group_name__icontains=q)
+    #
+    #     ctx = {
+    #         'group_list': qs,
+    #         'q': q,
+    #     }
+    # return render(request, 'users/find_groups.html', ctx)
 
     return render(request, 'blog_manager/invite_member.html', ctx)
 
