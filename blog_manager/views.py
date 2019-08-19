@@ -98,9 +98,8 @@ def baton_touch(request, pk):
 
         profile_name = form.get('user_p')
         user = User.objects.get(username=profile_name)
-        profile = Profile.objects.get(user=user)
 
-        group.group_head=profile
+        group.group_head=user
         group.save()
 
     return render(request, 'blog/group_detail.html', ctx)
