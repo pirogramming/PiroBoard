@@ -33,6 +33,7 @@ def manager_required(func):
         return func(request, pk)
     return wrapper
 
+
 @manager_required
 def group_manage(request, pk):
     group = Group.objects.get(id=pk)
@@ -47,6 +48,7 @@ def group_manage(request, pk):
     return render(request, 'blog_manager/group_manage.html', ctx)
 
 
+@manager_required
 def group_info_update(request, pk):
     group = Group.objects.get(id=pk)
     if request.method == 'POST':
@@ -60,6 +62,7 @@ def group_info_update(request, pk):
     return render(request, 'blog_manager/group_info_update.html', {'form': form})
 
 
+@manager_required
 def group_member_manage(request, pk):
     group = Group.objects.get(id=pk)
     users = [x.person for x in GroupMember.objects.filter(group=group, status='a', group_role='m')]
@@ -80,6 +83,7 @@ def group_member_manage(request, pk):
     return render(request, 'blog_manager/manage_group_member.html', ctx)
 
 
+@manager_required
 def baton_touch(request, pk):
     group = Group.objects.get(id=pk)
     group.save()
@@ -106,6 +110,7 @@ def baton_touch(request, pk):
     return render(request, 'blog/group_detail.html', ctx)
 
 
+@manager_required
 def refuse(request, pk):
     group = Group.objects.get(id=pk)
     group.save()
@@ -127,7 +132,8 @@ def refuse(request, pk):
 
     return render(request, 'blog_manager/group_manage.html', ctx)
 
-@group_head_required
+
+@manager_required
 def invite_member_page(request, pk):
     group = Group.objects.get(pk=pk)
     users = Profile.objects.exclude(group=group)
@@ -155,6 +161,8 @@ def invite_member_page(request, pk):
 
     return render(request, 'blog_manager/invite_member.html', ctx)
 
+
+@manager_required
 def invite(request, pk):
     group = Group.objects.get(id=pk)
     group.save()
@@ -171,6 +179,7 @@ def invite(request, pk):
     return redirect('invite_member_page', pk)
 
 
+@manager_required
 def manage_requests(request, pk):
     group = Group.objects.get(id=pk)
 
@@ -204,6 +213,7 @@ def manage_requests(request, pk):
 # 유저가 그룹에 보낸 '가입승인요청' 수용
 # 새로 렌더링 하지 없게 수정하기
 # 정말이냐고 알림창 띄우기
+@manager_required
 def user_request_accept(request, pk):
     if request.method == "POST":
         form = request.POST
@@ -224,6 +234,7 @@ def user_request_accept(request, pk):
 
 # 그룹이 유저에 보낸 '가입요청' 취소
 # 새로고침 없게 수정하기
+@manager_required
 def group_request_cancel(request, pk):
     if request.method == "POST":
         form = request.POST
