@@ -206,3 +206,32 @@ def request_cancel(request):
 
         return redirect('users:group_manage')
     return redirect('users:group_manage')
+
+
+def user_manage_requests(request, pk):
+    group = Group.objects.get(id=pk)
+
+    user_requests = [x.person for x in GroupMember.objects.filter(group=group, status='u')]
+    group_requests = [x.person for x in GroupMember.objects.filter(group=group, status='g')]
+
+    ctx = {
+        'pk': pk,
+    }
+
+    if len(user_requests) > 0:
+        ctx['user_requests'] = user_requests
+        ctx['userRequest'] = True
+        ctx['user_requests_count'] = len(user_requests)
+
+    else:
+        ctx['userRequest'] = False
+
+    if len(group_requests) > 0:
+        ctx['group_requests'] = group_requests
+        ctx['groupRequest'] = True
+        ctx['group_requests_count'] = len(group_requests)
+
+    else:
+        ctx['groupRequest'] = False
+
+    return render(request, 'users/user_manage_request.html', ctx)
