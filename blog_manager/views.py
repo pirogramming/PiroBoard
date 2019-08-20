@@ -188,6 +188,7 @@ def chadan_member_manage(request, pk):
     return render(request, 'blog_manager/manage_group_member.html', ctx)
 
 
+@group_head_required
 def unblock(request, pk):
     group = Group.objects.get(id=pk)
 

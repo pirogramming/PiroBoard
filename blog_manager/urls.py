@@ -10,6 +10,9 @@ urlpatterns = [
     path('baton/', views.baton_touch, name='baton_touch'),
     path('refuse/', views.refuse, name='refuse'),
 
+    path('manage_member/chadan_member/', views.chadan_member_manage, name='chadan_member_manage'),
+    path('manage_member/chadan_member/unblock/', views.unblock, name='unblock'),
+
     path('invite_member/', views.invite_member_page, name='invite_member_page'),
     path('invite/', views.invite, name='invite'),
     path('manage_requests/', views.manage_requests, name='manage_requests'),
