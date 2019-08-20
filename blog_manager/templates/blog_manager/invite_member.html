@@ -4,6 +4,11 @@
 
 {% block content %}
     <p>그룹에 유저를 초대하세요!</p>
+    <form action="" method="GET">
+        <input type="text" name="q" value="{{ q }}">
+        <input type="submit" value="찾아줘">
+    </form>
+    <hr>
     {% for profile in profiles %}
         <div class="content-section">
             <div class="media">

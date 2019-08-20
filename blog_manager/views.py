@@ -8,16 +8,31 @@ from blog_manager.forms import GroupForm
 from users.models import Group, Profile, GroupMember
 
 
-def manager_required(func):
+def group_head_required(func):
     @functools.wraps(func)
     def wrapper(request, pk):
         group = get_object_or_404(Group, pk=pk)
         user = request.user.profile
         group_member = GroupMember.objects.get(group=group, person=user)
-        if not group_member.is_head or not group_member.is_member:
+        if not group_member.is_manager or not group_member.is_member or group.group_head != request.user:
             return HttpResponse("헤드의 권한이 필요합니다.")
         return func(request, pk)
+
     return wrapper
+
+def manager_required(func):
+    @functools.wraps(func)
+    def wrapper(request, pk):
+        group = get_object_or_404(Group, pk=pk)
+        user = request.user.profile
+
+        group_member = GroupMember.objects.get(group=group, person=user)
+        if not group_member.is_manager or not group_member.is_member:
+            return HttpResponse("메니저의 권한이 필요합니다.")
+        return func(request, pk)
+
+    return wrapper
+
 
 @manager_required
 def group_manage(request, pk):
@@ -33,6 +48,7 @@ def group_manage(request, pk):
     return render(request, 'blog_manager/group_manage.html', ctx)
 
 
+@manager_required
 def group_info_update(request, pk):
     group = Group.objects.get(id=pk)
     if request.method == 'POST':
@@ -46,24 +62,50 @@ def group_info_update(request, pk):
     return render(request, 'blog_manager/group_info_update.html', {'form': form})
 
 
+@manager_required
 def group_member_manage(request, pk):
     group = Group.objects.get(id=pk)
     users = [x.person for x in GroupMember.objects.filter(group=group, status='a', group_role='m')]
 
-    head = Profile.objects.get(user=request.user)
+    head = group.group_head
+    print(head)
+    print(type(head))
+
     managers = [x.person for x in GroupMember.objects.filter(group=group, status='a', group_role='h')]
 
     ctx = {
         'pk': pk,
         'profiles': users,
-        'head':head,
-        "managers":managers,
+        'head': head,
+        "managers": managers,
     }
 
     return render(request, 'blog_manager/manage_group_member.html', ctx)
 
 
+@group_head_required
 def baton_touch(request, pk):
+    group = Group.objects.get(id=pk)
+    group.save()
+
+    ctx = {
+        'pk': pk,
+    }
+
+    if request.method == "POST":
+        form = request.POST
+
+        profile_name = form.get('user_p')
+        user = User.objects.get(username=profile_name)
+
+        group.group_head=user
+        group.save()
+
+    return render(request, 'blog/group_detail.html', ctx)
+
+
+@group_head_required
+def byebye_manager(request, pk):
     group = Group.objects.get(id=pk)
     group.save()
 
@@ -78,17 +120,37 @@ def baton_touch(request, pk):
         user = User.objects.get(username=profile_name)
         profile = Profile.objects.get(user=user)
 
-        oldHead = GroupMember.objects.get(group=group, person=request.user.profile)
-        oldHead.group_role = 'm'
-        oldHead.save()
+        oldManager = GroupMember.objects.get(group=group, person=profile)
+        oldManager.group_role = 'm'
+        oldManager.save()
 
-        newHead = GroupMember.objects.get(group=group, person=profile)
-        newHead.group_role = 'h'
-        newHead.save()
-
-    return render(request, 'blog/group_detail.html', ctx)
+    return render(request, 'blog_manager/group_manage.html', ctx)
 
 
+@group_head_required
+def welcome_manager(request, pk):
+    group = Group.objects.get(id=pk)
+    group.save()
+
+    ctx = {
+        'pk': pk,
+    }
+
+    if request.method == "POST":
+        form = request.POST
+
+        profile_name = form.get('user_p')
+        user = User.objects.get(username=profile_name)
+        profile = Profile.objects.get(user=user)
+
+        oldManager = GroupMember.objects.get(group=group, person=profile)
+        oldManager.group_role = 'h'
+        oldManager.save()
+
+    return render(request, 'blog_manager/group_manage.html', ctx)
+
+
+@manager_required
 def refuse(request, pk):
     group = Group.objects.get(id=pk)
     group.save()
@@ -111,17 +173,36 @@ def refuse(request, pk):
     return render(request, 'blog_manager/group_manage.html', ctx)
 
 
+@manager_required
 def invite_member_page(request, pk):
-    group = Group.objects.get(id=pk)
+    group = Group.objects.get(pk=pk)
     users = Profile.objects.exclude(group=group)
 
+    q = request.GET.get('q', '')
+    if q:
+        users = users.filter(user__username__icontains=q)
     ctx = {
         'pk': pk,
         'profiles': users,
+        'q': q,
     }
+
+    #     profile = Profile.objects.get(user=request.user)
+    #     qs = Group.objects.exclude(group_open_status='n').exclude(group_users=profile)
+    #     q = request.GET.get('q', '')
+    #     if q:
+    #         qs = qs.filter(group_name__icontains=q)
+    #
+    #     ctx = {
+    #         'group_list': qs,
+    #         'q': q,
+    #     }
+    # return render(request, 'users/find_groups.html', ctx)
 
     return render(request, 'blog_manager/invite_member.html', ctx)
 
+
+@manager_required
 def invite(request, pk):
     group = Group.objects.get(id=pk)
     group.save()
@@ -138,6 +219,7 @@ def invite(request, pk):
     return redirect('invite_member_page', pk)
 
 
+@manager_required
 def manage_requests(request, pk):
     group = Group.objects.get(id=pk)
 
@@ -171,6 +253,7 @@ def manage_requests(request, pk):
 # 유저가 그룹에 보낸 '가입승인요청' 수용
 # 새로 렌더링 하지 없게 수정하기
 # 정말이냐고 알림창 띄우기
+@manager_required
 def user_request_accept(request, pk):
     if request.method == "POST":
         form = request.POST
@@ -191,6 +274,7 @@ def user_request_accept(request, pk):
 
 # 그룹이 유저에 보낸 '가입요청' 취소
 # 새로고침 없게 수정하기
+@manager_required
 def group_request_cancel(request, pk):
     if request.method == "POST":
         form = request.POST

@@ -18,11 +18,12 @@ class UserRegisterForm(UserCreationForm):
 
         fields = ['username', 'email', 'phone_number', 'region', 'nickname', 'password1', 'password2']
 
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(UserRegisterForm, self).__init__(*args, **kwargs)
+
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = [
-            'user',
-            'image',
-        ]
+        exclude = ('user', 'group',)
