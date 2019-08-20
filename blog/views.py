@@ -44,22 +44,13 @@ def home(request):
 #
 def group_detail(request, pk):
     group = get_object_or_404(Group, pk=pk)
-    if request.method == "POST":
-        post = Post()
-        post.title = request.POST['title']
-        post.author = request.user
-        post.content = request.POST['content']
-        post.photo = request.FILES['photo']
-        post.save()
-        return redirect('group_detail', pk=group.pk)
-    else:
-        form = PostForm()
-        hi = {
-            'group': group,
-            'posts': Post.objects.filter(group=group),
-            'form': form,
-            'pk': pk,
-        }
+    form = PostForm()
+    hi = {
+        'group': group,
+        'posts': Post.objects.filter(group=group,).order_by('-id'),
+        'form': form,
+        'pk': pk,
+    }
     return render(request, 'blog/group_detail.html', hi)
 
 
@@ -86,7 +77,7 @@ def about(request):
             group.created_date = timezone.now()
             group.save()
 
-            GroupMember.objects.create(person=request.user.profile, group=group, status='a')
+            GroupMember.objects.create(person=request.user.profile, group=group, status='a', group_role='h')
 
             return redirect('blog-home')
     else:
@@ -122,8 +113,9 @@ def post_new(request, pk):
         post.group_id = pk
         post.content = request.POST['content']
         post.photo = request.FILES.get('photo', False)
+        post.category = request.POST['category']
         post.save()
-        return redirect('blog-home')
+        return redirect('group_detail', pk=pk)
     else:
         form = PostForm()
     return render(request, 'blog/post_new.html', {'form': form})

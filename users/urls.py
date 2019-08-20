@@ -5,6 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
 
+
 app_name = "users"
 
 urlpatterns = [
