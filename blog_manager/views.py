@@ -15,7 +15,7 @@ def group_head_required(func):
         user = request.user.profile
         group_member = GroupMember.objects.get(group=group, person=user)
         if not group_member.is_manager or not group_member.is_member or group.group_head != request.user:
-            return HttpResponse("헤드의 권한이 필요합니다.")
+            return HttpResponse("그룹장 권한이 필요합니다.")
         return func(request, pk)
 
     return wrapper
@@ -28,7 +28,7 @@ def manager_required(func):
 
         group_member = GroupMember.objects.get(group=group, person=user)
         if not group_member.is_manager or not group_member.is_member:
-            return HttpResponse("메니저의 권한이 필요합니다.")
+            return HttpResponse("관리자 권한이 필요합니다.")
         return func(request, pk)
 
     return wrapper
