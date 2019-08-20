@@ -149,7 +149,7 @@ def welcome_manager(request, pk):
 
     return render(request, 'blog_manager/group_manage.html', ctx)
 
-# 유저가 보낸 가입신청서를 거절하는 기능
+# 유저가 보낸 가입신청서를 거절하는 기능 차단차단
 @manager_required
 def user_request_refuse(request, pk):
     group = Group.objects.get(id=pk)
@@ -273,7 +273,25 @@ def group_request_cancel(request, pk):
         profile = Profile.objects.get(user=user)
 
         membership = GroupMember.objects.get(group=group, person=profile)
-        membership.delete()
+        membership.status = 'r'
+        membership.save()
 
         return redirect('manage_requests', pk)
     return redirect('manage_requests', pk)
+
+
+# 차단은 아니고 거절만
+@manager_required
+def request_refuse(request):
+    if request.method == "POST":
+        form = request.POST
+        group_id = form.get('group_id')
+        group = Group.objects.get(id=group_id)
+        group.save()
+
+        profile = Profile.objects.get(user=request.user)
+        membership = GroupMember.objects.get(group=group, person=profile, status='u')
+        membership.delete()
+
+        return redirect('manage_requests')
+    return redirect('manage_requests')
