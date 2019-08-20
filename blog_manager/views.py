@@ -98,10 +98,10 @@ def baton_touch(request, pk):
         profile_name = form.get('user_p')
         user = User.objects.get(username=profile_name)
 
-        group.group_head=user
+        group.group_head = user
         group.save()
 
-    return render(request, 'blog/group_detail.html', ctx)
+    return redirect('group_member_manage', pk)
 
 # 매니저 권한 뻇기
 @group_head_required
@@ -124,7 +124,7 @@ def byebye_manager(request, pk):
         oldManager.group_role = 'm'
         oldManager.save()
 
-    return render(request, 'blog_manager/group_manage.html', ctx)
+    return redirect('group_member_manage', pk)
 
 # 매니저 권한 부여
 @group_head_required
@@ -147,7 +147,7 @@ def welcome_manager(request, pk):
         oldManager.group_role = 'h'
         oldManager.save()
 
-    return render(request, 'blog_manager/group_manage.html', ctx)
+    return redirect('group_member_manage', pk)
 
 # 유저가 보낸 가입신청서를 거절하는 기능 차단차단
 @manager_required
@@ -171,6 +171,39 @@ def user_request_refuse(request, pk):
         membership.save()
 
     return render(request, 'blog_manager/group_manage.html', ctx)
+
+
+# 차단 유저 관리 페이지
+@group_head_required
+def chadan_member_manage(request, pk):
+    group = Group.objects.get(id=pk)
+    users = [x.person for x in GroupMember.objects.filter(group=group, status='r')]
+
+    ctx = {
+        'pk': pk,
+        'profiles': users,
+    }
+
+    return render(request, 'blog_manager/chadan_manage.html', ctx)
+
+
+# 차단 유저와의 GroupMember 삭제 -> 실행 후 초대하기/신청받기 가능
+@group_head_required
+def unblock(request, pk):
+    group = Group.objects.get(id=pk)
+
+    if request.method == "POST":
+        form = request.POST
+
+        profile_name = form.get('user_p')
+        user = User.objects.get(username=profile_name)
+        profile = Profile.objects.get(user=user)
+
+        membership = GroupMember.objects.get(person=profile, group=group, status='r')
+        membership.delete()
+
+    return redirect('chadan_member_manage', pk)
+
 
 # 그룹장이 유저 초대하는 페이지
 @manager_required
