@@ -185,7 +185,7 @@ def chadan_member_manage(request, pk):
         'profiles': users,
     }
 
-    return render(request, 'blog_manager/manage_group_member.html', ctx)
+    return render(request, 'blog_manager/chadan_manage.html', ctx)
 
 
 @group_head_required
