@@ -201,7 +201,7 @@ def request_cancel(request):
         group.save()
 
         profile = Profile.objects.get(user=request.user)
-        membership=GroupMember.objects.get(group=group, person=profile)
+        membership=GroupMember.objects.get(group=group, person=profile,)
         membership.delete()
 
         return redirect('users:group_manage')
