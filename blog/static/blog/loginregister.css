@@ -76,3 +76,130 @@ html {
 /*    color: gray;*/
 /*}*/
 
+
+.left-section {
+    width: 500px;
+    height: 600px;
+    float: left;
+    /*background: url(images/img15.png)  !important;*/
+    /*background-color: sandybrown;*/
+    background-size: 100%;
+    position: relative;
+    left: 30px;
+    top: 40px;
+    /*border: 10px solid brown;*/
+    border-radius: 10%;
+}
+
+
+.right-section {
+    width: 500px;
+    height: 600px;
+    float: left;
+    position: relative;
+    top: 40px;
+    left: 50px;
+    padding: 40px;
+    border: 1px solid black;
+}
+
+/*.right-section1 {*/
+/*    width: 400px;*/
+/*    height: 500px;*/
+/*    position: relative;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.right-section2 {*/
+/*    width: 430px;*/
+/*    height: 75px;*/
+/*    position: relative;*/
+/*    top: 150px;*/
+/*    border: 1px solid skyblue;*/
+/*    background-color: white;*/
+/*    text-align: center;*/
+/*    line-height: 40px;*/
+/*}*/
+
+/*.right-section3 {*/
+/*    width: 430px;*/
+/*    height: 100px;*/
+/*    position: relative;*/
+/*    top: 160px;*/
+/*    text-align: center;*/
+/*}*/
+
+table {
+    text-align: center;
+    background-color: white;
+    width: 430px;
+    height: 600px;
+    border: 1px solid skyblue;
+}
+
+
+.sliceline {
+    display: grid;
+    grid-template-columns: 3fr 2fr 3fr;
+    vertical-align: middle;
+}
+
+.sliceline * {
+    font-weight: 600;
+    color: gray;
+}
+
+.slice {
+    display: inline-block;
+    background-color: gray;
+    height: 1px;
+    position: relative;
+    top: 4px;
+}
+
+.left-footer {
+    position: absolute;
+    margin-left: 11%;
+    margin-top: -5%;
+}
+
+.left-footer ul li {
+    display: inline-block;
+}
+
+.right-footer {
+    position: absolute;
+    margin-left: 75%;
+    margin-top: -5%;
+    color: gray;
+}
+
+
+.right-section3 ul li {
+    list-style: none;
+    display: inline-block;
+    position: relative;
+    left: -7%;
+}
+
+
+.photo1 {
+    background: url(images/pics02.jpg);
+    background-size: 100%;
+    width: 500px;
+    height: 510px;
+}
+
+.photo2 {
+    background: url(images/pics03.jpg);
+    background-size: 100%;
+    width: 500px;
+    height: 510px;
+}
+
+.photo3 {
+    background: url(images/pics04.jpg);
+    background-size: 100%;
+    width: 500px;
+    height: 510px;
+}

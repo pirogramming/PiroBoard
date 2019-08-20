@@ -1,45 +1,54 @@
 {% extends "blog/base.html" %}
 {% block content %}
-    <div id="title"><h1>{{ user }}의 그룹</h1></div>
-    <hr>
-
-    <hr>
 
 
-    {% if hasGroup %}
-        <h2>당신은 현재 {{ user_groups.count }}개의 그룹에 속해 있습니다.</h2>
+    <div class="container">
+        <div id="title"><h1>{{ user }}의 그룹</h1></div>
         <hr>
-        <br>
-        <div class="container" id="marketing">
 
-            {% for group in user_groups %}
-                {#                <article class="media content-section">#}
-                {#                    <div class="media-body">#}
-                {#                        <div class="article-metadata">#}
-                {#                            <a class="mr-2" href="{% url 'users:profile' %}">{{ group.group_name }}</a>#}
-                {#                                <small class="text-muted">{{ group.created_date|date:"F d, Y" }}</small>#}
-                {#                        </div>#}
-                {#                        <p><a href="#"><img src="images/pics04.jpg" alt=""></a></p>#}
-                {#                        <p class="article-content">{{ group.group_info }}</p>#}
-                {#                        <a href="{% url 'group_detail' group.pk %}">그룹 자세히</a> {#sulmo#}
-                {#                        <button class="button2 btn login_btn">초대할 대상 찾기</button>#}
-                {#                    </div>#}
-                {#                </article>#}
-                <div class="3u">
-                    <section>
-                        <h2 class="title">{{ group.group_name }}</h2>
-                        <p class="subtitle">{{ group.group_info }}</p>
-                        <p><a href="#"><img src="images/pics05.jpg" alt=""></a></p>
-                        <p class="button-style1"><a href="{% url 'group_detail' group.id %}">그룹 들어가보기</a></p>
-                    </section>
-                </div>
-                </div>
-            {% endfor %}
+        <hr>
+
+
+        <div>
+            <div class="container" id="marketing">
+                {% if hasGroup %}
+                    <h2>당신은 현재 {{ user_groups.count }}개의 그룹에 속해 있습니다.</h2>
+                    <div class="row divider">
+
+                        {% for group in user_groups %}
+                            {#                    <article class="media content-section">#}
+                            {#                        <div class="media-body">#}
+                            {#                            <div class="article-metadata">#}
+                            {#                                <a class="mr-2" href="{% url 'users:profile' %}">{{ group.group_name }}</a>#}
+                            {#                                <small class="text-muted">{{ group.created_date|date:"F d, Y" }}</small>#}
+                            {#                            </div>#}
+                            {##}
+                            {#                            <h2><a class="article-title"#}
+                            {#                                   href="{% url 'group_detail' pk=group.pk %}">{{ group.group_name }}</a></h2>#}
+                            {#                            <p class="article-content">{{ group.group_info }}</p>#}
+                            {#                            <a href="{% url 'group_detail' group.pk %}">그룹 자세히</a> {#sulmo#}
+                            {#                            <button class="button2 btn login_btn">초대할 대상 찾기</button>#}
+                            {#                        </div>#}
+                            {#                    </article>#}
+                            <div class="3u">
+                                <section>
+                                    <h2 class="title"><a href="{% url 'group_detail' group.pk %}">{{ group.group_name }}</a>
+                                    </h2>
+                                    <p class="subtitle">{{ group.group_info }}</p>
+                                    <p><a href="#"><img src="{{ group.group_img }}" alt=""></a></p>
+                                    <p class="button-style1"><a href="{% url 'group_detail' group.pk %}">그룹 들어가보기</a>
+                                    </p>
+                                </section>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    </div>
+                {% else %}
+                    <h2>가입한 그룹이 없습니다. 'find group'을 눌러보세요!</h2>
+                {% endif %}
+
+
         </div>
-    {% else %}
-        <h2>가입한 그룹이 없습니다. 'find group'을 눌러보세요!</h2>
-    {% endif %}
-    </div>
 
 
 {% endblock content %}
