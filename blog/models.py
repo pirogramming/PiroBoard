@@ -23,9 +23,8 @@ class Post(models.Model):
         ('취미', '취미'),
         ('인물', '인물'),
         ('etc', 'etc'),
-        ('없음', '없음'),
     )
-    category = models.CharField(max_length=10, choices=CATEGRORY_CHOICES, default='없음',)
+    category = models.CharField(max_length=10, choices=CATEGRORY_CHOICES,)
 
 
     def __str__(self):

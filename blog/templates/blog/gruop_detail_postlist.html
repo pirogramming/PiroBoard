@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    여기에는 postlist페이지가 작성될 예정입니다.
+
+    <p>{{ category }}</p>
+    <hr/>
+    <hr/>
+    {% for post in postlist %}
+        <div>
+            <div>{{ post.title }}</div>
+            <div>{{ post.content }}</div>
+            <div>{{ post.author }}</div>
+            <div></div><hr/>
+
+        </div>
+    {% endfor %}
+
+
+
+
+
+{% endblock %}

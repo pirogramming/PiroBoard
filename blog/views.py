@@ -18,7 +18,7 @@ from .forms import GroupForm, CommentForm, PostForm
 @login_required
 def home(request):
     profile = Profile.objects.get(user=request.user)
-    user_groups = [x.group for x in GroupMember.objects.filter(person = profile, status='a')]
+    user_groups = [x.group for x in GroupMember.objects.filter(person=profile, status='a')]
     ctx = {}
 
     if len(user_groups) > 0:
@@ -47,11 +47,31 @@ def group_detail(request, pk):
     form = PostForm()
     hi = {
         'group': group,
-        'posts': Post.objects.filter(group=group,).order_by('-id'),
+        'posts': Post.objects.filter(group=group, ).order_by('-id'),
         'form': form,
         'pk': pk,
     }
     return render(request, 'blog/group_detail.html', hi)
+
+
+def group_postlist(request, pk):
+    ctx = {
+        'pk': pk
+    }
+
+    if request.method == 'POST':
+        group = get_object_or_404(Group, pk=pk)
+        form = request.POST
+        category = form.get('category')
+
+        postlist = Post.objects.filter(group=group, category=category)
+
+        ctx['postlist'] = postlist
+        ctx['category'] = category
+
+        return render(request, 'blog/gruop_detail_postlist.html', ctx)
+
+    return redirect('group_detail', pk)
 
 
 # # @login_required

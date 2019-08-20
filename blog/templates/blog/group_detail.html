@@ -47,10 +47,34 @@
                     <li><img
                             src="images/pics01.jpg"
                             title="etc">
-
-
                     </li>
                 </ul>
+            </div>
+            <div class="row">
+                <form method="post" action="{% url 'group_postlist' pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="group_id" value="{{ group.id }}">
+                    <input type="hidden" name="category" value="음식">
+                    <button type="submit">음식</button>
+                </form>
+                <form method="post" action="{% url 'group_postlist' pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="group_id" value="{{ group.id }}">
+                    <input type="hidden" name="category" value="취미">
+                    <button type="submit">취미</button>
+                </form>
+                <form method="post" action="{% url 'group_postlist' pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="group_id" value="{{ group.id }}">
+                    <input type="hidden" name="category" value="인물">
+                    <button type="submit">인물</button>
+                </form>
+                <form method="post" action="{% url 'group_postlist' pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="group_id" value="{{ group.id }}">
+                    <input type="hidden" name="category" value="etc">
+                    <button type="submit">etc</button>
+                </form>
             </div>
         </div>
 
