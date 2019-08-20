@@ -2,34 +2,160 @@
 {% load crispy_forms_tags %}
 
 {% block  content %}
-    <div class="content-section">
-        <div class="media">
-            <br/>
-            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}"><br/><br/>
-            <div class="media-body">
-             <h2 class="account-heading">유저: {{ user.username }}</h2><br/>
-                {% if user.profile.nickname == None %}
-                {% else %}
-                    <p class="text-secondary">닉네임: {{ user.profile.nickname }}</p><br/>
-                {% endif %}
-            {% if user.profile.nickname == None %}
-                {% else %}
-                    <p class="text-secondary">이메일: {{ user.email }}</p><br/>
-                {% endif %}
-            {% if user.profile.nickname == None %}
-                {% else %}
-                    <p class="text-secondary">연락처: {{ user.profile.phone_number }}</p><br/>
-                {% endif %}
-            {% if user.profile.nickname == None %}
-                {% else %}
-                    <p class="text-secondary">지역: {{ user.profile.region }}</p><br/>
-                {% endif %}
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Oswald:400|Open+Sans:700);
+        @import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+        /* fontawesome */
+        [class*="fontawesome-"]:before {
+            font-family: 'FontAwesome', sans-serif;
+        }
+
+        .total-section {
+            text-align: center;
+            margin-top: 7%;
+        }
+
+        body {
+            color: #121212;
+        }
+
+        section.text {
+            position: absolute;
+            width: 100%;
+            min-width: 800px;
+            text-align: center;
+            top: 50%;
+            margin-top: -55px;
+        }
+
+        .content-section h1, h3 {
+            transform: matrix(1, -0.20, 0, 1, 0, 0);
+            -ms-transform: matrix(1, -0.20, 0, 1, 0, 0);
+            -webkit-transform: matrix(1, -0.20, 0, 1, 0, 0);
+        }
+
+        .content-section h1 {
+            font-family: "Oswald", Sans-serif;
+            text-transform: uppercase;
+            font-weight: 400;
+            font-size: 70px;
+            text-shadow: 4px 5px #e6e6d8, 6px 7px #c6a39a;
+        }
+
+        h1 span {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: -10px;
+        }
+
+        span.star {
+            font-size: 20px;
+        }
+
+        h3 {
+            font-family: "Open Sans", Sans-serif;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        h3:before, h3:after {
+            content: " ";
+            position: absolute;
+            width: 120px;
+            height: 4px;
+            border-top: 2px solid #121212;
+            border-bottom: 2px solid #121212;
+        }
+
+        h3:before {
+            margin: 5px 0 0 -130px;
+        }
+
+        h3:after {
+            margin: 5px 0 0 10px;
+        }
+
+        .profile_image {
+            display: inline-block;
+        }
+
+        .media-body p {
+            font-size: 15px;
+        }
+
+        .revise {
+            margin-top: 20px;
+        }
+
+        .revise a {
+            font-size: 20px;
+        }
+
+    </style>
+
+    <div class="total-section">
+        <div class="content-section">
+            <div class="media">
+                <br/>
+
+                <div class="text">
+                    <h3>MY NAME IS</h3>
+                    <h1><span class="fontawesome-star star"></span> <span>{{ user.username }}</span> <span
+                            class="fontawesome-star star"></span></h1>
+                </div>
+                <br/><br/><br/>
+
+                <div class="profile_image">
+                    <img class="rounded-circle" width="200px" height="200px"
+                         style="border: 3px solid #121212; border-radius: 100px;
+                 -moz-border-radius: 100px; -khtml-border-radius: 100px; -webkit-border-radius: 100px;"
+                         src="{{ user.profile.image.url }}"><i class="material-icons">add</i>
+                    <br/><br/><br/>
+                </div>
+
+
+                <div class="media-body">
+                    {% if user.profile.nickname == None %}
+                    {% else %}
+                        <p class="text-secondary"><i
+                                class="material-icons">face</i>&nbsp&nbsp{{ user.profile.nickname }}
+                        </p><br/>
+                    {% endif %}
+                    {% if user.profile.nickname == None %}
+                    {% else %}
+                        <p class="text-secondary"><i class="material-icons">contact_mail</i>&nbsp&nbsp{{ user.email }}
+                        </p>
+                        <br/>
+                    {% endif %}
+                    {% if user.profile.nickname == None %}
+                    {% else %}
+                        <p class="text-secondary"><i
+                                class="material-icons">local_phone</i>&nbsp&nbsp{{ user.profile.phone_number }}</p><br/>
+                    {% endif %}
+                    {% if user.profile.nickname == None %}
+                    {% else %}
+                        <p class="text-secondary"><i class="material-icons">home</i>&nbsp&nbsp{{ user.profile.region }}
+                        </p>
+                        <br/>
+                    {% endif %}
+
+                </div>
             </div>
         </div>
-        <a href="{% url 'users:profile_update' %}">프로필 수정하기</a>
-        <a href="{% url 'users:change_password' %}">비밀번호 변경하기</a>
-        <a href="{% url 'users:password_reset_form' %}">비밀번호 찾기</a>
+
+        <div class="revise">
+            <a href="{% url 'users:profile_update' %}" style="text-decoration:none">프로필 수정하기</a>
+            <a href="{% url 'users:change_password' %}" style="text-decoration:none">비밀번호 변경하기</a>
+            <a href="{% url 'users:password_reset_form' %}" style="text-decoration:none">비밀번호 찾기</a>
+        </div>
     </div>
 {% endblock %}
 

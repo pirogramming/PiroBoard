@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -21,6 +22,30 @@ def register(request):
         form = UserRegisterForm()
 
     return render(request, 'users/register.html', {'form': form})
+
+
+@login_required
+def profile(request):
+    my_user = User.objects.get(username=request.user)
+    print(my_user)  # PASS
+
+    my_user_form = UserRegisterForm(instance=my_user.profile)
+    print(my_user_form['region'])
+
+    return render(request, 'users/profile.html', {'my_user': my_user_form})
+
+
+@login_required
+def profile_update(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '프로필을 성공적으로 수정하였습니다.')
+            return redirect("users:profile")
+    else:
+        form = ProfileForm(instance=request.user.profile)
+    return render(request, 'users/profile_update.html', {'form': form})
 
 
 def find_user(request, group_id):  # 그룹 내에서 초대할 유저를 검색함
@@ -150,25 +175,6 @@ def requests_manage(request):
         ctx['groupRequest'] = False
 
     return render(request, 'users/manage_groups.html', ctx)
-
-
-@login_required
-def profile(request):
-    profile = Profile.objects.get(user=request.user)
-    return render(request, 'users/profile.html',)
-
-
-@login_required
-def profile_update(request):
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        if form.is_valid():
-            form.save()
-            messages.success(request, '프로필을 성공적으로 수정하였습니다.')
-            return redirect("users:profile")
-    else:
-        form = ProfileForm(instance=request.user.profile)
-    return render(request, 'users/profile_update.html', {'form': form})
 
 
 #그룹이 유저에 보낸 '초대'수락

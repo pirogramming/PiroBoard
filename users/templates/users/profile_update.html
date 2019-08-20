@@ -12,7 +12,12 @@
         <div class="'profile">
 
             {% if form.image != None %}
-                <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+                 <div>
+                <img class="rounded-circle" width="200px" height="200px"
+                 style="border: 3px solid #121212; border-radius: 100px;
+                 -moz-border-radius: 100px; -khtml-border-radius: 100px; -webkit-border-radius: 100px;"
+                 src="{{ user.profile.image.url }}"><br/><br/>
+            </div>
             {% endif %}
 
             {{ form.as_p }}
