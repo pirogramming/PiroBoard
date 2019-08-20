@@ -15,7 +15,6 @@
     <script src="../../static/js/skel-panels.min.js"></script>
     <script src="../../static/js/init.js"></script>
 
-
     <link rel="stylesheet" type="text/css" href="{% static 'blog/skel-noscript.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'blog/style-desktop.css' %}">
@@ -23,6 +22,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+
+
+    <script>
+        $(document).ready(function () {
+            $('.bxslider').bxSlider();
+        });
+        $('.bxslider').bxSlider({mode: 'fade', captions: true});
+    </script>
+
+    <script>
+        $(window).load(function () {
+            $(".loading").fadeOut();
+        });
+    </script>
 
 </head>
 <body class="homepage">
@@ -55,9 +69,13 @@
 </div>
 <div class="container mt-15">
 
+
     {% block content %}
 
 
     {% endblock %}
 
 </div>
+{#<div id="copyright" class="container mb-0">#}
+{#    Design: <a href="http://templated.co">Pirogramming 11기</a>#}
+{#</div>#}
