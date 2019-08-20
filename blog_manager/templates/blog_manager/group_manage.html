@@ -3,24 +3,6 @@
 {% block content %}
     <br/>
 
-
-    <ur>
-        <p>구현해야 할 기능</p>
-        <a href="{% url 'group_info_update' pk %}"><li>그룹 정보 수정</li></a>
-        <a href="{% url 'group_member_manage' pk %}"><li>그룹 멤버 관리</li></a>
-        <a href="{% url 'invite' pk %}"><li>유저 찾아서 초대하기</li></a>
-        <a href="{% url 'manage_requests' pk %}"><li>가입요청 처리</li></a>
-        <hr/>
-        <li>이 창으로 들어오는 버튼은 그룹장일때만 보이게 하기</li>
-        <li>그룹장 데코레이터 까먹지 말기</li>
-    </ur>
-
-    <hr/>
-    <br/>
-
-    <p>그룹기본정보</p>
-    <hr>
-
     <div class="content-section">
         <div class="media">
             <img class="rounded-circle account-img" src="{{ group.group_img }}">
@@ -40,5 +22,25 @@
             {% endfor %}
         </div>
     </div>
+
+<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+ <a href="{% url 'group_info_update' pk %}"><li>그룹 정보 수정</li></a>
+</button>
+
+
+<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+ <a href="{% url 'group_member_manage' pk %}"><li>그룹 멤버 관리</li></a>
+</button>
+
+
+<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+  <a href="{% url 'invite' pk %}"><li>유저 찾아서 초대하기</li></a>
+</button>
+
+
+<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+ <a href="{% url 'manage_requests' pk %}"><li>가입요청 처리</li></a>
+</button>
+
 
 {% endblock %}
