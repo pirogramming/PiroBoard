@@ -102,7 +102,7 @@ def baton_touch(request, pk):
         group.group_head = user
         group.save()
 
-    return render(request, 'blog_manager/group_manage.html', ctx)
+    return redirect('group_member_manage', pk)
 
 
 @group_head_required
@@ -125,7 +125,7 @@ def byebye_manager(request, pk):
         oldManager.group_role = 'm'
         oldManager.save()
 
-    return render(request, 'blog_manager/group_manage.html', ctx)
+    return redirect('group_member_manage', pk)
 
 
 @group_head_required
@@ -148,7 +148,7 @@ def welcome_manager(request, pk):
         oldManager.group_role = 'h'
         oldManager.save()
 
-    return render(request, 'blog_manager/group_manage.html', ctx)
+    return redirect('group_member_manage', pk)
 
 
 @manager_required
