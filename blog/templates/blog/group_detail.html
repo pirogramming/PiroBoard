@@ -8,15 +8,7 @@
         {% if user.is_authenticated %}
             <a href="{% url 'post_new' pk %}">글쓰기</a>
         {% endif %}
-        <br>
 
-        <br>
-        {% for post in posts %}
-            제목 : {{ post.title }}<br>
-            내용 : {{ post.content }}<br>
-            <a href="{% url 'post_detail' post.pk %}">드루와</a>
-            <hr>
-        {% endfor %}
     </div>
     <hr>
     {#   end sulmo 임시 확인용#}

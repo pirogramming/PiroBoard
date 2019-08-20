@@ -1,18 +1,30 @@
 {% extends "blog/base.html" %}
 
-{% block content %}
-    여기에는 postlist페이지가 작성될 예정입니다.
 
-    <p>{{ category }}</p>
+{% block content %}
+    <style>
+        .postcard {
+            float: left;
+        }
+    </style>
+
+
+
+    여기에는 postlist페이지가 작성될 예정입니다.
+    <p>카테고리 : {{ category }}</p>
+    <div class="rows">
+        {% if user.is_authenticated %}
+            <a href="{% url 'post_new' pk %}">글쓰기</a>
+        {% endif %}
+    </div>
     <hr/>
     <hr/>
     {% for post in postlist %}
-        <div>
-            <div>{{ post.title }}</div>
-            <div>{{ post.content }}</div>
-            <div>{{ post.author }}</div>
-            <div></div><hr/>
-
+        <div class="postcard">
+            <a href="{% url 'post_detail' post.pk %}"><div><img src="{{ post.photo.url }}"/></div></a>
+{#            <div>{{ post.title }}</div>#}
+{#            <div>{{ post.content }}</div>#}
+{#            <div>-{{ post.author }}</div>#}
         </div>
     {% endfor %}
 
