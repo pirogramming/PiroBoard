@@ -22,8 +22,11 @@
     <hr>
 
     <div class="content-section">
+
         <div class="media">
-            <img class="rounded-circle account-img" src="{{ group.group_img }}">
+            {% if group.group_img %}
+            <img class="rounded-circle account-img" src="{{ group.group_img.url }}">
+            {% endif %}
             <div class="media-body">
                 <div class="account-heading">{{ group.group_name }}</div>
                 <p class="text-secondary">{{ group.group_info }}</p>
