@@ -7,7 +7,7 @@
 
         <div class="media">
             {% if group.group_img %}
-            <img class="rounded-circle account-img" src="{{ group.group_img.url }}">
+            <img class="rounded-circle account-img" src="{{ group.group_img.url }}" width="{{ group.width }}">
             {% endif %}
             <div class="media-body">
                 <div class="account-heading">{{ group.group_name }}</div>
@@ -26,24 +26,21 @@
         </div>
     </div>
 
-<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
- <a href="{% url 'group_info_update' pk %}"><li>그룹 정보 수정</li></a>
+<button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+  <a href="{% url 'group_info_update' pk %}"><li>그룹 정보 수정</li></a>
 </button>
 
-
-<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
- <a href="{% url 'group_member_manage' pk %}"><li>그룹 멤버 관리</li></a>
+<button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+  <a href="{% url 'group_member_manage' pk %}"><li>그룹 멤버 관리</li></a>
 </button>
 
-
-<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+<button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+sagittis lacus vel augue laoreet rutrum faucibus.">
   <a href="{% url 'invite' pk %}"><li>유저 찾아서 초대하기</li></a>
 </button>
 
-
-<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
- <a href="{% url 'manage_requests' pk %}"><li>가입요청 처리</li></a>
+<button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+  <a href="{% url 'manage_requests' pk %}"><li>가입요청 처리</li></a>
 </button>
-
 
 {% endblock %}
