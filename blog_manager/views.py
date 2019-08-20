@@ -102,7 +102,7 @@ def baton_touch(request, pk):
         group.group_head=user
         group.save()
 
-    return render(request, 'blog/group_detail.html', ctx)
+    return render(request, 'blog_manager/group_manage.html', ctx)
 
 
 @group_head_required
@@ -172,6 +172,19 @@ def refuse(request, pk):
         membership.save()
 
     return render(request, 'blog_manager/group_manage.html', ctx)
+
+
+@group_head_required
+def chadan_member_manage(request, pk):
+    group = Group.objects.get(id=pk)
+    users = [x.person for x in GroupMember.objects.filter(group=group, status='r')]
+
+    ctx = {
+        'pk': pk,
+        'profiles': users,
+    }
+
+    return render(request, 'blog_manager/manage_group_member.html', ctx)
 
 
 @manager_required
