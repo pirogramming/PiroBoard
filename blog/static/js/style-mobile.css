@@ -79,7 +79,7 @@ body {
 			position: absolute;
 			left: 15px;
 			top: 15px;
-			background: url('images/mobileUI-site-nav-opener-bg.svg') 0px 0px no-repeat;
+			background: url('../blog/images/mobileUI-site-nav-opener-bg.svg') 0px 0px no-repeat;
 			opacity: 1;
 		}
 
@@ -319,7 +319,7 @@ body {
 	overflow: hidden;
 	margin-bottom: 1.87em;
 	padding: 0em 0em 1.87em 0em;
-	background: url(images/img02.jpg) repeat-x left bottom;
+	background: url(../blog/images/img02.jpg) repeat-x left bottom;
 }
 
 #featured-area section {

@@ -106,7 +106,7 @@
 
 #page {
 	overflow: hidden;
-	background: url(images/img02.jpg) repeat-x left bottom;
+	background: url(../blog/images/img02.jpg) repeat-x left bottom;
 }
 
 
@@ -115,7 +115,7 @@
 #banner {
 	overflow: hidden;
 	margin: 3em 0em;
-	background: url(images/img02.jpg) repeat-x left bottom;
+	background: url(../blog/images/img02.jpg) repeat-x left bottom;
 }
 
 #banner .container {
@@ -231,7 +231,7 @@
 #marketing .divider {
 	margin-bottom: 3em;
 	padding-bottom: 3em;
-	background: url(images/img02.jpg) repeat-x left bottom;
+	background: url(../blog/images/img02.jpg) repeat-x left bottom;
 }
 
 #marketing .title {
@@ -257,7 +257,7 @@
 #featured-area .divider {
 	margin-bottom: 3em;
 	padding-bottom: 3em;
-	background: url(images/img02.jpg) repeat-x left bottom;
+	background: url(../blog/images/img02.jpg) repeat-x left bottom;
 }
 
 #featured-area .box-style {
