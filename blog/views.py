@@ -70,14 +70,14 @@ def group_detail(request, pk):
 def about(request):
     # return render(request, 'blog/about.html', {'title': 'About'})
     if request.method == "POST":
-        form = GroupForm(request.POST)
+        form = GroupForm(request.POST, request.FILES)
         if form.is_valid():
-            group = form.save(commit=False)
-            group.group_head = request.user
-            group.created_date = timezone.now()
-            group.save()
+            form = form.save(commit=False)
+            form.group_head = request.user
+            form.created_date = timezone.now()
+            form.save()
 
-            GroupMember.objects.create(person=request.user.profile, group=group, status='a', group_role='h')
+            GroupMember.objects.create(person=request.user.profile, group=form, status='a', group_role='h')
 
             return redirect('blog-home')
     else:

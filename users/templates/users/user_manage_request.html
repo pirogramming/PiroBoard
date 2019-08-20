@@ -6,8 +6,9 @@
     <hr/>
     <hr/>
     {% if groupRequest %}
+        <h2>{{ group_requests_count }}개의 그룹 가입 요청을 받았습니다.</h2>
         {% for group in group_requests %}
-            <h2>{{ group_requests_count }}개의 그룹 가입 요청을 받았습니다.</h2>
+
             <div class="content-section">
                 <div class="media">
                     <img class="rounded-circle account-img" src="{{ group.group_img }}">]]]
@@ -31,10 +32,11 @@
                     </div>
                 </div>
             </div>
+            <hr>
         {% endfor %}
 
     {% else %}
-        <h2>받은 가입 요청 없음</h2>
+        <h2>그룹에게서 받은 가입 요청 없음</h2>
     {% endif %}
 
     <hr/>
@@ -62,14 +64,10 @@
         {% endfor %}
 
     {% else %}
-        <h2>받은 가입 요청 없음</h2>
+        <h2>아직 그룹에 신청을 하지 않음</h2>
     {% endif %}
 
     <hr/>
     <hr/>
 {% endblock content %}
-
-
-
-
 
