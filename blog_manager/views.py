@@ -99,7 +99,7 @@ def baton_touch(request, pk):
         profile_name = form.get('user_p')
         user = User.objects.get(username=profile_name)
 
-        group.group_head=user
+        group.group_head = user
         group.save()
 
     return render(request, 'blog_manager/group_manage.html', ctx)
@@ -174,6 +174,7 @@ def refuse(request, pk):
     return render(request, 'blog_manager/group_manage.html', ctx)
 
 
+# 차단 유저 관리 페이지
 @group_head_required
 def chadan_member_manage(request, pk):
     group = Group.objects.get(id=pk)
@@ -185,6 +186,22 @@ def chadan_member_manage(request, pk):
     }
 
     return render(request, 'blog_manager/manage_group_member.html', ctx)
+
+
+def unblock(request, pk):
+    group = Group.objects.get(id=pk)
+
+    if request.method == "POST":
+        form = request.POST
+
+        profile_name = form.get('user_p')
+        user = User.objects.get(username=profile_name)
+        profile = Profile.objects.get(user=user)
+
+        membership = GroupMember.objects.get(person=profile, group=group, status='r')
+        membership.delete()
+
+    return redirect('chadan_member_manage', pk)
 
 
 @manager_required
