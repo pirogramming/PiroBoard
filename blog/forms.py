@@ -19,3 +19,9 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'content', 'post_photo', 'category',)
+
+
+class PostEditForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'content', 'category',)
