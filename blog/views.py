@@ -1,3 +1,4 @@
+from PIL import Image
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
@@ -127,14 +128,42 @@ def post_detail(request, pk):
 
 def post_new(request, pk):
     if request.method == 'POST':
+
         post = Post()
         post.title = request.POST['title']
         post.author = request.user
         post.group_id = pk
         post.content = request.POST['content']
-        post.photo = request.FILES.get('photo', False)
         post.category = request.POST['category']
+        post.photo = request.FILES.get('photo', False)
         post.save()
+
+        post_photo = request.FILES.get('photo', False)
+
+        if post_photo:
+            photo = Image.open(post_photo)
+            photo_width, photo_height = photo.size
+            photo_ratio = photo_width / photo_height
+
+            if photo_ratio < 0.88:
+                width = 200
+                height = 300
+
+            elif photo_ratio < 1:
+                width = 200
+                height = 200
+
+            elif photo_ratio < 1.2:
+                width = 300
+                height = 300
+
+            else:
+                width = 300
+                height = 200
+
+            post.photosize(width, height)
+            post.save()
+
         return redirect('group_detail', pk=pk)
     else:
         form = PostForm()

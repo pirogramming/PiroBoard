@@ -1,3 +1,4 @@
+from PIL import Image
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -8,14 +9,15 @@ from users.models import Group
 
 
 class Post(models.Model):
+    photo = ProcessedImageField(blank=True,
+                                format='JPEG',
+                                options={'quality': 60},
+                                null=True, )
+
     group = models.ForeignKey(Group, related_name='G_post', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField()
-    photo = ProcessedImageField(blank=True,
-                                processors=[Thumbnail(300, 300)],
-                                format='JPEG',
-                                options={'quality': 60},
-                                null=True,)
+
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     CATEGRORY_CHOICES = (
@@ -24,8 +26,12 @@ class Post(models.Model):
         ('인물', '인물'),
         ('etc', 'etc'),
     )
-    category = models.CharField(max_length=10, choices=CATEGRORY_CHOICES,)
+    category = models.CharField(max_length=10, choices=CATEGRORY_CHOICES, )
 
+    def photosize(self, width, height):
+        image = Image.open(self.photo.path)
+        image = image.resize((width, height), Image.ANTIALIAS)
+        image.save(self.photo.path)
 
     def __str__(self):
         return self.title
