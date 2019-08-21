@@ -13,10 +13,11 @@
                                  width="{{ group.width }}">
                         {% endif %}
                         <div class="media-body">
-                            <div class="account-heading">{{ group.group_name }}</div>
-                            <p class="text-secondary">{{ group.group_info }}</p>
+                            <div class="account-heading"
+                                 style="margin-bottom: 30px; margin-left: 150px;">{{ group.group_name }}</div>
+                            <pre class="text-secondary" style="margin-left: 100px;">{{ group.group_info }}</pre>
                         </div>
-                        <div class="media-body">
+                        <div class="media-body" style="margin-left: 250px;">
                             <p>그룹 참가자</p>
 
                             {% for member in members %}
@@ -31,26 +32,33 @@
 
     </hr>
 
-    <div class="row">
-
-        <button type="button" class="btn btn-outline-dark" style="margin-right: 40px;">
+    <div class="row" style="margin: 0 auto; text-decoration: none;">
+        <button type="button" class="btn btn-outline-dark" style="margin-right: 40px;" >
             <a href="{% url 'group_info_update' pk %}">
-                <li>그룹 정보 수정</li>
+                <ul>
+                    <li>그룹 정보 수정</li>
+                </ul>
             </a>
         </button>
         <button type="button" class="btn btn-outline-dark" style="margin-right: 40px;">
             <a href="{% url 'group_member_manage' pk %}">
-                <li>그룹 멤버 관리</li>
+                <ul>
+                    <li>그룹 멤버 관리</li>
+                </ul>
             </a>
         </button>
         <button type="button" class="btn btn-outline-dark" style="margin-right: 40px;">
             <a href="{% url 'invite' pk %}">
-                <li>유저 찾아서 초대하기</li>
+                <ul>
+                    <li>유저 찾아서 초대하기</li>
+                </ul>
             </a>
         </button>
         <button type="button" class="btn btn-outline-dark" style="margin-right: 40px;">
             <a href="{% url 'manage_requests' pk %}">
+                <ul>
                 <li>가입요청 처리</li>
+                </ul>
             </a>
         </button>
     </div>
