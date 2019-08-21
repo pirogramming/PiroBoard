@@ -137,11 +137,13 @@ def post_new(request, pk):
         post.content = request.POST['content']
         post.category = request.POST['category']
 
-        post_photo = request.FILES.get('photo', False)
-        if post_photo:
-            post.photo = request.FILES.get('photo', False)
+        original_photo = request.FILES.get('post_photo', False)
+        if original_photo:
+            post.post_photo = original_photo
+            post.photo = original_photo
+            post.save()
 
-            photo = Image.open(post_photo)
+            photo = Image.open(original_photo)
             photo_width, photo_height = photo.size
             photo_ratio = photo_width / photo_height
 
@@ -160,10 +162,10 @@ def post_new(request, pk):
             else:
                 width = 300
                 height = 200
-            post.save()
 
             post.photosize(width, height)
-            post.save()
+
+        post.save()
 
         return redirect('group_detail', pk=pk)
     else:

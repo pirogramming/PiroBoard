@@ -1,4 +1,4 @@
-{% extends "blog/base5.html" %}
+{% extends "blog/base.html" %}
 
 {% block content %}
     <a href="{% url 'group_manage' pk %}"><h2>그룹 관리</h2></a>
@@ -32,14 +32,14 @@
                         <h2>인물 사진</h2>
                         <p>친구들과 함께 찍은 사진은 이 곳에!!!</p>
                         <br>
-                        <p class="button-style3">
+                        <div class="button-style3">
                         <form method="post" action="{% url 'group_postlist' pk %}">
                             {% csrf_token %}
                             <input type="hidden" name="group_id" value="{{ group.id }}">
                             <input type="hidden" name="category" value="인물">
                             <button type="submit">인물</button>
                         </form>
-
+                        </div>
                     </div>
                 </div>
                 <div class="carousel-item">
