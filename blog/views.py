@@ -18,7 +18,8 @@ from .forms import GroupForm, CommentForm, PostForm
 @login_required
 def home(request):
     profile = Profile.objects.get(user=request.user)
-    user_groups = [x.group for x in GroupMember.objects.filter(person = profile, status='a')]
+    user_groups = [x.group for x in GroupMember.objects.filter(person=profile, status='a')]
+
     ctx = {}
 
     if len(user_groups) > 0:
