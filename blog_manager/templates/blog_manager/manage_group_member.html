@@ -10,7 +10,7 @@
         <div class="media">
             <img class="rounded-circle account-img" src="{{ head.image.url }}">
             <div class="media-body">
-                <p class="text-secondary">{{ head.user.username }}</p>
+                <p class="text-secondary">{{ head.username }}</p>
                 <div class="account-heading">{{ head.nickname }}</div>
                 <p class="text-secondary">{{ head.region }}</p>
             </div>
@@ -31,6 +31,7 @@
                     <p class="text-secondary">{{ profile.region }}</p>
                 </div>
                 <div>
+                    {% if request.user.username != head.username %}
                     <form method="post" action="{% url 'baton_touch' pk %}">
                         {% csrf_token %}
                         <input type="hidden" name="group_id" value="{{ group.id }}">
@@ -43,6 +44,9 @@
                         <input type="hidden" name="user_p" value="{{ profile.user.username }}">
                         <button type="submit">이 유저에게서 매니저 권한 취소</button>
                     </form>
+                    {% else %}
+                        <p>그룹장 입니다</p>
+                    {% endif %}
                 </div>
             </div>
         </div>

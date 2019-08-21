@@ -1,15 +1,12 @@
 {% extends "blog/base.html" %}
 {% block content %}
-{% load staticfiles %}
+    {% load staticfiles %}
 
 
     <div class="container">
         <div id="title"><h1>{{ user }}의 그룹</h1></div>
         <hr>
-
         <hr>
-
-
         <div>
             <div class="container" id="marketing">
                 {% if hasGroup %}
@@ -32,19 +29,21 @@
                             {#                        </div>#}
                             {#                    </article>#}
                             <div class="3u">
-                                <section>
-                                    <h2 class="title"><a href="{% url 'group_detail' group.pk %}">{{ group.group_name }}</a>
-                                    </h2>
-                                    <p class="subtitle">{{ group.group_info }}</p>
+
+                                <div class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 100%; margin: 10px 0; justify-content: space-around;">
                                     {% if group.group_img %}
-                                        <img src="{{ group.group_img.url}}" alt="">
+                                        <img class="card-img" src="{{ group.group_img.url }}" alt="">
                                     {% else %}
-                                        <img src="{% static 'blog/images/P뱀.png' %}" alt="">
+                                        <img class="card-img" src="{% static 'blog/images/P뱀.png' %}" alt="">
                                     {% endif %}
-                                    <p><a href=""><img src="{{ group.group_img }}" alt=""></a></p>
-                                    <p class="button-style1"><a href="{% url 'group_detail' group.pk %}">그룹 들어가보기</a>
-                                    </p>
-                                </section>
+                                    <div class="card-body" style="padding:10px 0 0 0;">
+                                        <h5 class="card-title">{{ group.group_name }}</h5>
+                                        <p class="card-text">{{ group.group_info }}</p>
+                                    </div>
+                                    <div class="card-body" style="padding:0;">
+                                        <p class="button-style1"><a href="{% url 'group_detail' group.pk %}">그룹 들어가보기</a>
+                                    </div>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
@@ -52,8 +51,6 @@
                 {% else %}
                     <h2>가입한 그룹이 없습니다. 'find group'을 눌러보세요!</h2>
                 {% endif %}
-
-
         </div>
 
 {% endblock content %}
