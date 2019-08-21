@@ -1,3 +1,4 @@
+from PIL import Image
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
@@ -48,11 +49,31 @@ def group_detail(request, pk):
     form = PostForm()
     hi = {
         'group': group,
-        'posts': Post.objects.filter(group=group,).order_by('-id'),
+        'posts': Post.objects.filter(group=group, ).order_by('-id'),
         'form': form,
         'pk': pk,
     }
     return render(request, 'blog/group_detail.html', hi)
+
+
+def group_postlist(request, pk):
+    ctx = {
+        'pk': pk
+    }
+
+    if request.method == 'POST':
+        group = get_object_or_404(Group, pk=pk)
+        form = request.POST
+        category = form.get('category')
+
+        postlist = Post.objects.filter(group=group, category=category)
+
+        ctx['postlist'] = postlist
+        ctx['category'] = category
+
+        return render(request, 'blog/gruop_detail_postlist.html', ctx)
+
+    return redirect('group_detail', pk)
 
 
 # # @login_required
@@ -108,14 +129,42 @@ def post_detail(request, pk):
 
 def post_new(request, pk):
     if request.method == 'POST':
+
         post = Post()
         post.title = request.POST['title']
         post.author = request.user
         post.group_id = pk
         post.content = request.POST['content']
-        post.post_photo = request.FILES.get('post_photo', False)
         post.category = request.POST['category']
-        post.save()
+
+        post_photo = request.FILES.get('photo', False)
+        if post_photo:
+            post.photo = request.FILES.get('photo', False)
+
+            photo = Image.open(post_photo)
+            photo_width, photo_height = photo.size
+            photo_ratio = photo_width / photo_height
+
+            if photo_ratio < 0.88:
+                width = 200
+                height = 300
+
+            elif photo_ratio < 1:
+                width = 200
+                height = 200
+
+            elif photo_ratio < 1.2:
+                width = 300
+                height = 300
+
+            else:
+                width = 300
+                height = 200
+            post.save()
+
+            post.photosize(width, height)
+            post.save()
+
         return redirect('group_detail', pk=pk)
     else:
         form = PostForm()
