@@ -113,7 +113,7 @@ def post_new(request, pk):
         post.author = request.user
         post.group_id = pk
         post.content = request.POST['content']
-        post.photo = request.FILES.get('photo', False)
+        post.post_photo = request.FILES.get('post_photo', False)
         post.category = request.POST['category']
         post.save()
         return redirect('group_detail', pk=pk)
