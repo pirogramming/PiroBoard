@@ -1,5 +1,6 @@
 {% extends "blog/base.html" %}
 {% block content %}
+{% load staticfiles %}
 
 
     <div class="container">
@@ -37,6 +38,8 @@
                                     <p class="subtitle">{{ group.group_info }}</p>
                                     {% if group.group_img %}
                                         <img src="{{ group.group_img.url}}" alt="">
+                                    {% else %}
+                                        <img src="{% static 'blog/images/P뱀.png' %}" alt="">
                                     {% endif %}
                                     <p><a href=""><img src="{{ group.group_img }}" alt=""></a></p>
                                     <p class="button-style1"><a href="{% url 'group_detail' group.pk %}">그룹 들어가보기</a>
