@@ -135,12 +135,12 @@ def post_new(request, pk):
         post.group_id = pk
         post.content = request.POST['content']
         post.category = request.POST['category']
-        post.photo = request.FILES.get('photo', False)
         post.save()
 
         post_photo = request.FILES.get('photo', False)
 
         if post_photo:
+            post.photo = request.FILES.get('photo', False)
             photo = Image.open(post_photo)
             photo_width, photo_height = photo.size
             photo_ratio = photo_width / photo_height
