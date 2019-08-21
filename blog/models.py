@@ -11,11 +11,15 @@ class Post(models.Model):
     group = models.ForeignKey(Group, related_name='G_post', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField()
+    post_photo = ProcessedImageField(blank=True,
+                                     format='JPEG',
+                                     options={'quality': 100},
+                                     null=True, )
     photo = ProcessedImageField(blank=True,
                                 processors=[Thumbnail(300, 300)],
                                 format='JPEG',
                                 options={'quality': 60},
-                                null=True,)
+                                null=True, )
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     CATEGRORY_CHOICES = (
@@ -25,8 +29,7 @@ class Post(models.Model):
         ('etc', 'etc'),
         ('없음', '없음'),
     )
-    category = models.CharField(max_length=10, choices=CATEGRORY_CHOICES, default='없음',)
-
+    category = models.CharField(max_length=10, choices=CATEGRORY_CHOICES, default='없음', )
 
     def __str__(self):
         return self.title

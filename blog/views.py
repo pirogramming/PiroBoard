@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from .models import Post
 from users.models import Profile, Group, GroupMember
-from .forms import GroupForm, CommentForm, PostForm
+from .forms import GroupForm, CommentForm, PostForm, PostEditForm
 
 
 # def search(request):
@@ -113,7 +113,7 @@ def post_new(request, pk):
         post.author = request.user
         post.group_id = pk
         post.content = request.POST['content']
-        post.photo = request.FILES.get('photo', False)
+        post.post_photo = request.FILES.get('post_photo', False)
         post.category = request.POST['category']
         post.save()
         return redirect('group_detail', pk=pk)
@@ -136,7 +136,7 @@ def post_edit(request, pk):
             post = form.save()
             return redirect('blog-home')
     else:
-        form = PostForm(instance=post)
+        form = PostEditForm(instance=post)
     return render(request, 'blog/post_new.html', {
         'form': form,
     })
