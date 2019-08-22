@@ -9,6 +9,7 @@ class Profile(models.Model):
     image = models.ImageField(default='profile_pics/프로필_라이언.gif', upload_to='profile_pics')
 
     nickname = models.CharField(blank=True, null=True, max_length=30)
+    email = models.CharField(blank=True, null=True, max_length=30)
     phone_number = models.CharField(blank=True, max_length=20, null=True)
     region = models.CharField(blank=True, max_length=50, null=True)
     # interests = models.ManyToManyField('Interest', max_length=20, blank=True, null=True, related_name='users')

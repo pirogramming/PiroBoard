@@ -23,15 +23,6 @@
             color: #121212;
         }
 
-        section.text {
-            position: absolute;
-            width: 100%;
-            min-width: 800px;
-            text-align: center;
-            top: 50%;
-            margin-top: -55px;
-        }
-
         .content-section h1, h3 {
             transform: matrix(1, -0.20, 0, 1, 0, 0);
             -ms-transform: matrix(1, -0.20, 0, 1, 0, 0);
@@ -97,6 +88,7 @@
 
         .revise a {
             font-size: 20px;
+            padding: 0 10px 0 10px;
         }
 
     </style>
@@ -129,18 +121,18 @@
                                 class="material-icons">face</i>&nbsp&nbsp{{ user.profile.nickname }}
                         </p><br/>
                     {% endif %}
-                    {% if user.profile.nickname == None %}
+                    {% if user.profile.email == None %}
                     {% else %}
                         <p class="text-secondary"><i class="material-icons">contact_mail</i>&nbsp&nbsp{{ user.email }}
                         </p>
                         <br/>
                     {% endif %}
-                    {% if user.profile.nickname == None %}
+                    {% if user.profile.phone_number == None %}
                     {% else %}
                         <p class="text-secondary"><i
                                 class="material-icons">local_phone</i>&nbsp&nbsp{{ user.profile.phone_number }}</p><br/>
                     {% endif %}
-                    {% if user.profile.nickname == None %}
+                    {% if user.profile.region == None %}
                     {% else %}
                         <p class="text-secondary"><i class="material-icons">home</i>&nbsp&nbsp{{ user.profile.region }}
                         </p>

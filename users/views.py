@@ -14,25 +14,32 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
+            user = form.save()
+            email = form.cleaned_data.get('email')
+            phone_number = form.cleaned_data.get('phone_number')
+            region = form.cleaned_data.get('region')
+            nickname = form.cleaned_data.get('nickname')
+            profile_model, created = Profile.objects.get_or_create(user=user)
+            profile_model.email = email
+            profile_model.phone_number = phone_number
+            profile_model.region = region
+            profile_model.nickname = nickname
+            profile_model.save()
             messages.success(request, f'Your account has been created! You are now able to log in')
             return redirect('login')
-    else:
-        form = UserRegisterForm()
+        else:
+            messages.success(request, f'다시 가입 정보를 기입하세요.')
 
-    return render(request, 'users/register.html', {'form': form})
+    ctx = {
+        'form': UserRegisterForm(),
+    }
+
+    return render(request, 'users/register.html', ctx)
 
 
 @login_required
 def profile(request):
-    my_user = User.objects.get(username=request.user)
-    print(my_user)  # PASS
-
-    my_user_form = UserRegisterForm(instance=my_user.profile)
-    print(my_user_form['region'])
-
-    return render(request, 'users/profile.html', {'my_user': my_user_form})
+    return render(request, 'users/profile.html', )
 
 
 @login_required
