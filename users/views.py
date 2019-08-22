@@ -112,7 +112,12 @@ def change_password(request):
 
 
 def password_reset_form(request):
-    return render(request, 'users/password_reset_form.html')
+    form = PasswordChangeForm(request.POST or None)
+    if request.method == 'POST':
+        pass
+    return render(request, 'users/password_reset_form.html', {
+        'form': form,
+    })
 
 
 # 유저가 참여하고 싶은 그룹을 찾는 페이지
@@ -214,8 +219,53 @@ def request_cancel(request):
         group.save()
 
         profile = Profile.objects.get(user=request.user)
-        membership=GroupMember.objects.get(group=group, person=profile)
+        membership=GroupMember.objects.get(group=group, person=profile,)
         membership.delete()
 
         return redirect('users:group_manage')
     return redirect('users:group_manage')
+
+
+def user_manage_requests(request):
+    person = request.user.profile
+
+    user_requests = [x.group for x in GroupMember.objects.filter(person=person, status='u')]   # u = 가입승인요청
+    group_requests = [x.group for x in GroupMember.objects.filter(person=person, status='g')]  # g = 가입요청
+
+    ctx = {
+
+    }
+
+    if len(user_requests) > 0:
+        ctx['user_requests'] = user_requests
+        ctx['userRequest'] = True
+        ctx['user_requests_count'] = len(user_requests)
+
+    else:
+        ctx['userRequest'] = False
+
+    if len(group_requests) > 0:
+        ctx['group_requests'] = group_requests
+        ctx['groupRequest'] = True
+        ctx['group_requests_count'] = len(group_requests)
+
+    else:
+        ctx['groupRequest'] = False
+
+    return render(request, 'users/user_manage_request.html', ctx)
+
+
+
+# 그룹이 유저에게 보낸 요청을 수락해주는 기능
+def group_request_accept(request):
+    if request.method == "POST":
+        form = request.POST
+        person = request.user
+        group = form.get('group_p')
+
+        membership = GroupMember.objects.get(group=group, person=person)
+        membership.status = 'a'
+        membership.save()
+
+        return redirect('users:user_manage_request')
+    return redirect('users:user_manage_request')

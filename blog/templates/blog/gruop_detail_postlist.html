@@ -1,0 +1,47 @@
+{% extends "blog/trello.html" %}
+
+
+{% block content %}
+    <style>
+        .postcard {
+            float: left;
+            margin: 10px;
+        }
+    </style>
+
+
+
+    여기에는 postlist페이지가 작성될 예정입니다.
+    <p>카테고리 : {{ category }}</p>
+    <div class="rows">
+        {% if user.is_authenticated %}
+            <a href="{% url 'post_new' pk %}">글쓰기</a>
+        {% endif %}
+    </div>
+    <hr/>
+    <hr/>
+    {% for post in postlist %}
+        {% if post.photo %}
+        <div class="postcard">
+            <a href="{% url 'post_detail' post.pk %}">
+                <div><img src="{{ post.photo.url }}"/></div>
+            </a>
+        </div>
+        {% else %}
+        <div class="postcard">
+            <a href="{% url 'post_detail' post.pk %}">
+                <div>
+                    <div>{{ post.title }}</div>
+                    <div>{{ post.content }}</div>
+                    <div>-{{ post.author }}</div>
+                </div>
+            </a>
+        </div>
+        {% endif %}
+    {% endfor %}
+
+
+
+
+
+{% endblock %}

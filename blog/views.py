@@ -1,10 +1,11 @@
+from PIL import Image
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.auth.models import User
 from .models import Post
 from users.models import Profile, Group, GroupMember
-from .forms import GroupForm, CommentForm, PostForm
+from .forms import GroupForm, CommentForm, PostForm, PostEditForm
 
 
 # def search(request):
@@ -18,7 +19,8 @@ from .forms import GroupForm, CommentForm, PostForm
 @login_required
 def home(request):
     profile = Profile.objects.get(user=request.user)
-    user_groups = [x.group for x in GroupMember.objects.filter(person = profile, status='a')]
+    user_groups = [x.group for x in GroupMember.objects.filter(person=profile, status='a')]
+
     ctx = {}
 
     if len(user_groups) > 0:
@@ -44,23 +46,34 @@ def home(request):
 #
 def group_detail(request, pk):
     group = get_object_or_404(Group, pk=pk)
-    if request.method == "POST":
-        post = Post()
-        post.title = request.POST['title']
-        post.author = request.user
-        post.content = request.POST['content']
-        post.photo = request.FILES['photo']
-        post.save()
-        return redirect('group_detail', pk=group.pk)
-    else:
-        form = PostForm()
-        hi = {
-            'group': group,
-            'posts': Post.objects.filter(group=group),
-            'form': form,
-            'pk': pk,
-        }
+    form = PostForm()
+    hi = {
+        'group': group,
+        'posts': Post.objects.filter(group=group, ).order_by('-id'),
+        'form': form,
+        'pk': pk,
+    }
     return render(request, 'blog/group_detail.html', hi)
+
+
+def group_postlist(request, pk):
+    ctx = {
+        'pk': pk
+    }
+
+    if request.method == 'POST':
+        group = get_object_or_404(Group, pk=pk)
+        form = request.POST
+        category = form.get('category')
+
+        postlist = Post.objects.filter(group=group, category=category)
+
+        ctx['postlist'] = postlist
+        ctx['category'] = category
+
+        return render(request, 'blog/gruop_detail_postlist.html', ctx)
+
+    return redirect('group_detail', pk)
 
 
 # # @login_required
@@ -79,14 +92,14 @@ def group_detail(request, pk):
 def about(request):
     # return render(request, 'blog/about.html', {'title': 'About'})
     if request.method == "POST":
-        form = GroupForm(request.POST)
+        form = GroupForm(request.POST, request.FILES)
         if form.is_valid():
-            group = form.save(commit=False)
-            group.group_head = request.user
-            group.created_date = timezone.now()
-            group.save()
+            form = form.save(commit=False)
+            form.group_head = request.user
+            form.created_date = timezone.now()
+            form.save()
 
-            GroupMember.objects.create(person=request.user.profile, group=group, status='a', group_role='h')
+            GroupMember.objects.create(person=request.user.profile, group=form, status='a', group_role='h')
 
             return redirect('blog-home')
     else:
@@ -116,14 +129,45 @@ def post_detail(request, pk):
 
 def post_new(request, pk):
     if request.method == 'POST':
+
         post = Post()
         post.title = request.POST['title']
         post.author = request.user
         post.group_id = pk
         post.content = request.POST['content']
-        post.photo = request.FILES.get('photo', False)
+        post.category = request.POST['category']
+
+        original_photo = request.FILES.get('post_photo', False)
+        if original_photo:
+            post.post_photo = original_photo
+            post.photo = original_photo
+            post.save()
+
+            photo = Image.open(original_photo)
+            photo_width, photo_height = photo.size
+            photo_ratio = photo_width / photo_height
+
+            if photo_ratio < 0.88:
+                width = 200
+                height = 300
+
+            elif photo_ratio < 1:
+                width = 200
+                height = 200
+
+            elif photo_ratio < 1.2:
+                width = 300
+                height = 300
+
+            else:
+                width = 300
+                height = 200
+
+            post.photosize(width, height)
+
         post.save()
-        return redirect('blog-home')
+
+        return redirect('group_detail', pk=pk)
     else:
         form = PostForm()
     return render(request, 'blog/post_new.html', {'form': form})
@@ -143,7 +187,7 @@ def post_edit(request, pk):
             post = form.save()
             return redirect('blog-home')
     else:
-        form = PostForm(instance=post)
+        form = PostEditForm(instance=post)
     return render(request, 'blog/post_new.html', {
         'form': form,
     })
