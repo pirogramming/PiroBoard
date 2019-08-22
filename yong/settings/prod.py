@@ -1,4 +1,4 @@
-from .common import *
+from yong.settings.common import *
 
 
 DEBUG = True
