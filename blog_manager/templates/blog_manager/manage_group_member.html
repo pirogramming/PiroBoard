@@ -6,81 +6,82 @@
     <hr/>
     <p>그룹장</p>
 
-    <div class="content-section">
-        <div class="media">
-            <img class="rounded-circle account-img" src="{{ head.image.url }}">
-            <div class="media-body">
-                <p class="text-secondary">{{ head.username }}</p>
-                <div class="account-heading">{{ head.nickname }}</div>
-                <p class="text-secondary">{{ head.region }}</p>
-            </div>
-        </div>
-    </div>
-
-    <hr/>
-    <p>그룹 매니저</p>
-
-    {% for profile in managers %}
-
         <div class="content-section">
             <div class="media">
-                <img class="rounded-circle account-img" src="{{ profile.image.url }}">
+                <img class="rounded-circle account-img" src="{{ head.image.url }}">
                 <div class="media-body">
-                    <p class="text-secondary">{{ profile.user.username }}</p>
-                    <div class="account-heading">{{ profile.nickname }}</div>
-                    <p class="text-secondary">{{ profile.region }}</p>
-                </div>
-                <div>
-                    {% if request.user.username != head.username %}
-                    <form method="post" action="{% url 'baton_touch' pk %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="group_id" value="{{ group.id }}">
-                        <input type="hidden" name="user_p" value="{{ profile.user.username }}">
-                        <button type="submit">이 유저에게 그룹장 넘기기</button>
-                    </form>
-                    <form method="post" action="{% url 'byebye_manager' pk %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="group_id" value="{{ group.id }}">
-                        <input type="hidden" name="user_p" value="{{ profile.user.username }}">
-                        <button type="submit">이 유저에게서 매니저 권한 취소</button>
-                    </form>
-                    {% else %}
-                        <p>그룹장 입니다</p>
-                    {% endif %}
+                    <p class="text-secondary">{{ head.username }}</p>
+                    <div class="account-heading">{{ head.nickname }}</div>
+                    <p class="text-secondary">{{ head.region }}</p>
                 </div>
             </div>
         </div>
-    {% endfor %}
-    <hr/>
-    <p>그룹 멤버를 관리하세요!</p>
 
-    {% for profile in profiles %}
+        <hr/>
+        <p>그룹 매니저</p>
 
-        <div class="content-section">
-            <div class="media">
-                <img class="rounded-circle account-img" src="{{ profile.image }}">
-                <div class="media-body">
-                    <p class="text-secondary">{{ profile.user.username }}</p>
-                    <div class="account-heading">{{ profile.nickname }}</div>
-                    <p class="text-secondary">{{ profile.region }}</p>
-                </div>
-                <div>
-                    <form method="post" action="{% url 'welcome_manager' pk %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="group_id" value="{{ group.id }}">
-                        <input type="hidden" name="user_p" value="{{ profile.user.username }}">
-                        <button type="submit">이 유저에게 매니저 권한 부여</button>
-                    </form>
-                    <form method="post" action="{% url 'refuse' pk %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="group_id" value="{{ group.id }}">
-                        <input type="hidden" name="user_p" value="{{ profile.user.username }}">
-                        <button type="submit">이 유저를 차단하기</button>
-                    </form>
+        {% for profile in managers %}
+
+            <div class="content-section">
+                <div class="media">
+                    <img class="rounded-circle account-img" src="{{ profile.image.url }}">
+                    <div class="media-body">
+                        <p class="text-secondary">{{ profile.user.username }}</p>
+                        <div class="account-heading">{{ profile.nickname }}</div>
+                        <p class="text-secondary">{{ profile.region }}</p>
+                    </div>
+                    <div>
+                        {% if request.user.username != head.username %}
+                            <form method="post" action="{% url 'baton_touch' pk %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="group_id" value="{{ group.id }}">
+                                <input type="hidden" name="user_p" value="{{ profile.user.username }}">
+                                <button type="submit">이 유저에게 그룹장 넘기기</button>
+                            </form>
+                            <form method="post" action="{% url 'byebye_manager' pk %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="group_id" value="{{ group.id }}">
+                                <input type="hidden" name="user_p" value="{{ profile.user.username }}">
+                                <button type="submit">이 유저에게서 매니저 권한 취소</button>
+                            </form>
+                        {% else %}
+                            <p>그룹장 입니다</p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+        <hr/>
+        <p>그룹 멤버를 관리하세요!</p>
+
+        {% for profile in profiles %}
+
+            <div class="content-section">
+                <div class="media">
+                    <img class="rounded-circle account-img" src="{{ profile.image }}">
+                    <div class="media-body">
+                        <p class="text-secondary">{{ profile.user.username }}</p>
+                        <div class="account-heading">{{ profile.nickname }}</div>
+                        <p class="text-secondary">{{ profile.region }}</p>
+                    </div>
+                    <div>
+                        <form method="post" action="{% url 'welcome_manager' pk %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="group_id" value="{{ group.id }}">
+                            <input type="hidden" name="user_p" value="{{ profile.user.username }}">
+                            <button type="submit">이 유저에게 매니저 권한 부여</button>
+                        </form>
+                        <form method="post" action="{% url 'refuse' pk %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="group_id" value="{{ group.id }}">
+                            <input type="hidden" name="user_p" value="{{ profile.user.username }}">
+                            <button type="submit">이 유저를 차단하기</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
 {% endblock content %}
 
 

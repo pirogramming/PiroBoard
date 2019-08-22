@@ -80,7 +80,12 @@ def change_password(request):
 
 
 def password_reset_form(request):
-    return render(request, 'users/password_reset_form.html')
+    form = PasswordChangeForm(request.POST or None)
+    if request.method == 'POST':
+        pass
+    return render(request, 'users/password_reset_form.html', {
+        'form': form,
+    })
 
 
 # 유저가 참여하고 싶은 그룹을 찾는 페이지
