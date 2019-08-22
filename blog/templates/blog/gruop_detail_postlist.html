@@ -1,11 +1,35 @@
-{% extends "blog/base.html" %}
+{% extends "blog/base5.html" %}
 
 
 {% block content %}
+
+
     <style>
+        img {
+            display: block;
+        }
+
+        .cardbox {
+            text-align: center;
+        }
+
         .postcard {
-            float: left;
-            margin: 10px;
+            display: inline-block;
+            float: top;
+            vertical-align: middle;
+            margin: 15px;
+            border: 1px solid #7C6E49;
+            box-sizing: border-box;
+        }
+
+        .photocard {
+
+        }
+
+        .textcard {
+            width: 200px;
+            height: 300px;
+
         }
     </style>
 
@@ -20,27 +44,31 @@
     </div>
     <hr/>
     <hr/>
-    {% for post in postlist %}
-        {% if post.photo %}
-        <div class="postcard">
-            <a href="{% url 'post_detail' post.pk %}">
-                <div><img src="{{ post.photo.url }}"/></div>
-            </a>
+    <div class="row">
+        <div class="cardbox">
+            {% for post in postlist %}
+                {% if post.photo %}
+                    <div class="postcard">
+                        <a href="{% url 'post_detail' post.pk %}">
+                            <div class="photocard">
+                                <img src="{{ post.photo.url }}"/>
+                            </div>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="postcard">
+                        <a href="{% url 'post_detail' post.pk %}">
+                            <div class="textcard">
+                                <div>{{ post.title }}</div>
+                                <div>{{ post.content }}</div>
+                                <div>-{{ post.author }}</div>
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
-        {% else %}
-        <div class="postcard">
-            <a href="{% url 'post_detail' post.pk %}">
-                <div>
-                    <div>{{ post.title }}</div>
-                    <div>{{ post.content }}</div>
-                    <div>-{{ post.author }}</div>
-                </div>
-            </a>
-        </div>
-        {% endif %}
-    {% endfor %}
-
-
+    </div>
 
 
 
