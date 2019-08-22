@@ -1,4 +1,4 @@
-from LPB.settings.common import *
+from .common import *
 
 
 DEBUG = False
