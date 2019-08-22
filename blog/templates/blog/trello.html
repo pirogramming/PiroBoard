@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +30,21 @@
             font-family: 'Nanum Pen Script', cursive;
             font-size: 1.05em;
         }
+
+        .nav-link{
+            color: black;
+        }
+
+        .plus{
+            background-image: url("https://cdn.pixabay.com/photo/2012/04/10/23/39/sign-27080_1280.png") !important;
+            background-size: 100% !important;
+            width: 12px;
+            height: 200px;
+        }
+
+
+
+
     </style>
     <!-- Custom styles for this template -->
     <link href="sticky-footer-navbar.css" rel="stylesheet">
@@ -142,6 +159,11 @@
             </ul>
         </div>
         <div class="col-9">
+
+            {% block content %}
+
+
+            {% endblock %}
 
 
         </div>

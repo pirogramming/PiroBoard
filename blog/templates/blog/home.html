@@ -1,42 +1,40 @@
-{% extends "blog/base5.html" %}
+{% extends "blog/trello.html" %}
 {% block content %}
 
-    <div><p>{{ user }}의 그룹</p></div>
+    <div><h2>{{ user }}의 그룹</h2></div>
 
 
 
     {% if hasGroup %}
         <p>당신은 현재 {{ user_groups.count }}개의 그룹에 속해 있습니다.</p>
-        <div class="section">
-            <div class="row">
-                <div class="col s12">
-
-                    {% for group in user_groups %}
+        <div class="container">
 
 
-                        <div class="col s12 m6 l4">
-                            <div class="card">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <a href="{% url 'group_detail' group.pk %}">
+        <div class="row">
 
-                                        {% if group.group_img %}
-                                            <img src="{{ group.group_img.url }}" alt="">
-                                        {% else %}
-                                            <img src="https://post-phinf.pstatic.net/MjAxNzAyMTBfMjQw/MDAxNDg2Njk3NjI5NDc3.3r2A1Vy2ReIVMfCkmmMssA937blMKLD_s-ysMj5cYy8g.O2eL5k1LMPl9c6ecfeSYNHjqnEHfxBjzrNjDJ1DKQK4g.JPEG/K-002.jpg?type=w1200"
-                                                 alt="">
-                                        {% endif %}
-                                        <span class="card-title home">{{ group.group_name }}</span>
-                                    </a>
+            {% for group in user_groups %}
 
-                                </div>
 
-                            </div>
+                <div class="col-4 mt-4">
+                    <div class="card" style="width: 12rem; height:15rem;">
+                        <img src="{{ group.group_img }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">{{ group.group_info }}</p>
                         </div>
+                    </div>
+                </div>
 
 
-                    {% endfor %}
+            {% endfor %}
+            <div class="col-4 mt-4">
+                <div class="card plus" style="width: 12rem; ">
+
+                    <div class="card-body">
+                        <p class="card-text">그룹 생성하기</p>
+                    </div>
                 </div>
             </div>
+
 
         </div>
     {% else %}
@@ -44,7 +42,7 @@
     {% endif %}
 
 
-    </div>
+</div>
 
 
 
