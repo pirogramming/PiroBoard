@@ -125,12 +125,18 @@
                 <h1 class="display-4">PiroBoard에 가입하세요!</h1>
                 <p class="lead">PiroBoard는 절친한 친구들과 추억을 공유하는 SNS입니다.</p>
                 <a class="nav-link" href="#">
-                    <a href="{% url 'login' %}">
-                        <button type="button" class="btn btn-info">로그인 하기</button>
-                    </a>
-                    <a href="{% url 'register' %}">
-                        <button type="button" class="btn btn-info">가입하러 가기</button>
-                    </a>
+                    {% if is_authenticated == False %}
+                        <a href="{% url 'login' %}">
+                            <button type="button" class="btn btn-info">로그인 하기</button>
+                        </a>
+                        <a href="{% url 'register' %}">
+                            <button type="button" class="btn btn-info">가입하러 가기</button>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'blog-home' %}">
+                            <button type="button" class="btn btn-info">많이 기다렸어요 :)</button>
+                        </a>
+                    {% endif %}
                 </a>
             </div>
         </div>
