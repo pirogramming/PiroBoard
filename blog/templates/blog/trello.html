@@ -21,7 +21,8 @@
 
     <style>
         body {
-        {#background-color: #fafafa;#} background-color: rgb(250, 240, 231);
+            background-color: rgb(250, 240, 231);
+        {#background-color: #fafafa;#}
         }
 
         * {
@@ -145,18 +146,7 @@
         <div class="col-2 men-area">
             <ul class="nav flex-column">
                 {% block sidebar %}
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'blog-about' %}">
-                            <span class="men" data-feather="home"> 그룹 생성</span>
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:group_find' %}">
-                            <span class="men" data-feather="file">그룹 찾기</span>
-
-                        </a>
-                    </li>
+                  
                 {% endblock %}
             </ul>
         </div>
