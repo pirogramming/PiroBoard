@@ -2,6 +2,8 @@
 {% block content %}
     <hr/>
     <hr/>
+    <h2>초대 및 가입요청 관리</h2>
+    <hr/>
 
 
     {% if userRequest %}
@@ -52,21 +54,21 @@
     {% if groupRequest %}
         <h2>{{ group_requests_count }}명의 유저의 참여를 기다리고 있습니다.</h2>
         {% for user in group_requests %}
-            <div class="content-section">
+            <div class="content-section" style="margin: 5% 2%;">
                 <div class="media">
-                    <img class="rounded-circle account-img" src="{{ user.image }}">
+                    <img class="rounded-circle account-img" width="200px" src="{{ user.image.url }}">
                      <div class="media-body" style="display: inline-block; margin-left: 6%">
                         <p class="account-heading">{{ user.user.username }}</p>
                         <div class="text-secondary">{{ user.nickname }}</div>
                         <div class="text-secondary">{{ user.phone_number }}</div>
                         <div class="text-secondary">{{ user.region }}</div>
                     </div>
-                    <div>
+                    <div style="margin: 70px 119px 0 0;">
                         <form method="post" action="{% url 'group_request_cancel' pk %}">
                             {% csrf_token %}
                             <input type="hidden" name="group_id" value="{{ pk }}">
                             <input type="hidden" name="user_p" value="{{ user.user.username }}">
-                            <button type="submit">가입요청 취소하기</button>
+                            <button type="submit" class="btn btn-outline-dark" style="font-size: 22px;"> 가입요청 취소하기 </button>
                         </form>
                     </div>
                 </div>
