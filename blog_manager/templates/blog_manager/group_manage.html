@@ -1,7 +1,13 @@
 {% extends "blog/trello.html" %}
 
 {% block content %}
-<br/>
+
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<hr>
+    <h2>그룹 정보</h2>
+    <hr>
+
+
 <div class="container">
     <div class="row" style="margin: 5% 0 10% ;">
         <div class="col-sm">
@@ -9,7 +15,7 @@
 
                 <div class="media">
                     {% if group.group_img %}
-                    <img class="rounded-circle account-img" src="{{ group.group_img.url }}"
+                    <img src="{{ group.group_img.url }}"
                          style="width: auto;">
                     {% endif %}
                     <div class="media-body">
@@ -35,10 +41,11 @@
 </div>
 
 </hr>
-
+    <hr>
 <div class="row" style="margin: 0 auto;">
     <button type="button" class="btn btn-outline-dark" style="margin-right: 50px; margin-left: 30px; ">
         <a href="{% url 'group_info_update' pk %}">
+            <i class="material-icons">content_paste</i>
             <ul style="list-style: none; text-decoration: none; margin:auto; margin-left:-30px; font-size: 25px;">
                 <li>그룹 정보 수정&nbsp</li>
             </ul>
@@ -49,6 +56,7 @@
     </style>
     <button type="button" class="btn btn-outline-dark" style="margin-right: 50px; font-size: 25px;">
         <a href="{% url 'group_member_manage' pk %}" style="text-decoration: none;" >
+            <i class="material-icons">group</i>
             <ul style="list-style: none; text-decoration: none; margin:0 auto; margin-left: -30px;">
                 <li>그룹 멤버 관리&nbsp</li>
             </ul>
@@ -56,6 +64,7 @@
     </button>
     <button type="button" class="btn btn-outline-dark" style="margin-right: 50px;">
         <a href="{% url 'invite' pk %}">
+            <i class="material-icons">person_add</i>
             <ul style="list-style: none; margin:0 auto; margin-left: -30px; font-size: 25px;">
                 <li>유저 초대&nbsp</li>
             </ul>
@@ -63,10 +72,12 @@
     </button>
     <button type="button" class="btn btn-outline-dark" style="margin-right: 10px; font-size: 25px;">
         <a href="{% url 'manage_requests' pk %}">
+            <i class="material-icons">send</i>
             <ul style="list-style: none; margin:0 auto; margin-left: -30px;">
                 <li>가입요청 처리&nbsp</li>
             </ul>
         </a>
     </button>
 </div>
+
 {% endblock %}
