@@ -28,6 +28,16 @@
             font-family: 'Nanum Pen Script', cursive;
             font-size: 1.05em;
         }
+
+        .men {
+            color: black;
+        }
+
+        .men-area {
+            background: lemonchiffon;
+        }
+
+
     </style>
     <!-- Custom styles for this template -->
     <link href="sticky-footer-navbar.css" rel="stylesheet">
@@ -72,7 +82,7 @@
         </ul>
 
 
-        <a class="loggout" href="{% url 'logout' %}">
+        <a class="logout" href="{% url 'logout' %}">
             <i class="fas fa-sign-out-alt"></i>
         </a>
 
@@ -111,11 +121,11 @@
                 <span class="sr-only">Split button!</span>
             </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
+                <li><a href="{% url 'users:profile' %}">유저 정보 보기</a></li>
+                <li><a href="{% url 'users:profile_update' %}">프로필 수정</a></li>
                 <li><a href="#">Something else here</a></li>
                 <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
+                <li><a href="{% url 'logout' %}">로그아웃</a></li>
             </ul>
         </div>
 
@@ -126,24 +136,26 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-3">
+        <div class="col-3 men-area">
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'blog-about' %}">
-                        <span data-feather="home"></span>
-                        그룹 생성<span class="sr-only">(current)</span>
+                        <span class="men" data-feather="home"> 그룹 생성</span>
+                        <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'users:group_find' %}">
-                        <span data-feather="file"></span>
-                        그룹 찾기
+                        <span class="men" data-feather="file">그룹 찾기</span>
+
                     </a>
                 </li>
         </div>
         <div class="col-9">
             {% block content %}
+
             {% endblock %}
+
         </div>
 
 
