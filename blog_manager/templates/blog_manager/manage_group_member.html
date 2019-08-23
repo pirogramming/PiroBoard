@@ -1,13 +1,22 @@
 {% extends "blog/trello.html" %}
 {% block content %}
+
+    <style>
+    @import url(http://weloveiconfonts.com/api/?family=fontawesome);
+    /* fontawesome */
+        [class*="fontawesome-"]:before {
+            font-family: 'FontAwesome', sans-serif;
+        }
+    </style>
+
     <hr/>
-    <p>그룹장</p>
+    <h2>그룹장</h2>
 
     <div class="content-section">
         <div class="media">
             <img class="rounded-circle account-img" src="{{ head.image.url }}">
             <div class="media-body">
-                <p class="text-secondary">{{ head.username }}</p>
+                <p class="text-secondary">{{ head.username }}&nbsp;<span class="fontawesome-star star" style="color: red; font-size: 5px"></span></p>
                 <div class="account-heading">{{ head.nickname }}</div>
                 <p class="text-secondary">{{ head.region }}</p>
             </div>
@@ -15,14 +24,15 @@
     </div>
 
     <hr/>
-    <p>그룹 매니저</p>
+    <h2>그룹 매니저</h2>
 
     {% for profile in managers %}
 
+         <br/>
         <div class="content-section">
             <div class="media">
                 <img class="rounded-circle account-img" width="150px" src="{{ profile.image.url }}">
-                <div class="media-body">
+                <div class="media-body" style="display: inline-block; margin-left: 5%">
                     <p class="text-secondary">{{ profile.user.username }}</p>
                     <div class="account-heading">{{ profile.nickname }}</div>
                     <p class="text-secondary">{{ profile.region }}</p>
@@ -49,10 +59,11 @@
         </div>
     {% endfor %}
     <hr/>
-    <p>그룹 멤버를 관리하세요!</p>
+    <h2>그룹 멤버를 관리하세요!</h2>
 
     {% for profile in profiles %}
 
+         <br/>
         <div class="content-section">
             <div class="media">
 
@@ -62,7 +73,7 @@
                     <img class="rounded-circle account-img" width="150px" src="{{ profile.image.url }}">
                 {% endif %}
 
-                <div class="media-body">
+                <div class="media-body" style="display: inline-block; margin-left: 5%">
                     <p class="text-secondary">{{ profile.user.username }}</p>
                     <div class="account-heading">{{ profile.nickname }}</div>
                     <p class="text-secondary">{{ profile.region }}</p>
