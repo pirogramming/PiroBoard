@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.contrib.auth.models import User
-from .models import Post
+from .models import Post, Comment
 from users.models import Profile, Group, GroupMember
 from .forms import GroupForm, CommentForm, PostForm, PostEditForm
 
@@ -97,16 +97,18 @@ def group_postlist(request, pk):
 def about(request):
     # return render(request, 'blog/about.html', {'title': 'About'})
     if request.method == "POST":
-        form = GroupForm(request.POST, request.FILES)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.group_head = request.user
-            form.created_date = timezone.now()
-            form.save()
+        group = Group()
+        group.group_head =request.user
+        group.created_date = timezone.now()
+        group.group_img = request.FILES.get('group_img', False)
+        group.group_info = request.POST['group_info']
+        group.group_name = request.POST['group_name']
+        group.group_open_status = request.POST['group_open_status']
+        group.save()
 
-            GroupMember.objects.create(person=request.user.profile, group=form, status='a', group_role='h')
+        GroupMember.objects.create(person=request.user.profile, group=group, status='a', group_role='h')
 
-            return redirect('blog-home')
+        return redirect('blog-home')
     else:
         form = GroupForm()
     return render(request, 'blog/about.html', {'form': form})
@@ -119,14 +121,20 @@ def login(request):
 # sulmo
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = post
-            comment.author = request.user
-            comment.save()
-            return redirect('post_detail', pk=post.pk)
+    if request.method == 'POST':
+        comment = Comment()
+        comment.message = request.POST['message']
+        comment.post = post
+        comment.author = request.user
+        comment.save()
+    # if request.method == "POST":
+    #     form = CommentForm(request.POST)
+    #     if form.is_valid():
+    #         comment = form.save(commit=False)
+    #         comment.post = post
+    #         comment.author = request.user
+    #         comment.save()
+        return redirect('post_detail', pk=post.pk)
     else:
         form = CommentForm()
     return render(request, 'blog/post_detail.html', {'post': post, 'form': form})
