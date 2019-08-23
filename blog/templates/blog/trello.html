@@ -48,9 +48,6 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-
-
-            <div class="inline-block" style="padding: 5px;">
                 <li class="nav-item active" style="margin-left:550px; font-size:35px; ">
                     <a class="nav-link" href="{% url 'blog-home' %}">Piroboard <span
                             class="sr-only">(current)</span></a>
@@ -83,7 +80,6 @@
                 <span class="sr-only">Split button!</span>
             </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton">
-                <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
                 <li><a href="#">Something else here</a></li>
                 <li class="divider"></li>
@@ -101,7 +97,6 @@
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton">
                 <li><a href="{% url 'users:profile' %}">유저 정보 보기</a></li>
                 <li><a href="{% url 'users:profile_update' %}">프로필 수정</a></li>
-                <li><a href="#">Something else here</a></li>
                 <li class="divider"></li>
                 <li><a href="{% url 'logout' %}">로그아웃</a></li>
             </ul>

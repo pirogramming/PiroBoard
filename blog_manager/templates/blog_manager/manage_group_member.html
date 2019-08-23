@@ -25,7 +25,7 @@
             <div class="content-section">
                 <div class="media">
                     <img class="rounded-circle account-img" src="{{ profile.image.url }}">
-                    <div class="media-body">
+                    <div class="media-body" style="margin-left: 170px;">
                         <p class="text-secondary">{{ profile.user.username }}</p>
                         <div class="account-heading">{{ profile.nickname }}</div>
                         <p class="text-secondary">{{ profile.region }}</p>
@@ -45,7 +45,7 @@
                                 <button type="submit">이 유저에게서 매니저 권한 취소</button>
                             </form>
                         {% else %}
-                            <p>그룹장 입니다</p>
+                            <p>당신은 그룹장 입니다</p>
                         {% endif %}
                     </div>
                 </div>
@@ -56,7 +56,7 @@
 
         {% for profile in profiles %}
 
-            <div class="content-section">
+            <div class="content-section" style="margin-left:20px;">
                 <div class="media">
                     <img class="rounded-circle account-img" src="{{ profile.image }}">
                     <div class="media-body">
@@ -71,7 +71,7 @@
                             <input type="hidden" name="user_p" value="{{ profile.user.username }}">
                             <button type="submit">이 유저에게 매니저 권한 부여</button>
                         </form>
-                        <form method="post" action="{% url 'refuse' pk %}">
+                        <form method="post" action="{% url 'user_request_refuse' pk %}">
                             {% csrf_token %}
                             <input type="hidden" name="group_id" value="{{ group.id }}">
                             <input type="hidden" name="user_p" value="{{ profile.user.username }}">
