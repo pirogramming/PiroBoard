@@ -12,6 +12,7 @@
     <hr/>
     <h2>그룹장</h2>
 
+<<<<<<< Updated upstream
     <div class="content-section">
         <div class="media">
             <img class="rounded-circle account-img" src="{{ head.image.url }}">
@@ -19,6 +20,25 @@
                 <p class="text-secondary">{{ head.username }}&nbsp;<span class="fontawesome-star star" style="color: red; font-size: 5px"></span></p>
                 <div class="account-heading">{{ head.nickname }}</div>
                 <p class="text-secondary">{{ head.region }}</p>
+=======
+<div class="content-section">
+    <div class="media">
+        <img class="rounded-circle account-img" src="{{ head.image.url }}">
+        <div class="media-body">
+            <p class="text-secondary">{{ head.username }}&nbsp;<span class="fontawesome-star star"
+                                                                     style="color: red; font-size: 5px"></span></p>
+            <div class="account-heading">{{ head.nickname }}</div>
+            <p class="text-secondary">{{ head.region }}</p>
+        </div>
+        <div>
+                <form method="post" action="{% url 'chadan_member_manage' pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="group_id" value="{{ group.id }}">
+                    <input type="hidden" name="user_p" value="{{ profile.user.username }}">
+                    <button type="submit" class="btn btn-outline-dark" style="margin: 0 143px 1%; font-size: 22px;">차단 유저목록 보기
+                    </button>
+                </form>
+>>>>>>> Stashed changes
             </div>
         </div>
     </div>
