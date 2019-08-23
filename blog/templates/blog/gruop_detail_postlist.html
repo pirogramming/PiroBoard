@@ -3,27 +3,65 @@
 
 {% block content %}
 
-
     <style>
+        body {
+            background-color: white;
+        }
+
+        a {
+            color: rgb(133, 85, 54);
+
+        }
+
         .photocard-img {
             display: inline-block;
             outline: none !important;
         }
 
+        .cardbox-frame {
+            padding: 70px 60px;
+            background-color: rgba(142, 178, 203, 0.18);
+            box-shadow: 0px 5px 10px rgba(42, 44, 59, 0.88);
+        }
+
         .cardbox {
-            padding-top: 50px;
+            padding-top: 70px;
+            padding-bottom: 70px;
             text-align: center;
-            border: 2px solid rgba(204, 204, 204, 0.5);
+            border: 2px inset rgba(204, 204, 204, 0.47);
+            box-shadow: inset 0px 0px 5px;
+            position: relative;
+            background-color: linen;
+            background-color: #f5f2e6;
+            background-image: url("https://i.pinimg.com/originals/7c/66/19/7c66194188bd8efd77ab85c3c095f7fb.jpg");
+            background-blend-mode: multiply;
+            opacity: 0.6;
+        }
+
+        .cardbox:before {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            background-color: #f5f2e6;
+            background-image: url("https://i.pinimg.com/originals/7c/66/19/7c66194188bd8efd77ab85c3c095f7fb.jpg");
+            background-blend-mode: multiply;
+            opacity: 0.6;
+            filter: alpha(opacity=50);
+        {#background-color: rgb(186, 133, 93);#}
         }
 
         .postcard {
+            position: relative;
             display: inline-block;
             float: top;
             vertical-align: middle;
             margin: 17px 15px;
-            border: 1px solid rgba(204, 204, 204, 0.5);
+            border-right: 3px solid rgba(91, 78, 54, 0.5);
+            border-bottom: 3px solid rgba(91, 78, 54, 0.5);
             box-sizing: border-box;
-            box-shadow: 0px 3px 3px 0 rgba(204, 204, 204, 0.7);
+            box-shadow: 0px 3px 7px 0 rgba(91, 78, 54, 0.7);
+            opacity: 1;
+            filter: alpha(opacity=100);
         }
 
         .postcard a {
@@ -40,6 +78,8 @@
             width: 200px;
             height: 300px;
             background-image: url("https://getflywheel.com/wp-content/uploads/2015/09/free-paper-textures-lined.jpg");
+            background-color: rgba(255, 255, 240, 0.27);
+            background-blend-mode: multiply;
             text-align: center;
         }
 
@@ -84,9 +124,7 @@
     </style>
 
 
-
-    여기에는 postlist페이지가 작성될 예정입니다.
-    <p>카테고리 : {{ category }}</p>
+    <p>{{ category }} posts</p>
     <div class="rows">
         {% if user.is_authenticated %}
             <a href="{% url 'post_new' pk %}">글쓰기</a>
@@ -95,33 +133,34 @@
     <hr/>
     <hr/>
     <div class="row">
-        <div class="cardbox">
-            {% for post in postlist %}
-                {% if post.photo %}
-                    <div class="postcard">
-                        <a href="{% url 'post_detail' post.pk %}">
-                            <div class="photocard">
-                                <img class="photocard-img" src="{{ post.photo.url }}"/>
-                            </div>
-                        </a>
-                    </div>
-                {% else %}
-                    <div class="postcard">
-                        <a href="{% url 'post_detail' post.pk %}">
-                            <div class="textcard">
-                                <div class="textzone">
-                                    <p class="text-title">{{ post.title }}</p>
-                                    <p class="text-content">{{ post.content }}</p>
-                                    <p class="text-author">- {{ post.author }}</p>
+        <div class="cardbox-frame">
+            <div id="cardlist" class="cardbox">
+                {% for post in postlist %}
+                    {% if post.photo %}
+                        <div class="postcard">
+                            <a href="{% url 'post_detail' post.pk %}">
+                                <div class="photocard">
+                                    <img class="photocard-img" src="{{ post.photo.url }}"/>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                {% endif %}
-            {% endfor %}
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="postcard">
+                            <a href="{% url 'post_detail' post.pk %}">
+                                <div class="textcard">
+                                    <div class="textzone">
+                                        <p class="text-title">{{ post.title }}</p>
+                                        <p class="text-content">{{ post.content }}</p>
+                                        <p class="text-author">- {{ post.author }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div id="cardlist_plus"></div>
         </div>
     </div>
-
-
 
 {% endblock %}
