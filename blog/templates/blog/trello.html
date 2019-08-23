@@ -23,39 +23,22 @@
         body {
             background-color: ivory;
         }
-
         * {
             font-family: 'Nanum Pen Script', cursive;
             font-size: 1.05em;
         }
-
         .men {
             color: black;
         }
-
         .men-area {
             background: lemonchiffon;
         }
-
-        .men-area2{
-            height:100%;
-        }
-
-        .mynav{
-            background-color: #ddffdd !important;
-        }
-
-        .mytitle{
-            color: #776d6a !important;
-        }
-
-
     </style>
     <!-- Custom styles for this template -->
     <link href="sticky-footer-navbar.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light mynav" style="height:50px;" >
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="height:50px;">
 
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -64,68 +47,64 @@
 
             <div class="inline-block" style="padding: 5px;">
                 <li class="nav-item active" style="margin-left:550px; font-size:35px; ">
-                    <a class="nav-link mytitle" href="{% url 'blog-home' %}">Piroboard <span
+                    <a class="nav-link" href="{% url 'home' %}">Piroboard <span
                             class="sr-only">(current)</span></a>
 
                 </li>
             </div>
+
         </ul>
-
-
-        <a class="logout" href="{% url 'logout' %}">
-            <i class="fas fa-sign-out-alt"></i>
-        </a>
-
-        <!--        <div class="dropdown">-->
-        <!--          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-        <!--            Dropdown button-->
-        <!--          </button>-->
-        <!--          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-        <!--            <a class="dropdown-item" href="#">Action</a>-->
-        <!--            <a class="dropdown-item" href="#">Another action</a>-->
-        <!--            <a class="dropdown-item" href="#">Something else here</a>-->
-        <!--          </div>-->
-        <!--        </div>-->
-
-        <div class="btn-group dropdown">
-            <button type="button" class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                <i class="far fa-bell"></i>
-                <span class="caret"></span>
-                <span class="sr-only">Split button!</span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-            </ul>
-        </div>
-
-        <div class="btn-group dropdown">
-            <button type="button" class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-user-circle"></i>
-                <span class="caret"></span>
-                <span class="sr-only">Split button!</span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton">
-                <li><a href="{% url 'users:profile' %}">유저 정보 보기</a></li>
-                <li><a href="{% url 'users:profile_update' %}">프로필 수정</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="{% url 'logout' %}">로그아웃</a></li>
-            </ul>
-        </div>
-
     </div>
 
+    <a class="logout" href="{% url 'logout' %}">
+        <i class="fas fa-sign-out-alt"></i>
+    </a>
+
+    <!--        <div class="dropdown">-->
+    <!--          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+    <!--            Dropdown button-->
+    <!--          </button>-->
+    <!--          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+    <!--            <a class="dropdown-item" href="#">Action</a>-->
+    <!--            <a class="dropdown-item" href="#">Another action</a>-->
+    <!--            <a class="dropdown-item" href="#">Something else here</a>-->
+    <!--          </div>-->
+    <!--        </div>-->
+
+    <div class="btn-group dropdown">
+        <button type="button" class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            <i class="far fa-bell"></i>
+            <span class="caret"></span>
+            <span class="sr-only">Split button!</span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton">
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+        </ul>
     </div>
+
+    <div class="btn-group dropdown">
+        <button type="button" class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle"></i>
+            <span class="caret"></span>
+            <span class="sr-only">Split button!</span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton">
+            <li><a href="{% url 'users:profile' %}">유저 정보 보기</a></li>
+            <li><a href="{% url 'users:profile_update' %}">프로필 수정</a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'logout' %}">로그아웃</a></li>
+        </ul>
+    </div>
+
 </nav>
 
 <div class="container">
-    <div class="row men-area2">
+    <div class="row">
         <div class="col-3 men-area">
             <ul class="nav flex-column">
                 <li class="nav-item">
@@ -140,21 +119,16 @@
 
                     </a>
                 </li>
-
+            </ul>
         </div>
         <div class="col-9">
             {% block content %}
 
             {% endblock %}
-
         </div>
-
-
     </div>
 
 </div>
-</div>
-</body>
-</html>
 
+</body>
 </html>

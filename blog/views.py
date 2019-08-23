@@ -71,7 +71,7 @@ def group_postlist(request, pk):
         form = request.POST
         category = form.get('category')
 
-        postlist = Post.objects.filter(group=group, category=category)
+        postlist = Post.objects.filter(group=group, category=category).order_by('-id')
 
         ctx['postlist'] = postlist
         ctx['category'] = category
@@ -152,13 +152,9 @@ def post_new(request, pk):
             photo_width, photo_height = photo.size
             photo_ratio = photo_width / photo_height
 
-            if photo_ratio < 0.88:
+            if photo_ratio < 0.9:
                 width = 200
                 height = 300
-
-            elif photo_ratio < 1:
-                width = 200
-                height = 200
 
             elif photo_ratio < 1.2:
                 width = 300

@@ -19,4 +19,5 @@ urlpatterns = [
 
     path('request_accept/', views.user_request_accept, name='user_request_accept'),
     path('request_delete/', views.request_refuse, name='group_request_delete'), # 삭제
+    path('request_cancel/',views.group_request_cancel, name='group_request_cancel'),
 ]
