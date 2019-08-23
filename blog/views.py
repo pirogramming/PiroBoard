@@ -16,6 +16,11 @@ from .forms import GroupForm, CommentForm, PostForm, PostEditForm
 #
 #     return render(request, 'users/find_groups.html', {'user_list': qs, 'q': q})
 
+
+def new_home(request):
+    return render(request, "blog/init.html")
+
+
 @login_required
 def home(request):
     profile = Profile.objects.get(user=request.user)
