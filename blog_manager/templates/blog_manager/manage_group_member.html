@@ -21,6 +21,15 @@
             <div class="account-heading">{{ head.nickname }}</div>
             <p class="text-secondary">{{ head.region }}</p>
         </div>
+        <div>
+                <form method="post" action="{% url 'chadan_member_manage' pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="group_id" value="{{ group.id }}">
+                    <input type="hidden" name="user_p" value="{{ profile.user.username }}">
+                    <button type="submit" class="btn btn-outline-dark" style="margin: 0 65px 1%; font-size: 22px;">차단 유저목록 보기
+                    </button>
+                </form>
+            </div>
     </div>
 </div>
 
@@ -102,15 +111,7 @@
                     차단하기
                 </button>
             </form>
-            <div>
-                <form method="post" action="{% url 'chadan_member_manage' pk %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="group_id" value="{{ group.id }}">
-                    <input type="hidden" name="user_p" value="{{ profile.user.username }}">
-                    <button type="submit" class="btn btn-outline-dark" style="margin: 0 65px 1%; font-size: 22px;">차단 유저목록 보기
-                    </button>
-                </form>
-            </div>
+
 
         </div>
     </div>
