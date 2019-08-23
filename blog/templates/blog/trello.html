@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,32 +23,61 @@
 
     <style>
         body {
-            background-color: ivory;
-        }
 
+            background-color: rgb(250, 240, 231);
+        {#background-color: #fafafa;#}
+
+        }
         * {
             font-family: 'Nanum Pen Script', cursive;
             font-size: 1.05em;
         }
-
         .men {
-            color: black;
+            color: rgba(103, 73, 65, 0.89);
         }
-
         .men-area {
-            background: lemonchiffon;
+            width: 200px;
+            margin-top: 130px;
+
         }
 
-        .men-area2{
-            height:100%;
+        .flex-column {
+            padding-left: 5px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        {#border: 2px solid rgba(204, 204, 204, 1);#} border: 2px solid rgba(190, 181, 175, 0.52);
+        {#background-color: rgba(245, 245, 245, 0.6);#} background-color: rgba(192, 211, 235, 0.35);
+            background-color: rgba(171, 162, 156, 0.36);
+            background-color: rgba(204, 204, 204, 0.51);
+            border: 2px solid rgba(204, 204, 204, 0.68);
+            vertical-align: middle;
         }
 
-        .mynav{
-            background-color: #ddffdd !important;
+        .navbar {
+            margin: 0;
+            height: 60px;
+            padding-top: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(204, 204, 204, 0.47);
+        {#background-color: rgba(211, 231, 255, 0.54);#} background-color: rgb(171, 162, 156);
+
+
         }
 
-        .mytitle{
-            color: #776d6a !important;
+
+        .navlogo{
+            margin-top: -10px;
+        }
+
+
+        .navbar a {
+            color: darkslategrey;
+
+        }
+
+        .col-10 {
+            border-right: 2px solid rgba(204, 204, 204, 0.44);
+            box-sizing: border-box;
         }
 
 
@@ -54,107 +85,90 @@
     <!-- Custom styles for this template -->
     <link href="sticky-footer-navbar.css" rel="stylesheet">
 </head>
+
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light mynav" style="height:50px;" >
+<nav class="navbar navbar-expand-lg" style="height:50px;">
 
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
 
+            <li class="nav-item active" style="margin-left:550px; font-size:35px; ">
+                <a class="nav-link" href="{% url 'blog-home' %}">
+                    <img class="navlogo" src="{% static 'blog/images/frame.PNG' %}" alt="logo" width="42" height="38"> Piroboard
+                    <span class="sr-only">(current)</span></a>
+            </li>
 
-            <div class="inline-block" style="padding: 5px;">
-                <li class="nav-item active" style="margin-left:550px; font-size:35px; ">
-                    <a class="nav-link mytitle" href="{% url 'blog-home' %}">Piroboard <span
-                            class="sr-only">(current)</span></a>
-
-                </li>
-            </div>
         </ul>
-
-
-        <a class="logout" href="{% url 'logout' %}">
-            <i class="fas fa-sign-out-alt"></i>
-        </a>
-
-        <!--        <div class="dropdown">-->
-        <!--          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-        <!--            Dropdown button-->
-        <!--          </button>-->
-        <!--          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-        <!--            <a class="dropdown-item" href="#">Action</a>-->
-        <!--            <a class="dropdown-item" href="#">Another action</a>-->
-        <!--            <a class="dropdown-item" href="#">Something else here</a>-->
-        <!--          </div>-->
-        <!--        </div>-->
-
-        <div class="btn-group dropdown">
-            <button type="button" class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                <i class="far fa-bell"></i>
-                <span class="caret"></span>
-                <span class="sr-only">Split button!</span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-            </ul>
-        </div>
-
-        <div class="btn-group dropdown">
-            <button type="button" class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-user-circle"></i>
-                <span class="caret"></span>
-                <span class="sr-only">Split button!</span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton">
-                <li><a href="{% url 'users:profile' %}">유저 정보 보기</a></li>
-                <li><a href="{% url 'users:profile_update' %}">프로필 수정</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li><a href="{% url 'logout' %}">로그아웃</a></li>
-            </ul>
-        </div>
-
     </div>
 
+    <a class="logout" href="{% url 'logout' %}">
+        <i class="fas fa-sign-out-alt"></i>
+    </a>
+
+    <!--        <div class="dropdown">-->
+    <!--          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+    <!--            Dropdown button-->
+    <!--          </button>-->
+    <!--          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+    <!--            <a class="dropdown-item" href="#">Action</a>-->
+    <!--            <a class="dropdown-item" href="#">Another action</a>-->
+    <!--            <a class="dropdown-item" href="#">Something else here</a>-->
+    <!--          </div>-->
+    <!--        </div>-->
+
+    <div class="btn-group dropdown">
+        <button type="button" class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            <i class="far fa-bell"></i>
+            <span class="caret"></span>
+            <span class="sr-only">Split button!</span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton">
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+        </ul>
     </div>
+
+    <div class="btn-group dropdown">
+        <button type="button" class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle"></i>
+            <span class="caret"></span>
+            <span class="sr-only">Split button!</span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton">
+            <li><a href="{% url 'users:profile' %}">유저 정보 보기</a></li>
+            <li><a href="{% url 'users:profile_update' %}">프로필 수정</a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'logout' %}">로그아웃</a></li>
+        </ul>
+    </div>
+
 </nav>
 
+<hr size="5px" style="margin-bottom: 50px"/>
+
 <div class="container">
-    <div class="row men-area2">
-        <div class="col-3 men-area">
+    <div class="row">
+        <div class="col-2 men-area">
             <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'blog-about' %}">
-                        <span class="men" data-feather="home"> 그룹 생성</span>
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:group_find' %}">
-                        <span class="men" data-feather="file">그룹 찾기</span>
+                {% block sidebar %}
 
-                    </a>
-                </li>
-
+                {% endblock %}
+            </ul>
         </div>
-        <div class="col-9">
+        <div class="col-10">
             {% block content %}
 
             {% endblock %}
-
         </div>
-
-
     </div>
 
 </div>
-</div>
-</body>
-</html>
 
+</body>
 </html>

@@ -1,21 +1,23 @@
 {% extends "blog/trello.html" %}
 
 {% block content %}
-    <a href="{% url 'group_manage' pk %}"><h2>그룹 관리</h2></a>
-    <hr>
-    {#    sulmo 임시 확이용  #}
-    <div class="rows">
-        {% if user.is_authenticated %}
-            <a href="{% url 'post_new' pk %}"><h2>글쓰기</h2></a>
-        {% endif %}
 
-
-    </div>
-    <hr>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .bd-example img {
+            height: 500px;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+    </style>
     <h1>
-        <div id="title"><h1>{{ group.group_name }}</h1></div>
-    </h1>
-    <hr/>
+        <div id="title" style="color: rgb(59, 56, 51);"><span><i
+                class="material-icons">extension</i>&nbsp;{{ group.group_name }}</span>
+            <a href="{% url 'group_manage' pk %}" style="color: rgb(59, 56, 51);"><i class="material-icons"
+                                                                                     style="margin-left: 85%">settings</i></a>
+        </div>
+    </h1><br>
     <div class="bd-example">
         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -33,12 +35,12 @@
                         <p>친구들과 함께 찍은 사진은 이 곳에!!!</p>
                         <br>
                         <div class="button-style3">
-                        <form method="post" action="{% url 'group_postlist' pk %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="group_id" value="{{ group.id }}">
-                            <input type="hidden" name="category" value="인물">
-                            <button type="submit">인물</button>
-                        </form>
+                            <form method="post" action="{% url 'group_postlist' pk %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="group_id" value="{{ group.id }}">
+                                <input type="hidden" name="category" value="인물">
+                                <button type="submit">인물</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -106,4 +108,13 @@
         </div>
     </div>
 
+    <hr>
+    <div class="rows">
+        {% if user.is_authenticated %}
+            <a href="{% url 'post_new' pk %}" style="color: rgb(59, 56, 51);"><h2>&nbsp;&nbsp;&nbsp;<i class="material-icons" style="margin-left: 85%; color: #de4450">favorite_border</i>&nbsp;글쓰기</h2></a>
+        {% endif %}
+
+    </div>
+    </hr>
+    <hr>
 {% endblock %}
