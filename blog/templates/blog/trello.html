@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +23,10 @@
 
     <style>
         body {
-        {#background-color: #fafafa;#}background-color: rgb(250, 240, 231);
+
+            background-color: rgb(250, 240, 231);
+        {#background-color: #fafafa;#}
+
         }
         * {
             font-family: 'Nanum Pen Script', cursive;
@@ -60,6 +65,11 @@
         }
 
 
+        .navlogo{
+            margin-top: -10px;
+        }
+
+
         .navbar a {
             color: darkslategrey;
 
@@ -86,7 +96,7 @@
 
             <li class="nav-item active" style="margin-left:550px; font-size:35px; ">
                 <a class="nav-link" href="{% url 'blog-home' %}">
-                    <img src="/blog/static/blog/images/logo.PNG" alt="logo"> Piroboard
+                    <img class="navlogo" src="{% static 'blog/images/frame.PNG' %}" alt="logo" width="42" height="38"> Piroboard
                     <span class="sr-only">(current)</span></a>
             </li>
 
@@ -147,18 +157,7 @@
         <div class="col-2 men-area">
             <ul class="nav flex-column">
                 {% block sidebar %}
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'blog-about' %}">
-                            <span class="men" data-feather="home"> 그룹 생성</span>
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:group_find' %}">
-                            <span class="men" data-feather="file">그룹 찾기</span>
 
-                        </a>
-                    </li>
                 {% endblock %}
             </ul>
         </div>
