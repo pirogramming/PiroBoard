@@ -48,7 +48,7 @@
             border: 0;
         }
 
-        .subm label {
+        .subm input {
             display: inline-block;
             padding: .3em .35em;
             color: #999;
@@ -61,17 +61,6 @@
             border-bottom-color: #e2e2e2;
             border-radius: .25em;
             justify-content: flex-end;
-        }
-
-        .subm input[type="submit"] { /* 파일 필드 숨기기 */
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
         }
 
     </style>
@@ -89,12 +78,11 @@
         <div style="display: block;">
             <div class="filebo border-0" style="float:left;">
                 <label for="ex_file" class="border-0 shadow"> <i class="material-icons">camera_alt</i></label>
-                <input name="image" type="file" id="ex_file">
+                <input name="post_photo" type="file" id="ex_file">
             </div>
 
             <div class="subm border-0" style="float:right;">
-                <label for="ex_file" class="border-0 shadow"> <i class="material-icons">send</i></label>
-                <input type="submit" value="팍" id="ex_file">
+                <input type="submit" value="팍">
             </div>
         </div>
         <!--    <input type="text" name="title">-->
