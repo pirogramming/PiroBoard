@@ -1,69 +1,73 @@
 {% extends "blog/trello.html" %}
 
 {% block content %}
-    <br/>
-    <div class="container">
-        <div class="row" style="margin-bottom: 150px;">
-            <div class="col-sm">
-                <div class="content-section">
+<br/>
+<div class="container">
+    <div class="row" style="margin-bottom: 150px;">
+        <div class="col-sm">
+            <div class="content-section">
 
-                    <div class="media">
-                        {% if group.group_img %}
-                            <img class="rounded-circle account-img" src="{{ group.group_img.url }}"
-                                 style="width: auto;">
-                        {% endif %}
-                        <div class="media-body">
-                            <div class="account-heading"
-                                 style="margin-bottom: 30px; margin-left: 150px;">{{ group.group_name }}</div>
-                            <pre class="text-secondary" style="margin-left: 100px;">{{ group.group_info }}</pre>
+                <div class="media">
+                    {% if group.group_img %}
+                    <img class="rounded-circle account-img" src="{{ group.group_img.url }}"
+                         style="width: auto;">
+                    {% endif %}
+                    <div class="media-body">
+                        <div class="account-heading"
+                             style="margin-bottom: 30px; margin-left: 100px;">{{ group.group_name }}
                         </div>
-                        <div class="media-body" style="margin-left: 250px;">
-                            <p>그룹 참가자</p>
 
-                            {% for member in members %}
-                                <p>{{ member.user.username }}</p>
-                            {% endfor %}
-                        </div>
+                        <pre class="text-secondary"
+                             style="margin-left: 70px; font-size: 15px; white-space: normal;">{{ group.group_info }}</pre>
+
+                    </div>
+                    <div class="media-body" style="margin-left: 50px; white-space:normal;">
+                        <p>그룹 참가자</p>
+
+                        {% for member in members %}
+                        <p>{{ member.user.username }}</p>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    </hr>
+</hr>
 
-    <div class="row" style="margin: 0 auto; text-decoration: none; text-align: center;">
-        <button type="button" class="btn btn-outline-dark" style="margin-right: 50px;">
-            <a href="{% url 'group_info_update' pk %}">
-                <i class="material-icons">content_paste</i>
-                <ul>
-                    <li>그룹 정보 수정</li>
-                </ul>
-            </a>
-        </button>
-        <button type="button" class="btn btn-outline-dark" style="margin-right: 50px;">
-            <a href="{% url 'group_member_manage' pk %}">
-                <i class="material-icons">group</i>
-                <ul>
-                    <li>그룹 멤버 관리</li>
-                </ul>
-            </a>
-        </button>
-        <button type="button" class="btn btn-outline-dark" style="margin-right: 50px;">
-            <a href="{% url 'invite' pk %}">
-                <i class="material-icons">person_add</i>
-                <ul>
-                    <li>유저 찾아서 초대하기</li>
-                </ul>
-            </a>
-        </button>
-        <button type="button" class="btn btn-outline-dark" style="margin-right: 50px;">
-            <a href="{% url 'manage_requests' pk %}">
-                <i class="material-icons">send</i>
-                <ul>
-                    <li>가입요청 처리</li>
-                </ul>
-            </a>
-        </button>
-    </div>
+<div class="row" style="margin: 0 auto;">
+    <button type="button" class="btn btn-outline-dark" style="margin-right: 50px; margin-left: 30px; ">
+        <a href="{% url 'group_info_update' pk %}">
+            <i class="material-icons">content_paste</i>
+            <ul style="list-style: none; text-decoration: none; ">
+                <li>그룹 정보 수정</li>
+            </ul>
+        </a>
+    </button>
+    <button type="button" class="btn btn-outline-dark" style="margin-right: 50px; ">
+        <a href="{% url 'group_member_manage' pk %}">
+            <i class="material-icons">group</i>
+            <ul style="list-style: none; text-decoration: none;">
+                <li>그룹 멤버 관리</li>
+            </ul>
+        </a>
+    </button>
+    <button type="button" class="btn btn-outline-dark" style="margin-right: 50px;">
+        <a href="{% url 'invite' pk %}">
+            <i class="material-icons">person_add</i>
+            <ul style="list-style: none;">
+                <li>유저 초대</li>
+            </ul>
+        </a>
+    </button>
+    <button type="button" class="btn btn-outline-dark" style="margin-right: 10px;">
+        <a href="{% url 'manage_requests' pk %}">
+            <i class="material-icons">send</i>
+            <ul style="list-style: none;">
+                <li>가입요청 처리</li>
+            </ul>
+        </a>
+    </button>
+</div>
 {% endblock %}
