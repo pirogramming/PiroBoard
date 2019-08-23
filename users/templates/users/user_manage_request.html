@@ -11,23 +11,25 @@
 
             <div class="content-section">
                 <div class="media">
-                    <img class="rounded-circle account-img" src="{{ group.group_img }}">]]]
+                    <img class="rounded-circle account-img" src="{{ group.group_img }}">
                     <div class="media-body">
                         <div class="account-heading">{{ group.group_name }}</div>
                         <p class="text-secondary">{{ group.group_info }}</p>
                     </div>
-                    <div>
+                    <div style="margin-right: 1%">
                         <form method="post" action="{% url 'users:request_accept' %}">
                             {% csrf_token %}
                             <input type="hidden" name="group_id" value="{{ group.id }}">
-                            <button type="submit">이 그룹에 참여하기</button>
+                            <button type="submit" class="btn btn-outline-dark" style="size: 20px; margin: 0 ; font-size: 22px;">이 그룹에 참여한다
+                    </button>
                         </form>
                     </div>
-                    <div>
+                    <div style="margin-right: 3%">
                         <form method="post" action="{% url 'users:request_cancel' %}">
                             {% csrf_token %}
                             <input type="hidden" name="group_id" value="{{ group.id }}">
-                            <button type="submit">거절한다</button>
+                            <button type="submit" class="btn btn-outline-dark" style="size: 10px; margin: 0 ; font-size: 22px;">거절한다
+                    </button>
                         </form>
                     </div>
                 </div>
@@ -47,7 +49,7 @@
         {% for group in user_requests %}
             <div class="content-section">
                 <div class="media">
-                    <img class="rounded-circle account-img" src="{{ group.group_img }}">]]]
+                    <img class="rounded-circle account-img" src="{{ group.group_img }}">
                     <div class="media-body">
                         <div class="account-heading">{{ group.group_name }}</div>
                         <p class="text-secondary">{{ group.group_info }}</p>
@@ -56,7 +58,8 @@
                         <form method="post" action="{% url 'users:request_cancel' %}">
                             {% csrf_token %}
                             <input type="hidden" name="group_id" value="{{ group.id }}">
-                            <button type="submit">가입신청 취소하기</button>
+                             <button type="submit" class="btn btn-outline-dark" style="size: 10px; margin: 0 ; font-size: 22px;">취소한다
+                    </button>
                         </form>
                     </div>
                 </div>
