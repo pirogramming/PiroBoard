@@ -1,14 +1,105 @@
 {% extends "blog/trello.html" %}
 {% block content %}
-<h3>글쓰기</h3>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_table }}
+    <style>
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            background-color: #fffff0;
+            resize: none;
+            margin-bottom: 0px;
+        }
 
-<!--    <input type="text" name="title">-->
-<!--    <textarea name="content" id="" cols="30" rows="10"></textarea>-->
-    <input type="submit" value="팍">
-</form>
+        #id_title {
+            width: 100%;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            background-color: #fffff0;
+            resize: none;
+        }
+
+        .filebo label {
+            display: inline-block;
+            padding: .3em .35em;
+            color: #999;
+            font-size: inherit;
+            line-height: normal;
+            vertical-align: middle;
+            background-color: #fffff0;
+            cursor: pointer;
+            border: 1px solid #ebebeb;
+            border-bottom-color: #e2e2e2;
+            border-radius: .25em;
+        }
+
+        .filebo input[type="file"] { /* 파일 필드 숨기기 */
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        .subm label {
+            display: inline-block;
+            padding: .3em .35em;
+            color: #999;
+            font-size: inherit;
+            line-height: normal;
+            vertical-align: middle;
+            background-color: #fffff0;
+            cursor: pointer;
+            border: 1px solid #ebebeb;
+            border-bottom-color: #e2e2e2;
+            border-radius: .25em;
+            justify-content: flex-end;
+        }
+
+        .subm input[type="submit"] { /* 파일 필드 숨기기 */
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+    </style>
+    <h3>글쓰기</h3>
+
+    <form action="" method="POST" enctype="multipart/form-data" style="background-color: rgb(171, 162, 156); height: 90%;"
+          class="border-0 shadow p-3 mb-7">
+
+        {% csrf_token %}
+        {{ form.as_table }}
+        <input id="id_title" type="text" name="title" maxlength="100" placeholder="title.."
+               class="border-0 shadow p-3 "/></p>
+        <textarea name="content" id="id_content" cols="30" rows="10" placeholder="content.."
+                  class="border-0 shadow p-3 "></textarea>
+        <div style="display: block;">
+            <div class="filebo border-0" style="float:left;">
+                <label for="ex_file" class="border-0 shadow"> <i class="material-icons">camera_alt</i></label>
+                <input name="image" type="file" id="ex_file">
+            </div>
+
+            <div class="subm border-0" style="float:right;">
+                <label for="ex_file" class="border-0 shadow"> <i class="material-icons">send</i></label>
+                <input type="submit" value="팍" id="ex_file">
+            </div>
+        </div>
+        <!--    <input type="text" name="title">-->
+        <!--    <textarea name="content" id="" cols="30" rows="10"></textarea>-->
+
+    </form>
 
 {% endblock content %}
