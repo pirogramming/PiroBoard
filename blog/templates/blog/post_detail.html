@@ -1,13 +1,16 @@
-{% extends "blog/base5.html" %}
+{% extends "blog/trello.html" %}
 {% block content %}
     <h2>detail page</h2><hr>
     제목 : {{post.title}} <br>
     내용 : {{post.content}}<br>
     카테고리 : {{ post.category }}<br>
-{% if post.photo %}
-<img src="{{post.photo.url}}" alt=""><hr>
+{% if post.post_photo %}
+<img src="{{post.post_photo.url}}" style="max-width: 500px" alt=""><hr>
 
 {% endif %}
+
+
+
 
     작성자 : {{post.author}}
 <hr>

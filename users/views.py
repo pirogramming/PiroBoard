@@ -9,18 +9,50 @@ from django.contrib.auth.models import User
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
+            user = form.save()
+            email = form.cleaned_data.get('email')
+            phone_number = form.cleaned_data.get('phone_number')
+            region = form.cleaned_data.get('region')
+            nickname = form.cleaned_data.get('nickname')
+            profile_model, created = Profile.objects.get_or_create(user=user)
+            profile_model.email = email
+            profile_model.phone_number = phone_number
+            profile_model.region = region
+            profile_model.nickname = nickname
+            profile_model.save()
             messages.success(request, f'Your account has been created! You are now able to log in')
             return redirect('login')
-    else:
-        form = UserRegisterForm()
+        else:
+            messages.success(request, f'다시 가입 정보를 기입하세요.')
 
-    return render(request, 'users/register.html', {'form': form})
+    ctx = {
+        'form': UserRegisterForm(),
+    }
+
+    return render(request, 'users/register.html', ctx)
+
+
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html', )
+
+
+@login_required
+def profile_update(request):
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '프로필을 성공적으로 수정하였습니다.')
+            return redirect("users:profile")
+    else:
+        form = ProfileForm(instance=request.user.profile)
+    return render(request, 'users/profile_update.html', {'form': form})
 
 
 def find_user(request, group_id):  # 그룹 내에서 초대할 유저를 검색함
@@ -80,7 +112,12 @@ def change_password(request):
 
 
 def password_reset_form(request):
-    return render(request, 'users/password_reset_form.html')
+    form = PasswordChangeForm(request.POST or None)
+    if request.method == 'POST':
+        pass
+    return render(request, 'users/password_reset_form.html', {
+        'form': form,
+    })
 
 
 # 유저가 참여하고 싶은 그룹을 찾는 페이지
@@ -150,25 +187,6 @@ def requests_manage(request):
         ctx['groupRequest'] = False
 
     return render(request, 'users/manage_groups.html', ctx)
-
-
-@login_required
-def profile(request):
-    profile = Profile.objects.get(user=request.user)
-    return render(request, 'users/profile.html',)
-
-
-@login_required
-def profile_update(request):
-    if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        if form.is_valid():
-            form.save()
-            messages.success(request, '프로필을 성공적으로 수정하였습니다.')
-            return redirect("users:profile")
-    else:
-        form = ProfileForm(instance=request.user.profile)
-    return render(request, 'users/profile_update.html', {'form': form})
 
 
 #그룹이 유저에 보낸 '초대'수락

@@ -1,23 +1,40 @@
-{% extends "blog/base.html" %}
+{% extends "blog/trello.html" %}
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <h2>프로필 수정</h2><br/>
 
-    {% if not user.is_authenticated %}
-        <a href="{% url 'login' %}?next={{ request.path }}">로그인이 필요합니다.</a>
-    {% endif %}
+    <style>
 
-    <form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
-        <div class="'profile">
+        .content-section {
+            text-align: center;
+        }
 
-            {% if form.image != None %}
-                <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-            {% endif %}
+    </style>
 
-            {{ form.as_p }}
-            <input type="submit" value="수정완료">
+    <div class="content-section">
 
-        </div>
-    </form>
+        <h2>프로필 수정</h2><br/>
+
+        {% if not user.is_authenticated %}
+            <a href="{% url 'login' %}?next={{ request.path }}">로그인이 필요합니다.</a>
+        {% endif %}
+
+        <form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+            <div class="'profile">
+
+                {% if form.image != None %}
+                    <div>
+                        <img class="rounded-circle" width="200px" height="200px"
+                             style="border: 3px solid #121212; border-radius: 100px;
+                             -moz-border-radius: 100px; -khtml-border-radius: 100px; -webkit-border-radius: 100px;"
+                             src="{{ user.profile.image.url }}"><br/><br/>
+                    </div>
+                {% endif %}
+
+                {{ form.as_p }}
+                <input type="submit" value="수정완료">
+
+            </div>
+        </form>
+    </div>
 {% endblock content %}

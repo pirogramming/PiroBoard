@@ -1,4 +1,4 @@
-{% extends "blog/base5.html" %}
+{% extends "blog/trello.html" %}
 
 {% block content %}
     <a href="{% url 'group_manage' pk %}"><h2>그룹 관리</h2></a>
@@ -8,18 +8,14 @@
         {% if user.is_authenticated %}
             <a href="{% url 'post_new' pk %}"><h2>글쓰기</h2></a>
         {% endif %}
-        <br>
 
 
-        {% for post in posts %}
-            제목 : {{ post.title }}<br>
-            내용 : {{ post.content }}<br>
-            <a href="{% url 'post_detail' post.pk %}">드루와</a>
-            <hr>
-        {% endfor %}
     </div>
     <hr>
-    {#   end sulmo 임시 확인용#}
+    <h1>
+        <div id="title"><h1>{{ group.group_name }}</h1></div>
+    </h1>
+    <hr/>
     <div class="bd-example">
         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -36,7 +32,14 @@
                         <h2>인물 사진</h2>
                         <p>친구들과 함께 찍은 사진은 이 곳에!!!</p>
                         <br>
-                        <p class="button-style3"><a href="#">테마 들어가보기</a>
+                        <div class="button-style3">
+                        <form method="post" action="{% url 'group_postlist' pk %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="group_id" value="{{ group.id }}">
+                            <input type="hidden" name="category" value="인물">
+                            <button type="submit">인물</button>
+                        </form>
+                        </div>
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -46,7 +49,14 @@
                         <h2>음식 사진</h2>
                         <p>친구들과 먹은 음식들 사진은 이 곳에!!</p>
                         <br>
-                        <p class="button-style3"><a href="#">테마 들어가보기</a>
+                        <p class="button-style3">
+                        <form method="post" action="{% url 'group_postlist' pk %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="group_id" value="{{ group.id }}">
+                            <input type="hidden" name="category" value="음식">
+                            <button type="submit">음식</button>
+                        </form>
+
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -56,7 +66,14 @@
                         <h2>취미 사진</h2>
                         <p>서로의 취미활동을 공유하는 저장소!!</p>
                         <br>
-                        <p class="button-style3"><a href="#">테마 들어가보기</a>
+                        <p class="button-style3">
+                        <form method="post" action="{% url 'group_postlist' pk %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="group_id" value="{{ group.id }}">
+                            <input type="hidden" name="category" value="취미">
+                            <button type="submit">취미</button>
+                        </form>
+
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -66,7 +83,14 @@
                         <h2>etc</h2>
                         <p>그 외의 소중한 추억.</p>
                         <br>
-                        <p class="button-style3"><a href="#">테마 들어가보기</a>
+                        <p class="button-style3">
+                        <form method="post" action="{% url 'group_postlist' pk %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="group_id" value="{{ group.id }}">
+                            <input type="hidden" name="category" value="etc">
+                            <button type="submit">etc</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -78,6 +102,7 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
+
         </div>
     </div>
 

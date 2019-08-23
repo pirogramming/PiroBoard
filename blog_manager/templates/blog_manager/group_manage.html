@@ -1,47 +1,69 @@
-{% extends "blog/base.html" %}
+{% extends "blog/trello.html" %}
 
 {% block content %}
     <br/>
+    <div class="container">
+        <div class="row" style="margin-bottom: 150px;">
+            <div class="col-sm">
+                <div class="content-section">
 
+                    <div class="media">
+                        {% if group.group_img %}
+                            <img class="rounded-circle account-img" src="{{ group.group_img.url }}"
+                                 style="width: auto;">
+                        {% endif %}
+                        <div class="media-body">
+                            <div class="account-heading"
+                                 style="margin-bottom: 30px; margin-left: 150px;">{{ group.group_name }}</div>
+                            <pre class="text-secondary" style="margin-left: 100px;">{{ group.group_info }}</pre>
+                        </div>
+                        <div class="media-body" style="margin-left: 250px;">
+                            <p>그룹 참가자</p>
 
-    <ur>
-        <p>구현해야 할 기능</p>
-        <a href="{% url 'group_info_update' pk %}"><li>그룹 정보 수정</li></a>
-        <a href="{% url 'group_member_manage' pk %}"><li>그룹 멤버 관리</li></a>
-        <a href="{% url 'invite' pk %}"><li>유저 찾아서 초대하기</li></a>
-        <a href="{% url 'manage_requests' pk %}"><li>가입요청 처리</li></a>
-        <hr/>
-        <li>이 창으로 들어오는 버튼은 그룹장일때만 보이게 하기</li>
-        <li>그룹장 데코레이터 까먹지 말기</li>
-    </ur>
-
-    <hr/>
-    <br/>
-
-    <p>그룹기본정보</p>
-    <hr>
-
-    <div class="content-section">
-
-        <div class="media">
-            {% if group.group_img %}
-            <img class="rounded-circle account-img" src="{{ group.group_img.url }}">
-            {% endif %}
-            <div class="media-body">
-                <div class="account-heading">{{ group.group_name }}</div>
-                <p class="text-secondary">{{ group.group_info }}</p>
+                            {% for member in members %}
+                                <p>{{ member.user.username }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <hr/>
-
-        </div>
-        <div class="media-body">
-            <p>그룹 참가자</p>
-            <hr/>
-            {% for member in members %}
-                <p>{{ member.user.username }}</p>
-            {% endfor %}
         </div>
     </div>
 
+    </hr>
+
+    <div class="row" style="margin: 0 auto; text-decoration: none; text-align: center;">
+        <button type="button" class="btn btn-outline-dark" style="margin-right: 50px;">
+            <a href="{% url 'group_info_update' pk %}">
+                <i class="material-icons">content_paste</i>
+                <ul>
+                    <li>그룹 정보 수정</li>
+                </ul>
+            </a>
+        </button>
+        <button type="button" class="btn btn-outline-dark" style="margin-right: 50px;">
+            <a href="{% url 'group_member_manage' pk %}">
+                <i class="material-icons">group</i>
+                <ul>
+                    <li>그룹 멤버 관리</li>
+                </ul>
+            </a>
+        </button>
+        <button type="button" class="btn btn-outline-dark" style="margin-right: 50px;">
+            <a href="{% url 'invite' pk %}">
+                <i class="material-icons">person_add</i>
+                <ul>
+                    <li>유저 찾아서 초대하기</li>
+                </ul>
+            </a>
+        </button>
+        <button type="button" class="btn btn-outline-dark" style="margin-right: 50px;">
+            <a href="{% url 'manage_requests' pk %}">
+                <i class="material-icons">send</i>
+                <ul>
+                    <li>가입요청 처리</li>
+                </ul>
+            </a>
+        </button>
+    </div>
 {% endblock %}
