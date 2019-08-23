@@ -1,150 +1,208 @@
 {% load crispy_forms_tags %}
-
-
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>PiroBoard 로그인</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 
     <style>
 
 
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background: seashell !important;
-        }
-
-        .main {
+        .btn {
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            padding: 4px 10px 4px;
+            margin-bottom: 0;
+            font-size: 13px;
+            line-height: 18px;
+            color: #333333;
             text-align: center;
-            padding-top: 70px;
-            font-size: 50px;
-            font-family: 'Nanum Pen Script', cursive;
-            color: gray;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+            vertical-align: middle;
+            background-color: #f5f5f5;
+            background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+            background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: linear-gradient(top, #ffffff, #e6e6e6);
+            background-repeat: repeat-x;
+            filter: progid:dximagetransform.microsoft.gradient(startColorstr=#ffffff, endColorstr=#e6e6e6, GradientType=0);
+            border-color: #e6e6e6 #e6e6e6 #e6e6e6;
+            border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+            border: 1px solid #e6e6e6;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            *margin-left: .3em;
         }
 
-        .user_card {
-            font-family: 'Nanum Pen Script', cursive !important;
-            font-size: 1.2em;
+        .btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] {
+            background-color: #e6e6e6;
+        }
 
-            width: 350px;
-            margin-top: 80px;
-            margin-bottom: auto;
-            background: bisque;
-            opacity: 0.9;
-
-            position: relative;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            padding: 10px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 30px 0 rgba(0, 0, 0, 0.19);
+        .btn-large {
+            padding: 9px 14px;
+            font-size: 15px;
+            line-height: normal;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
             border-radius: 5px;
-
-
         }
 
-        {#.brand_logo_container {#}
-        {#    position: absolute;#}
-        {#    height: 170px;#}
-        {#    width: 170px;#}
-        {#    top: -75px;#}
-        {#    border-radius: 40%;#}
-        {#    background: darkseagreen;#}
-        {#    padding: 10px;#}
-        {#    text-align: center;#}
-        {
-        #}#}
-        {##}
-        {#.brand_logo {#}
-        {#    height: 150px;#}
-        {#    width: 150px;#}
-        {#    border-radius: 50%;#}
-        {##}
-        {##}
-        {
-        #}#}
-
-        .form_container {
-            margin-top: 150px;
+        .btn:hover {
+            color: #333333;
+            text-decoration: none;
+            background-color: #e6e6e6;
+            background-position: 0 -15px;
+            -webkit-transition: background-position 0.1s linear;
+            -moz-transition: background-position 0.1s linear;
+            -ms-transition: background-position 0.1s linear;
+            -o-transition: background-position 0.1s linear;
+            transition: background-position 0.1s linear;
         }
 
-        .login_btn {
+
+        {##}
+        {#.btn-info {#}
+        {#    background-color: #4a77d4;#}
+        {#    background-image: -moz-linear-gradient(top, palegoldenrod, lemonchiffon);#}
+        {#    background-image: -ms-linear-gradient(top, palegoldenrod, lemonchiffon);#}
+        {#    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6eb6de), to(#4a77d4));#}
+        {#    background-image: -webkit-linear-gradient(top, palegoldenrod, lemonchiffon);#}
+        {#    background-image: -o-linear-gradient(top, palegoldenrod, lemonchiffon);#}
+        {#    background-image: linear-gradient(top, palegoldenrod, lemonchiffon);#}
+        {#    background-repeat: repeat-x;#}
+        {#    filter: progid:dximagetransform.microsoft.gradient(startColorstr=#6eb6de, endColorstr=#4a77d4, GradientType=0);#}
+        {##}
+        {#    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);#}
+        {#    #}
+        {
+        #}#}
+
+
+        .btn-block {
             width: 100%;
-            background: linen !important;
-            color: gray !important;
+            display: block;
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            -o-box-sizing: border-box;
+            box-sizing: border-box;
 
         }
 
-        .login_btn:focus {
-            box-shadow: none !important;
-            outline: 0px !important;
+
+        html {
+            overflow: hidden;
         }
 
-        .login_container {
-            padding: 0 2rem;
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Open Sans', sans-serif;
+            background: linen;
+
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3E1D6D', endColorstr='#092756', GradientType=1);
         }
 
-        .button2 {
-            color: gray;
+        .login {
+            position: absolute;
+            top: 24%;
+            left: 50%;
+            margin: -150px 0 0 -150px;
+            width: 300px;
+            height: 300px;
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: 1.6em;
+            text-align: center;
         }
 
+        .login h1 {
+            color: dimgray;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+
+        * {
+            color: dimgray;
+        }
+
+        .btfont {
+            font-family: Sans-serif;
+            font-size: 1.3em;
+        }
+
+        .link-register {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            outline: none;
+            padding: 10px;
+            font-size: 13px;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2), 0 1px 1px rgba(255, 255, 255, 0.2);
+            -webkit-transition: box-shadow .5s ease;
+            -moz-transition: box-shadow .5s ease;
+            -o-transition: box-shadow .5s ease;
+            -ms-transition: box-shadow .5s ease;
+            transition: box-shadow .5s ease;
+        }
+
+        input:focus {
+            box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4), 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
 
     </style>
-
 </head>
-<!--Coded with love by Mutiullah Samim-->
 <body>
-<div class="main container col-ms-10">
-    <p>Piro Board</p>
-</div>
-<div class="container h-100">
-    <div class="d-flex justify-content-center h-100">
-        <div class="user_card">
-            {#            <div class="d-flex justify-content-center">#}
-            {#                <div class="brand_logo_container">#}
-            {#                    <div class="brand_logo"></div>#}
-            {#                </div>#}
-            {#            </div>#}
-            <div class="d-flex justify-content-center form_container">
-                <form method="post">
-                    {% csrf_token %}
-                    <fieldset class="form-group mb-3">
-                        {{ form|crispy }}
-                    </fieldset>
+<div class="login">
 
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customControlInline">
-                            <label class="custom-control-label" for="customControlInline">비밀번호 기억하기</label>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center mt-3 login_container">
+    <img src="https://cdn.svgporn.com/logos/pug.svg" alt="">
+    <h1>PiroBoard</h1>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
 
-                        <button class="button2 btn login_btn" type="submit">Login</button>
-                    </div>
-                </form>
-            </div>
-            <div class="pt-5 mt-5">
-                <div class="d-flex justify-content-center links">
-                    아직 계정이 없으신가요? <a href="{% url 'register' %}" class="ml-2">회원가입하기</a>
-                </div>
-            </div>
+        <button type="submit" class="btn btn-info btn-block btn-large"><p class="btfont">로그인</p></button>
 
-        </div>
+    </form>
+    <br>
+    <div class="link-register">아직 계정이 없으신가요? <a href="{% url 'register' %}" class="ml-2">회원가입하기</a></div>
+    <br>
+    <div class="link-register">
+        <a href="https://itunes.apple.com/ca/app/adbeus-coffee/id878517979?ls=1&amp;mt=8"><img
+                src="https://adbeus.com/wp-content/uploads/2016/09/ios.png" alt="" width="100"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.samsao.cafemtl.app"><img
+                src="https://adbeus.com/wp-content/uploads/2016/09/get-it-on-google-play-vector.png"
+                alt="" width="100"></a>
 
     </div>
+
+
 </div>
 </body>
 </html>
