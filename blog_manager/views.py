@@ -155,10 +155,6 @@ def user_request_refuse(request, pk):
     group = Group.objects.get(id=pk)
     group.save()
 
-    ctx = {
-        'pk': pk,
-    }
-
     if request.method == "POST":
         form = request.POST
 
@@ -169,6 +165,14 @@ def user_request_refuse(request, pk):
         membership = GroupMember.objects.get(group=group, person=profile)
         membership.status = 'r'
         membership.save()
+
+    members = [x.person for x in GroupMember.objects.filter(group=group, status='a')]
+
+    ctx = {
+        'pk': pk,
+        'group': group,
+        'members': members,
+    }
 
     return render(request, 'blog_manager/group_manage.html', ctx)
 

@@ -3,16 +3,19 @@
 
 
 {% block content %}
-    <p>차단 유저 관리 페이지</p>
+    <h2>차단 유저 관리 페이지</h2>
 
     <hr>
     {% for profile in profiles %}
+        <br>
         <div class="content-section">
             <div class="media">
-                <img class="rounded-circle account-img" src="{{ profile.image }}">
-                <div class="media-body">
-                    <p class="text-secondary">{{ profile.user.username }}</p>
-                    <div class="account-heading">{{ profile.nickname }}</div>
+                <img class="rounded-circle account-img" style="margin-top: 10px" width="160px;" src="{{ profile.image.url }}">
+                <div class="media-body" style="display: inline-block; margin-left: 5%">
+                    <p class="account-heading">{{ profile.user.username }}</p>
+                    <div class="text-secondary">{{ profile.nickname }}</div>
+                    <div class="text-secondary">{{ profile.user.email }}</div>
+                    <div class="text-secondary">{{ profile.phone_number }}</div>
                     <p class="text-secondary">{{ profile.region }}</p>
                 </div>
                 <div>
@@ -20,7 +23,9 @@
                         {% csrf_token %}
                         <input type="hidden" name="group_id" value="{{ group.id }}">
                         <input type="hidden" name="user_p" value="{{ profile.user.username }}">
-                        <button type="submit">차단 해제</button>
+                        <button type="submit" class="btn btn-outline-dark" style="margin: 10% 120px 1%; font-size: 22px;">차단 해제
+
+                </button>
                     </form>
                 </div>
             </div>
