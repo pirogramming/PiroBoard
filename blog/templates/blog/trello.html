@@ -26,16 +26,13 @@
             background-color: rgb(250, 240, 231);
         {#background-color: #fafafa;#}
         }
-
         * {
             font-family: 'Nanum Pen Script', cursive;
             font-size: 1.05em;
         }
-
         .men {
             color: rgba(103, 73, 65, 0.89);
         }
-
         .men-area {
             width: 200px;
             margin-top: 130px;
@@ -65,9 +62,11 @@
 
         }
 
+
         .navlogo{
             margin-top: -10px;
         }
+
 
         .navbar a {
             color: darkslategrey;
@@ -78,6 +77,8 @@
             border-right: 2px solid rgba(204, 204, 204, 0.44);
             box-sizing: border-box;
         }
+
+
     </style>
     <!-- Custom styles for this template -->
     <link href="sticky-footer-navbar.css" rel="stylesheet">
@@ -90,11 +91,13 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+
             <li class="nav-item active" style="margin-left:550px; font-size:35px; ">
                 <a class="nav-link" href="{% url 'blog-home' %}">
                     <img class="navlogo" src="{% static 'blog/images/frame.PNG' %}" alt="logo" width="42" height="38"> Piroboard
                     <span class="sr-only">(current)</span></a>
             </li>
+
         </ul>
     </div>
 
@@ -167,4 +170,3 @@
 
 </body>
 </html>
-

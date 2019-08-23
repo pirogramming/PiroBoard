@@ -3,27 +3,30 @@
 
 
 {% block content %}
-    <p>그룹에 유저를 초대하세요!</p>
+    <h3>그룹에 유저를 초대하세요!</h3>
     <form action="" method="GET">
         <input type="text" name="q" value="{{ q }}">
         <input type="submit" value="찾아줘">
     </form>
     <hr>
+    <h3>유저 목록</h3>
     {% for profile in profiles %}
-        <div class="content-section">
+        <div class="content-section" style="margin-top: 5%">
             <div class="media">
-                <img class="rounded-circle account-img" src="{{ profile.image }}">
-                <div class="media-body">
-                    <p class="text-secondary">{{ profile.user.username }}</p>
-                    <div class="account-heading">{{ profile.nickname }}</div>
-                    <p class="text-secondary">{{ profile.region }}</p>
+                <img class="rounded-circle account-img" style="width: 200px" src="{{ profile.image.url }}">
+                <div class="media-body" style="display: inline-block; margin: 1% 0 0 5%">
+                    <div class="account-heading">{{ profile.user.username }}</div>
+                    <div class="text-secondary">{{ profile.nickname }}</div>
+                    <div class="text-secondary">{{ profile.email }}</div>
+                    <div class="text-secondary">{{ profile.phone_number }}</div>
+                    <div class="text-secondary">{{ profile.region }}</div>
                 </div>
                 <div>
-                    <form method="post" action="{% url 'invite' pk %}">
+                    <form method="post" action="{% url 'invite' pk %}" style="margin: 70px 50px 0 0;">
                         {% csrf_token %}
                         <input type="hidden" name="group_id" value="{{ group.id }}">
                         <input type="hidden" name="user_p" value="{{ profile.user.username }}">
-                        <button type="submit">이 유저를 초대하기</button>
+                        <button type="submit" class="btn btn-outline-dark" style="margin: 0 50px 1%; font-size: 22px;">이 유저를 초대하기</button>
                     </form>
                 </div>
             </div>
