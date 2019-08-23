@@ -6,7 +6,7 @@ from users.models import Group
 class GroupForm(forms.ModelForm):
     class Meta:
         model = Group
-        fields = ('group_name', 'group_info', 'group_img', 'group_open_status')
+        fields = ('group_open_status',)
 
 
 class CommentForm(forms.ModelForm):

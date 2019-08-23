@@ -97,16 +97,18 @@ def group_postlist(request, pk):
 def about(request):
     # return render(request, 'blog/about.html', {'title': 'About'})
     if request.method == "POST":
-        form = GroupForm(request.POST, request.FILES)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.group_head = request.user
-            form.created_date = timezone.now()
-            form.save()
+        group = Group()
+        group.group_head =request.user
+        group.created_date = timezone.now()
+        group.group_img = request.FILES.get('group_img', False)
+        group.group_info = request.POST['group_info']
+        group.group_name = request.POST['group_name']
+        group.group_open_status = request.POST['group_open_status']
+        group.save()
 
-            GroupMember.objects.create(person=request.user.profile, group=form, status='a', group_role='h')
+        GroupMember.objects.create(person=request.user.profile, group=group, status='a', group_role='h')
 
-            return redirect('blog-home')
+        return redirect('blog-home')
     else:
         form = GroupForm()
     return render(request, 'blog/about.html', {'form': form})
