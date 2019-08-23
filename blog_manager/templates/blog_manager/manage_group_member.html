@@ -28,18 +28,18 @@
                     <p class="text-secondary">{{ profile.region }}</p>
                 </div>
                 <div>
-                    {% if request.user.username != head.username %}
+                    {% if request.user.username == head.username %}
                         <form method="post" action="{% url 'baton_touch' pk %}">
                             {% csrf_token %}
                             <input type="hidden" name="group_id" value="{{ group.id }}">
                             <input type="hidden" name="user_p" value="{{ profile.user.username }}">
-                            <button type="submit">이 유저에게 그룹장 넘기기</button>
+                        <button type="submit" class="btn btn-outline-dark" style="margin-right: 50px; font-size: 22px;">이 유저에게 그룹장 넘기기</button>
                         </form>
                         <form method="post" action="{% url 'byebye_manager' pk %}">
                             {% csrf_token %}
                             <input type="hidden" name="group_id" value="{{ group.id }}">
                             <input type="hidden" name="user_p" value="{{ profile.user.username }}">
-                            <button type="submit">이 유저에게서 매니저 권한 취소</button>
+                         <button type="submit" class="btn btn-outline-dark" style="margin-right: 50px; font-size: 22px;">이 유저에게서 매니저 권한 취소</button>
                         </form>
                     {% else %}
                         <p>그룹장 입니다</p>
@@ -72,13 +72,14 @@
                         {% csrf_token %}
                         <input type="hidden" name="group_id" value="{{ group.id }}">
                         <input type="hidden" name="user_p" value="{{ profile.user.username }}">
-                        <button type="submit">이 유저에게 매니저 권한 부여</button>
+                        <button type="submit" class="btn btn-outline-dark" style="margin-right: 50px; font-size: 22px;">이 유저에게 매니저 권한 부여</button>
                     </form>
                     <form method="post" action="{% url 'user_request_refuse' pk %}">
                         {% csrf_token %}
                         <input type="hidden" name="group_id" value="{{ group.id }}">
                         <input type="hidden" name="user_p" value="{{ profile.user.username }}">
-                        <button type="submit">이 유저를 차단하기</button>
+                        <button type="submit" class="btn btn-outline-dark" style="margin-right: 50px; font-size: 22px;">이 유저를 차단하기</button>
+                    </form>
                     </form>
                 </div>
             </div>
@@ -86,5 +87,3 @@
 
     {% endfor %}
 {% endblock content %}
-
-
