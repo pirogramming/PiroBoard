@@ -10,13 +10,14 @@
     {% if userRequest %}
         <h2>{{ user_requests_count }}명의 유저가 가입을 요청했습니다</h2>
         {% for user in user_requests %}
-            <div class="content-section">
+            <div class="content-section" style="margin: 5% 2%;">
                 <div class="media">
-                    <img class="rounded-circle account-img" src="{{ user.image }}">]]]
-                    <div class="media-body">
-                        <div class="account-heading">{{ user.user.username }}</div>
-                        <p class="text-secondary">{{ user.nickname }}</p>
-                        <p class="text-secondary">{{ user.region }}</p>
+                    <img class="rounded-circle account-img" width="200px" src="{{ user.image.url }}">
+                     <div class="media-body" style="display: inline-block; margin-left: 6%">
+                        <p class="account-heading">{{ user.user.username }}</p>
+                        <div class="text-secondary">{{ user.nickname }}</div>
+                         <div class="text-secondary">{{ user.phone_number }}</div>
+                        <div class="text-secondary">{{ user.region }}</div>
                     </div>
                     <div>
                         <form method="post" action="{% url 'user_request_accept' pk %}">
@@ -57,11 +58,12 @@
         {% for user in group_requests %}
             <div class="content-section">
                 <div class="media">
-                    <img class="rounded-circle account-img" src="{{ user.image }}">]]]
-                    <div class="media-body">
-                        <div class="account-heading">{{ user.user.username }}</div>
-                        <p class="text-secondary">{{ user.nickname }}</p>
-                        <p class="text-secondary">{{ user.region }}</p>
+                    <img class="rounded-circle account-img" src="{{ user.image }}">
+                     <div class="media-body" style="display: inline-block; margin-left: 6%">
+                        <p class="account-heading">{{ user.user.username }}</p>
+                        <div class="text-secondary">{{ user.nickname }}</div>
+                        <div class="text-secondary">{{ user.phone_number }}</div>
+                        <div class="text-secondary">{{ user.region }}</div>
                     </div>
                     <div>
                         <form method="post" action="{% url 'group_request_cancel' pk %}">
