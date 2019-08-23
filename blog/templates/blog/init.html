@@ -1,9 +1,13 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'fullpage.css' %}">
+    <link rel="stylesheet" href="{% static 'examples.css' %}">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -27,6 +31,7 @@
             margin: 0;
             padding: 0;
         }
+
         {#div {#}
         {#    width: 100% !important;#}
         {#    height: 100vh !important;#}
@@ -48,49 +53,58 @@
             left: -100%;
             transform: translate(-50%, -50%);
         }
+
         .part1 {
-            width: 100%;
-            height: 100vh;
+            width: 100% !important;
+            height: 100vh !important;
             background-color: #edecd6;
             text-align: center;
             line-height: 175px;
             position: relative;
         }
+
         .part2 {
-            width: 100%;
-            height: 100vh;
+            width: 100% !important;
+            height: 100vh !important;
             background-color: #6DDCBD;
             text-align: center;
             line-height: 175px;
             position: relative;
         }
+
         .part3 {
-            width: 100%;
-            height: 100vh;
+            width: 100% !important;
+            height: 100vh !important;
             background-color: #999999;
             text-align: center;
             line-height: 175px;
             position: relative;
         }
+
         .fix {
             overflow: hidden;
             position: fixed;
             width: 100%;
         }
+
         .navbar-brand {
             font-family: 'Nanum Pen Script', cursive;
             font-size: 1.25em;
         }
+
         .cent {
             text-align: center;
             line-height: 175px;
         }
+
         .jum1 {
             background-color: #edecd6 !important;
         }
+
         .jum2 {
             background-color: #6DDCBD !important;
         }
+
         .jum3 {
             background-color: #999999 !important;
         }
@@ -101,91 +115,81 @@
 <body>
 
 
-<div class="part1 sec1">
-    <br>
+<div id="fullpage">
+    <div class="part1 sec1 section">
+        <br>
 
-    <div class="container">
-        <div class="jumbotron jumbotron-fluid jum1">
-            <div class="container">
-                <h1 class="display-4">PiroBoard에 가입하세요!</h1>
-                <p class="lead">PiroBoard는 절친한 친구들과 추억을 공유하는 SNS입니다.</p>
-                <a class="nav-link" href="#">
-                    {% if request.user.is_authenticated == False %}
-                        <a href="{% url 'login' %}">
-                            <button type="button" class="btn btn-info">로그인 하기</button>
-                        </a>
-                        <a href="{% url 'register' %}">
-                            <button type="button" class="btn btn-info">가입하러 가기</button>
-                        </a>
-                    {% else %}
-                        <a href="{% url 'blog-home' %}">
-                            <button type="button" class="btn btn-info">많이 기다렸어요 :)</button>
-                        </a>
-                    {% endif %}
-                </a>
-            </div>
-        <i class="large material-icons" style="font-size: 35px">expand_more</i>
-        </div>
-    </div>
-
-
-</div>
-<div class="part2 sec2">
-    <div class="container">
-        <div class="jumbotron jumbotron-fluid jum2">
-            <div class="container">
-                <h1 class="display-4">아직도 PiroBoard를 사용하지 않는다고요?</h1>
-
-                <p class="lead"><img
-                        src="https://image.flaticon.com/icons/svg/1490/1490408.svg"
-                        alt=""></p>
-                <p class="lead">아마 당신의 친구들은 이미 PiroBoard를 이용하고 있을겁니다.</p>
+        <div class="container">
+            <div class="jumbotron jumbotron-fluid jum1">
+                <div class="container">
+                    <h1 class="display-4">PiroBoard에 가입하세요!</h1>
+                    <p class="lead">PiroBoard는 절친한 친구들과 추억을 공유하는 SNS입니다.</p>
+                    <a class="nav-link" href="#">
+                        {% if request.user.is_authenticated == False %}
+                            <a href="{% url 'login' %}">
+                                <button type="button" class="btn btn-info">로그인 하기</button>
+                            </a>
+                            <a href="{% url 'register' %}">
+                                <button type="button" class="btn btn-info">가입하러 가기</button>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'blog-home' %}">
+                                <button type="button" class="btn btn-info">많이 기다렸어요 :)</button>
+                            </a>
+                        {% endif %}
+                    </a>
+                </div>
+                <i class="large material-icons" style="font-size: 35px">expand_more</i>
             </div>
         </div>
 
+
     </div>
-</div>
+    <div class="part2 sec2 section">
+        <div class="container">
+            <div class="jumbotron jumbotron-fluid jum2">
+                <div class="container">
+                    <h1 class="display-4">아직도 PiroBoard를 사용하지 않는다고요?</h1>
 
-<div class="part3 sec3">
-    <div class="container">
-        <div class="jumbotron jumbotron-fluid jum3">
-            <div class="container">
-                <br>
-                <h2>지금 바로 앱스토어에서 PiroBoard를 경험해보세요!</h2>
+                    <p class="lead"><img
+                            src="https://image.flaticon.com/icons/svg/1490/1490408.svg"
+                            alt=""></p>
+                    <p class="lead">아마 당신의 친구들은 이미 PiroBoard를 이용하고 있을겁니다.</p>
+                </div>
+            </div>
 
-                <a href="https://itunes.apple.com/ca/app/adbeus-coffee/id878517979?ls=1&amp;mt=8"><img
-                        src="https://adbeus.com/wp-content/uploads/2016/09/ios.png" alt="" width="225"></a>
-                <a href="https://play.google.com/store/apps/details?id=com.samsao.cafemtl.app"><img
-                        src="https://adbeus.com/wp-content/uploads/2016/09/get-it-on-google-play-vector.png"
-                        alt="" width="225"></a>
+        </div>
+    </div>
+
+    <div class="part3 sec3 section">
+        <div class="container">
+            <div class="jumbotron jumbotron-fluid jum3">
+                <div class="container">
+                    <br>
+                    <h2>지금 바로 앱스토어에서 PiroBoard를 경험해보세요!</h2>
+
+                    <a href="https://itunes.apple.com/ca/app/adbeus-coffee/id878517979?ls=1&amp;mt=8"><img
+                            src="https://adbeus.com/wp-content/uploads/2016/09/ios.png" alt="" width="225"></a>
+                    <a href="https://play.google.com/store/apps/details?id=com.samsao.cafemtl.app"><img
+                            src="https://adbeus.com/wp-content/uploads/2016/09/get-it-on-google-play-vector.png"
+                            alt="" width="225"></a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<script
-        src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-        crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function () {
-        $(window).scroll(function () {
-            var s_top = $(window).scrollTop() + 500;
-            var sec2_top = $(".sec2").offset().top;
-            var sec2_bt = $(".sec2").offset().top + $(".sec2").height();
-            if (s_top > sec2_top && s_top < sec2_bt) {
-                $("#box").css({
-                    left: "50%",
-                    transition: "0.5s"
-                })
-            } else {
-                $("#box").css({
-                    left: "-100%"
-                })
-            }
-        })
-    })
+<script type="text/javascript" src="{% static "fullpage.js" %}"></script>
+<script type="text/javascript" src="{% static "examples.js" %}"></script>
+<script type="text/javascript">
+    var myFullpage = new fullpage('#fullpage', {
+        sectionsColor: ['#edecd6', '#6DDCBD', '#999999'],
+        anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],
+        menu: '#menu',
+        lazyLoad: true
+    });
 </script>
 
 </body>
 </html>
+
