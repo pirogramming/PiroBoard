@@ -21,7 +21,7 @@
 
     <style>
         body {
-            background-color: ivory;
+        {#background-color: #fafafa;#} background-color: rgb(250, 240, 231);
         }
 
         * {
@@ -30,26 +30,62 @@
         }
 
         .men {
-            color: black;
+            color: rgba(103, 73, 65, 0.89);
         }
 
         .men-area {
-            background: lemonchiffon;
+            width: 200px;
+            margin-top: 130px;
+
         }
 
+        .flex-column {
+            padding-left: 5px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        {#border: 2px solid rgba(204, 204, 204, 1);#} border: 2px solid rgba(190, 181, 175, 0.52);
+        {#background-color: rgba(245, 245, 245, 0.6);#} background-color: rgba(192, 211, 235, 0.35);
+            background-color: rgba(171, 162, 156, 0.36);
+            background-color: rgba(204, 204, 204, 0.51);
+            border: 2px solid rgba(204, 204, 204, 0.68);
+            vertical-align: middle;
+        }
 
+        .navbar {
+            margin: 0;
+            height: 60px;
+            padding-top: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(204, 204, 204, 0.47);
+        {#background-color: rgba(211, 231, 255, 0.54);#} background-color: rgb(171, 162, 156);
+
+
+        }
+
+        .navbar a {
+            color: darkslategrey;
+
+        }
+
+        .col-10 {
+            border-right: 2px solid rgba(204, 204, 204, 0.44);
+            box-sizing: border-box;
+        }
     </style>
     <!-- Custom styles for this template -->
     <link href="sticky-footer-navbar.css" rel="stylesheet">
 </head>
+
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="height:50px;">
+<nav class="navbar navbar-expand-lg" style="height:50px;">
 
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active" style="margin-left:550px; font-size:35px; ">
-                <a class="nav-link" href="{% url 'blog-home' %}">Piroboard
+                <a class="nav-link" href="{% url 'blog-home' %}">
+                    <img src="/blog/static/blog/images/logo.PNG" alt="logo"> Piroboard
                     <span class="sr-only">(current)</span></a>
             </li>
         </ul>
@@ -102,25 +138,29 @@
 
 </nav>
 
+<hr size="5px" style="margin-bottom: 50px"/>
+
 <div class="container">
     <div class="row">
-        <div class="col-3 men-area">
+        <div class="col-2 men-area">
             <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'blog-about' %}">
-                        <span class="men" data-feather="home"> 그룹 생성</span>
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'users:group_find' %}">
-                        <span class="men" data-feather="file">그룹 찾기</span>
+                {% block sidebar %}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'blog-about' %}">
+                            <span class="men" data-feather="home"> 그룹 생성</span>
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:group_find' %}">
+                            <span class="men" data-feather="file">그룹 찾기</span>
 
-                    </a>
-                </li>
+                        </a>
+                    </li>
+                {% endblock %}
             </ul>
         </div>
-        <div class="col-9">
+        <div class="col-10">
             {% block content %}
 
             {% endblock %}
