@@ -28,7 +28,7 @@
         body {
 
             background-color: rgb(250, 240, 231);
-        {#background-color: #fafafa;#}
+
 
         }
 
@@ -38,12 +38,14 @@
         }
 
         .men {
-            color: rgba(103, 73, 65, 0.89);
+            color: black;
         }
 
         .men-area {
             width: 200px;
-            margin-top: 130px;
+
+            background-color: burlywood;
+            font-size: 1.5em;
 
         }
 
@@ -51,11 +53,10 @@
             padding-left: 5px;
             padding-top: 30px;
             padding-bottom: 30px;
-        {#border: 2px solid rgba(204, 204, 204, 1);#} border: 2px solid rgba(190, 181, 175, 0.52);
-        {#background-color: rgba(245, 245, 245, 0.6);#} background-color: rgba(192, 211, 235, 0.35);
-            background-color: rgba(171, 162, 156, 0.36);
-            background-color: rgba(204, 204, 204, 0.51);
-            border: 2px solid rgba(204, 204, 204, 0.68);
+
+            /*background-color: rgba(171, 162, 156, 0.36);*/
+            /*background-color: rgba(204, 204, 204, 0.51);*/
+            /*border: 2px solid rgba(204, 204, 204, 0.68);*/
             vertical-align: middle;
         }
 
@@ -65,7 +66,7 @@
             padding-top: 40px;
             padding-bottom: 30px;
             border-bottom: 2px solid rgba(204, 204, 204, 0.47);
-        {#background-color: rgba(211, 231, 255, 0.54);#} background-color: burlywood;
+            background-color: burlywood;
 
 
         }
@@ -103,7 +104,8 @@
             <li class="nav-item active" style="margin-left:550px; font-size:35px; ">
                 <a class="nav-link" href="{% url 'blog-home' %}">
 
-                    <img class="navlogo" src="{% static 'blog/images/min.png' %}" alt="logo" width="42" height="38"> Piroboard
+                    <img class="navlogo" src="{% static 'blog/images/min.png' %}" alt="logo" width="42" height="38">
+                    Piroboard
 
                     <span class="sr-only">(current)</span></a>
             </li>
@@ -164,9 +166,18 @@
     <div class="row">
         <div class="col-2 men-area">
             <ul class="nav flex-column">
-                {% block sidebar %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'blog-about' %}">
+                        <span class="men" data-feather="home"> 그룹 생성</span>
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:group_find' %}">
+                        <span class="men" data-feather="file">그룹 찾기</span>
 
-                {% endblock %}
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="col-10">
