@@ -127,26 +127,46 @@
         </div>
         <div class="container">
             <div class="row">
-            <div class="col-6 mt-4 ">
-                <a style="text-decoration: none;" href="{% url 'blog-about' %}">
-                    <div class="sulmo card plus border-0 shadow p-3 mb-5 bg-white rounded"
-                         style="width: 12rem; height: 70px; margin:0 auto;">
-                        <p class="card-text" style="text-align: center; color:black;">그룹 생성하기</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 mt-4">
-                <a style="text-decoration: none;" href="{% url 'users:group_find' %}">
-                    <div class="sulmo card plus border-0 shadow p-3 mb-5 bg-white rounded"
-                         style="width: 12rem; height: 70px; margin:0 auto;">
-                        <p class="card-text" style="text-align: center; color:black;">그룹 찾기</p>
-                    </div>
-                </a>
-            </div>
+                <div class="col-6 mt-4 ">
+                    <a style="text-decoration: none;" href="{% url 'blog-about' %}">
+                        <div class="sulmo card plus border-0 shadow p-3 mb-5 bg-white rounded"
+                             style="width: 12rem; height: 70px; margin:0 auto;">
+                            <p class="card-text" style="text-align: center; color:black;">그룹 생성하기</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 mt-4">
+                    <a style="text-decoration: none;" href="{% url 'users:group_find' %}">
+                        <div class="sulmo card plus border-0 shadow p-3 mb-5 bg-white rounded"
+                             style="width: 12rem; height: 70px; margin:0 auto;">
+                            <p class="card-text" style="text-align: center; color:black;">그룹 찾기</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     {% else %}
         <h5>가입한 그룹이 없습니다. '그룹 생성' 혹은 '그룹 찾기'을 눌러보세요!</h5>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 mt-4 ">
+                    <a style="text-decoration: none;" href="{% url 'blog-about' %}">
+                        <div class="sulmo card plus border-0 shadow p-3 mb-5 bg-white rounded"
+                             style="width: 12rem; height: 70px; margin:0 auto;">
+                            <p class="card-text" style="text-align: center; color:black;">그룹 생성하기</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 mt-4">
+                    <a style="text-decoration: none;" href="{% url 'users:group_find' %}">
+                        <div class="sulmo card plus border-0 shadow p-3 mb-5 bg-white rounded"
+                             style="width: 12rem; height: 70px; margin:0 auto;">
+                            <p class="card-text" style="text-align: center; color:black;">그룹 찾기</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     {% endif %}
 
 

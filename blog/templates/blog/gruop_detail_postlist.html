@@ -5,13 +5,12 @@
 
     <style>
         body {
-            {#background-color: #fafafa;#}
+        {#background-color: #fafafa;#}
         }
 
         a {
 
         {#color: rgb(133, 85, 54);#} color: rgba(103, 73, 65, 0.89);
-
 
 
         }
@@ -135,34 +134,45 @@
     <hr/>
     <hr/>
     <div class="row">
-        <div class="cardbox-frame">
-            <div id="cardlist" class="cardbox">
-                {% for post in postlist %}
-                    {% if post.photo %}
-                        <div class="postcard">
-                            <a href="{% url 'post_detail' post.pk %}">
-                                <div class="photocard">
-                                    <img class="photocard-img" src="{{ post.photo.url }}"/>
-                                </div>
-                            </a>
-                        </div>
-                    {% else %}
-                        <div class="postcard">
-                            <a href="{% url 'post_detail' post.pk %}">
-                                <div class="textcard">
-                                    <div class="textzone">
-                                        <p class="text-title">{{ post.title }}</p>
-                                        <p class="text-content">{{ post.content }}</p>
-                                        <p class="text-author">- {{ post.author }}</p>
+
+            <div class="cardbox-frame  gridster">
+
+                <div id="cardlist" class="cardbox">
+
+                    {% for post in postlist %}
+                        {% if post.photo %}
+
+
+                            <div class="postcard">
+                                <a href="{% url 'post_detail' post.pk %}">
+                                    <div class="photocard">
+                                        <img class="photocard-img" src="{{ post.photo.url }}"/>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                                </a>
+                            </div>
+
+                        {% else %}
+
+                            <div class="postcard">
+                                <a href="{% url 'post_detail' post.pk %}">
+                                    <div class="textcard">
+                                        <div class="textzone">
+                                            <p class="text-title">{{ post.title }}</p>
+                                            <p class="text-content">{{ post.content }}</p>
+                                            <p class="text-author">- {{ post.author }}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+
+                <div id="cardlist_plus"></div>
             </div>
-            <div id="cardlist_plus"></div>
-        </div>
+
     </div>
 
 {% endblock %}
@@ -181,3 +191,5 @@
         </a>
     </li>
 {% endblock %}
+
+
